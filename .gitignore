@@ -1,0 +1,11 @@
+# Abaikan folder sampah nodejs
+node_modules/
+dist/
+
+# Abaikan folder virtual env python
+venv/
+__pycache__/
+
+# Abaikan folder upload dan file sistem
+uploads/
+.DS_Store
