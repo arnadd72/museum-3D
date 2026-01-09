@@ -1,70 +1,268 @@
+/* Reset & Base Layout */
 .app-container {
-  display: grid;
-  grid-template-columns: 300px 1fr;
+  width: 100%;
   min-height: 100vh;
-  color: #e1e1e1;
-  background: #0a0a0a;
-}
-.sidebar {
-  border-right: 1px solid #333;
-  padding: 2rem;
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.logo-text {
-  font-family: "Courier New", monospace;
-  font-size: 2rem;
-  margin: 0;
-  line-height: 1;
-  text-transform: uppercase;
+  background-color: #050505;
   color: #fff;
-}
-.main-feed {
-  background: #0a0a0a;
-}
-.feed-header {
-  padding: 5rem 3rem;
-  font-size: 3.5rem;
-  text-transform: uppercase;
-  border-bottom: 1px solid #333;
-  line-height: 1.1;
-}
-.accent {
-  color: #d4af37;
-}
-.marquee {
-  background: #d4af37;
-  color: #000;
-  padding: 0.5rem;
-  white-space: nowrap;
+  font-family: "Inter", sans-serif;
   overflow: hidden;
-  font-weight: bold;
-  font-family: monospace;
+  position: relative;
 }
-.feed-item {
-  display: grid;
-  grid-template-columns: 100px 1fr;
-  border-bottom: 1px solid #333;
+
+/* --- 3. MENU BAR STYLING --- */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1.5rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  /* Efek Kaca (Glassmorphism) */
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-sizing: border-box;
 }
-.feed-item:hover {
-  background: #111;
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo-symbol {
+  width: 40px;
+  height: 40px;
+  background: #00d2ff;
+  color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 900;
+  font-family: "Rajdhani", sans-serif;
+  font-size: 1.5rem;
+  clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
+}
+
+.logo-text {
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 3rem;
+}
+
+.nav-link {
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  transition: color 0.3s;
+  position: relative;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: #00d2ff;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: #00d2ff;
+  transition: width 0.3s;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.ticket-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  padding: 0.8rem 1.5rem;
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 600;
+  letter-spacing: 1px;
   cursor: pointer;
+  transition: all 0.3s;
 }
-.year {
-  padding: 2rem;
-  border-right: 1px solid #333;
-  font-family: monospace;
+
+.ticket-btn:hover {
+  background: #00d2ff;
+  border-color: #00d2ff;
+  color: #000;
+}
+
+/* --- 2. VIDEO & HERO SECTION --- */
+.hero-section {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 6rem;
+  box-sizing: border-box;
+}
+
+.video-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.hero-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.6; /* Video sedikit redup */
+}
+
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Gradasi agar teks terbaca jelas */
+  background: linear-gradient(
+    90deg,
+    #050505 0%,
+    rgba(5, 5, 5, 0.8) 40%,
+    transparent 100%
+  );
+}
+
+/* --- 1. ELEMEN DESAIN UNIK --- */
+.hero-content {
+  position: relative;
+  z-index: 10;
+  max-width: 800px;
+}
+
+.floating-tag {
+  color: #00d2ff;
+  font-family: "Rajdhani", monospace;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  letter-spacing: 2px;
+}
+
+.hero-title {
+  font-family: "Rajdhani", sans-serif;
+  font-size: 6rem;
+  line-height: 0.9;
+  font-weight: 700;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.outline-text {
+  /* Teks transparan dengan garis tepi (Stroke) */
+  color: transparent;
+  -webkit-text-stroke: 2px #fff;
   opacity: 0.5;
 }
-.content {
-  padding: 2rem;
+
+.hero-desc {
+  margin-top: 2rem;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 500px;
+  border-left: 3px solid #00d2ff;
+  padding-left: 1.5rem;
 }
-.content h2 {
-  margin: 0 0 0.5rem 0;
-  font-size: 1.8rem;
-  font-weight: normal;
+
+.cta-container {
+  margin-top: 3rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.explore-btn {
+  background: #fff;
+  color: #000;
+  border: none;
+  padding: 1rem 2.5rem;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  cursor: pointer;
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    95% 100%,
+    0% 100%
+  ); /* Bentuk tombol miring unik */
+  transition: transform 0.2s;
+}
+
+.explore-btn:hover {
+  transform: scale(1.05);
+  background: #00d2ff;
+}
+
+.play-btn-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.8);
+  transition: color 0.3s;
+}
+
+.play-btn-wrapper:hover {
+  color: #00d2ff;
+}
+
+.play-icon {
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.8rem;
+}
+
+/* Dekorasi Tambahan */
+.decorative-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, #00d2ff, transparent);
+  z-index: 10;
+}
+
+.coordinate-text {
+  position: absolute;
+  bottom: 2rem;
+  right: 3rem;
+  font-family: "Rajdhani", monospace;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.9rem;
+  z-index: 10;
+  transform: rotate(-90deg);
+  transform-origin: right bottom;
 }

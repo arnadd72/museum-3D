@@ -1,22 +1,15 @@
-/* RESET TOTAL - Hapus style tengah bawaan Vite */
 :root {
-  font-family: Inter, system-ui, sans-serif;
+  font-family: "Inter", system-ui, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  color-scheme: dark;
+  color-scheme: light; /* Ubah ke Light */
 }
+
 body {
   margin: 0;
   padding: 0;
   width: 100vw;
   min-height: 100vh;
-  background-color: #0a0a0a;
-  display: block; /* Hapus display: flex bawaan */
-}
-#root {
-  width: 100%;
-  max-width: 100%;
-  margin: 0;
-  padding: 0;
-  text-align: left; /* Hapus text-align center */
+  background-color: #f0f2f5; /* Abu-abu muda */
+  color: #1a1a1a;
 }
