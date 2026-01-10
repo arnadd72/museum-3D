@@ -1,15 +1,25 @@
-/* Reset & Base Layout */
+/* --- GLOBAL & RESET --- */
+:root {
+  font-family: "Inter", sans-serif;
+  line-height: 1.5;
+  color-scheme: dark;
+}
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #050505;
+  overflow-x: hidden;
+}
+
+/* --- 1. LANDING PAGE STYLES --- */
 .app-container {
   width: 100%;
   min-height: 100vh;
-  background-color: #050505;
   color: #fff;
-  font-family: "Inter", sans-serif;
-  overflow: hidden;
   position: relative;
 }
 
-/* --- 3. MENU BAR STYLING --- */
+/* NAVBAR */
 .navbar {
   position: fixed;
   top: 0;
@@ -20,19 +30,15 @@
   justify-content: space-between;
   align-items: center;
   z-index: 100;
-  /* Efek Kaca (Glassmorphism) */
   background: rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  box-sizing: border-box;
 }
-
 .logo-section {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
-
 .logo-symbol {
   width: 40px;
   height: 40px;
@@ -46,19 +52,16 @@
   font-size: 1.5rem;
   clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
 }
-
 .logo-text {
   font-family: "Rajdhani", sans-serif;
   font-weight: 700;
   font-size: 1.5rem;
   letter-spacing: 2px;
 }
-
 .nav-links {
   display: flex;
   gap: 3rem;
 }
-
 .nav-link {
   color: rgba(255, 255, 255, 0.6);
   text-decoration: none;
@@ -66,13 +69,15 @@
   letter-spacing: 1px;
   transition: color 0.3s;
   position: relative;
+  cursor: pointer;
 }
-
 .nav-link:hover,
 .nav-link.active {
   color: #00d2ff;
 }
-
+.nav-link:hover::after {
+  width: 100%;
+}
 .nav-link::after {
   content: "";
   position: absolute;
@@ -84,29 +89,7 @@
   transition: width 0.3s;
 }
 
-.nav-link:hover::after {
-  width: 100%;
-}
-
-.ticket-btn {
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: #fff;
-  padding: 0.8rem 1.5rem;
-  font-family: "Rajdhani", sans-serif;
-  font-weight: 600;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-
-.ticket-btn:hover {
-  background: #00d2ff;
-  border-color: #00d2ff;
-  color: #000;
-}
-
-/* --- 2. VIDEO & HERO SECTION --- */
+/* HERO SECTION */
 .hero-section {
   position: relative;
   height: 100vh;
@@ -116,7 +99,6 @@
   padding: 0 6rem;
   box-sizing: border-box;
 }
-
 .video-wrapper {
   position: absolute;
   top: 0;
@@ -126,21 +108,21 @@
   z-index: 0;
   overflow: hidden;
 }
-
 .hero-video {
-  width: 100%;
-  height: 100%;
+  width: 105%;
+  height: 105%;
+  position: absolute;
+  top: 0;
+  left: 0;
   object-fit: cover;
-  opacity: 0.6; /* Video sedikit redup */
+  opacity: 0.5;
 }
-
 .video-overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  /* Gradasi agar teks terbaca jelas */
   background: linear-gradient(
     90deg,
     #050505 0%,
@@ -148,14 +130,11 @@
     transparent 100%
   );
 }
-
-/* --- 1. ELEMEN DESAIN UNIK --- */
 .hero-content {
   position: relative;
   z-index: 10;
   max-width: 800px;
 }
-
 .floating-tag {
   color: #00d2ff;
   font-family: "Rajdhani", monospace;
@@ -163,7 +142,6 @@
   font-size: 1rem;
   letter-spacing: 2px;
 }
-
 .hero-title {
   font-family: "Rajdhani", sans-serif;
   font-size: 6rem;
@@ -172,14 +150,11 @@
   margin: 0;
   text-transform: uppercase;
 }
-
 .outline-text {
-  /* Teks transparan dengan garis tepi (Stroke) */
   color: transparent;
   -webkit-text-stroke: 2px #fff;
   opacity: 0.5;
 }
-
 .hero-desc {
   margin-top: 2rem;
   font-size: 1.1rem;
@@ -189,14 +164,12 @@
   border-left: 3px solid #00d2ff;
   padding-left: 1.5rem;
 }
-
 .cta-container {
   margin-top: 3rem;
   display: flex;
   align-items: center;
   gap: 2rem;
 }
-
 .explore-btn {
   background: #fff;
   color: #000;
@@ -206,20 +179,13 @@
   font-size: 1rem;
   letter-spacing: 1px;
   cursor: pointer;
-  clip-path: polygon(
-    0 0,
-    100% 0,
-    95% 100%,
-    0% 100%
-  ); /* Bentuk tombol miring unik */
+  clip-path: polygon(0 0, 100% 0, 95% 100%, 0% 100%);
   transition: transform 0.2s;
 }
-
 .explore-btn:hover {
   transform: scale(1.05);
   background: #00d2ff;
 }
-
 .play-btn-wrapper {
   display: flex;
   align-items: center;
@@ -228,11 +194,9 @@
   color: rgba(255, 255, 255, 0.8);
   transition: color 0.3s;
 }
-
 .play-btn-wrapper:hover {
   color: #00d2ff;
 }
-
 .play-icon {
   width: 40px;
   height: 40px;
@@ -243,8 +207,6 @@
   align-items: center;
   font-size: 0.8rem;
 }
-
-/* Dekorasi Tambahan */
 .decorative-line {
   position: absolute;
   bottom: 0;
@@ -254,7 +216,6 @@
   background: linear-gradient(90deg, #00d2ff, transparent);
   z-index: 10;
 }
-
 .coordinate-text {
   position: absolute;
   bottom: 2rem;
@@ -266,16 +227,15 @@
   transform: rotate(-90deg);
   transform-origin: right bottom;
 }
-/* --- SECTION BARU: ABOUT / CORE SYSTEM --- */
+
+/* ABOUT SECTION */
 .about-section {
   position: relative;
   min-height: 100vh;
-  background-color: #050a10; /* Latar lebih gelap dari hero */
+  background-color: #050a10;
   padding: 8rem 4rem;
   overflow: hidden;
-  z-index: 20; /* Di atas video background */
-
-  /* Pattern Background Halus */
+  z-index: 20;
   background-image: radial-gradient(
       circle at 10% 20%,
       rgba(0, 210, 255, 0.05) 0%,
@@ -287,13 +247,23 @@
       transparent 20%
     );
 }
+.about-video {
+  /* Samakan triknya di sini */
+  width: 105%;
+  height: 105%;
 
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  object-fit: cover;
+  opacity: 0.4; /* Opacity & filter tetap sama */
+  filter: grayscale(80%) contrast(1.2);
+}
 .about-container {
   max-width: 1200px;
   margin: 0 auto;
 }
-
-/* Typography Header */
 .section-title {
   font-family: "Rajdhani", sans-serif;
   font-size: 4rem;
@@ -301,63 +271,45 @@
   margin: 0;
   line-height: 1;
 }
-
 .section-line {
   width: 100px;
   height: 4px;
   background: #00d2ff;
   margin: 1.5rem 0;
 }
-
 .section-desc {
   font-size: 1.2rem;
   color: #a0aab5;
   max-width: 600px;
   line-height: 1.6;
 }
-
 .highlight {
   color: #00d2ff;
   font-weight: 700;
 }
-
-/* --- GRID LAYOUT KARTU --- */
 .features-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
   margin-top: 5rem;
 }
-
 .feature-card {
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.1);
   padding: 3rem 2rem;
   position: relative;
-  /* Transisi diubah lebih 'bouncy' sedikit */
   transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
   backdrop-filter: blur(10px);
   overflow: hidden;
-  cursor: pointer; /* Menunjukkan ini bisa diklik */
+  cursor: pointer;
 }
-
-/* State HOVER: Ini kuncinya */
 .feature-card:hover {
-  /* Background jadi sedikit lebih terang */
   background: rgba(0, 210, 255, 0.08);
-
-  /* Naik ke atas + Membesar sedikit */
   transform: translateY(-15px) scale(1.02);
-
-  /* Border menyala */
   border-color: #00d2ff;
-
-  /* Efek GLOW NEON di luar dan di dalam */
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4),
-    /* Bayangan kedalaman */ 0 0 20px rgba(0, 210, 255, 0.2),
-    /* Glow luar halus */ inset 0 0 20px rgba(0, 210, 255, 0.05); /* Glow dalam */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 210, 255, 0.2),
+    inset 0 0 20px rgba(0, 210, 255, 0.05);
 }
-
 .card-number {
   font-family: "Rajdhani", sans-serif;
   font-size: 5rem;
@@ -369,13 +321,10 @@
   line-height: 1;
   transition: all 0.5s ease;
 }
-
-/* Angka ikut menyala sedikit saat hover */
 .feature-card:hover .card-number {
   color: rgba(0, 210, 255, 0.2);
-  transform: scale(1.1); /* Angka membesar */
+  transform: scale(1.1);
 }
-
 .feature-card h3 {
   font-family: "Rajdhani", sans-serif;
   font-size: 2rem;
@@ -383,47 +332,37 @@
   color: #fff;
   transition: color 0.3s ease;
 }
-
-/* Judul berubah jadi Neon saat hover */
 .feature-card:hover h3 {
   color: #00d2ff;
   text-shadow: 0 0 10px rgba(0, 210, 255, 0.6);
 }
-
 .feature-card p {
   color: #8fa3b0;
   line-height: 1.5;
   transition: color 0.3s ease;
 }
-
-/* Teks deskripsi jadi lebih putih/jelas */
 .feature-card:hover p {
   color: #e0f7fa;
 }
-
 .card-decoration {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 0%;
-  height: 4px; /* Sedikit lebih tebal */
+  height: 4px;
   background: #00d2ff;
   transition: width 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-  box-shadow: 0 0 10px #00d2ff; /* Garisnya juga glowing */
+  box-shadow: 0 0 10px #00d2ff;
 }
-
 .feature-card:hover .card-decoration {
   width: 100%;
 }
 
-/* --- ANIMASI SCROLL (MAGIC HAPPENS HERE) --- */
-
-/* State awal: Tersembunyi */
+/* ANIMASI SCROLL */
 .animate-hidden {
   opacity: 0;
-  transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); /* Efek smooth */
+  transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
 }
-
 .slide-up {
   transform: translateY(50px);
 }
@@ -433,9 +372,171 @@
 .slide-right {
   transform: translateX(50px);
 }
-
-/* State akhir: Muncul (ditambahkan oleh JS) */
 .animate-active {
   opacity: 1;
   transform: translate(0, 0);
+}
+
+/* --- 2. ARTIFACT VIEW STYLES --- */
+.artifact-view-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  background: #050a10;
+  overflow: hidden;
+  position: relative;
+}
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-out;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Back Button */
+.back-btn {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  z-index: 50;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  padding: 0.8rem 1.5rem;
+  font-family: "Rajdhani", sans-serif;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.3s;
+  backdrop-filter: blur(5px);
+}
+.back-btn:hover {
+  border-color: #00d2ff;
+  color: #00d2ff;
+  background: rgba(0, 210, 255, 0.1);
+}
+
+/* Canvas Area */
+.canvas-wrapper {
+  flex: 1;
+  position: relative;
+  background: radial-gradient(circle at center, #0b1a26 0%, #000 100%);
+}
+.artifact-title-overlay {
+  position: absolute;
+  bottom: 3rem;
+  left: 3rem;
+  pointer-events: none;
+}
+.item-id {
+  font-family: "Rajdhani", monospace;
+  color: #00d2ff;
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+}
+.artifact-title-overlay h1 {
+  font-family: "Rajdhani", sans-serif;
+  font-size: 4rem;
+  margin: 0;
+  line-height: 0.9;
+  color: #fff;
+}
+
+/* Article Panel */
+.article-panel {
+  width: 450px;
+  background: rgba(5, 10, 16, 0.85);
+  backdrop-filter: blur(20px);
+  border-left: 1px solid rgba(0, 210, 255, 0.2);
+  display: flex;
+  flex-direction: column;
+  padding: 3rem;
+  box-shadow: -10px 0 50px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+.panel-header {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.tab-btn {
+  background: none;
+  border: none;
+  color: #8fa3b0;
+  font-family: "Rajdhani", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding-bottom: 1rem;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s;
+}
+.tab-btn.active {
+  color: #00d2ff;
+  border-bottom-color: #00d2ff;
+}
+.panel-content {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 1rem;
+}
+.content-title {
+  font-family: "Rajdhani", sans-serif;
+  font-size: 1.8rem;
+  color: #fff;
+  margin-top: 0;
+}
+.content-text {
+  color: #a0aab5;
+  line-height: 1.8;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  text-align: justify;
+}
+.data-row {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1rem 0;
+  font-family: "Rajdhani", monospace;
+  color: #00d2ff;
+  font-size: 0.9rem;
+}
+.tech-stat {
+  margin-bottom: 1.5rem;
+}
+.tech-stat label {
+  display: block;
+  font-family: "Rajdhani", sans-serif;
+  font-size: 0.8rem;
+  color: #8fa3b0;
+  margin-bottom: 0.5rem;
+}
+.bar-container {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  margin-bottom: 0.5rem;
+}
+.bar-fill {
+  height: 100%;
+  background: #00d2ff;
+  box-shadow: 0 0 10px #00d2ff;
+}
+.loading-text {
+  color: #00d2ff;
+  font-family: "Rajdhani", monospace;
+  animation: blink 1s infinite;
+}
+@keyframes blink {
+  50% {
+    opacity: 0.5;
+  }
 }
