@@ -11,6 +11,16 @@ body {
   overflow-x: hidden;
 }
 
+/* Sembunyikan Scrollbar tapi tetap bisa scroll */
+::-webkit-scrollbar {
+  display: none;
+}
+html,
+body {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
 /* --- 1. LANDING PAGE STYLES --- */
 .app-container {
   width: 100%;
@@ -248,16 +258,13 @@ body {
     );
 }
 .about-video {
-  /* Samakan triknya di sini */
   width: 105%;
   height: 105%;
-
   position: absolute;
   top: 0;
   left: 0;
-
   object-fit: cover;
-  opacity: 0.4; /* Opacity & filter tetap sama */
+  opacity: 0.4;
   filter: grayscale(80%) contrast(1.2);
 }
 .about-container {
@@ -539,4 +546,285 @@ body {
   50% {
     opacity: 0.5;
   }
+}
+
+/* --- 3. COLLECTION PREVIEW (HORIZONTAL SCROLL) - BARU DITAMBAHKAN --- */
+.collection-preview-section {
+  position: relative;
+  width: 100%;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 5rem;
+}
+
+.preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 3rem;
+  padding-right: 4rem; /* Memberi ruang di kanan */
+}
+
+.preview-header h3 {
+  font-family: "Rajdhani", sans-serif;
+  font-size: 3rem;
+  color: #fff;
+  margin: 0;
+  line-height: 0.9;
+  letter-spacing: 2px;
+}
+
+.scroll-indicator {
+  font-family: "Rajdhani", monospace;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 3px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  opacity: 0.7;
+}
+
+/* --- TRACK SCROLL MANUAL --- */
+.gallery-track.manual-scroll {
+  display: flex;
+  gap: 2.5rem; /* Jarak antar kartu lebih lega */
+
+  /* Aktifkan Scroll Horizontal Manual */
+  overflow-x: auto;
+  scroll-behavior: smooth;
+
+  /* Padding penting agar efek hover tidak terpotong & ada ruang scroll */
+  padding: 1rem 4rem 4rem 0;
+
+  /* Hapus animasi scrolling sebelumnya */
+  animation: none;
+  width: auto;
+
+  /* Sembunyikan scrollbar browser */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.gallery-track.manual-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* --- DESAIN KARTU ELEGAN & FUTURISTIK --- */
+.preview-card.elegant-card {
+  min-width: 380px; /* Kartu sedikit lebih lebar */
+  max-width: 380px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px; /* Sudut lebih membulat */
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  cursor: grab;
+
+  /* --- RAHASIA GRADIENT BORDER --- */
+  /* Layer 1: Background Dalam (Gelap Transparan) */
+  background-image: linear-gradient(
+      rgba(10, 15, 20, 0.9),
+      rgba(10, 15, 20, 0.95)
+    ),
+    /* Layer 2: Gradient untuk Border (Awalnya subtle) */
+      linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(0, 210, 255, 0.3));
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  border: 1px solid transparent; /* Border transparan agar gradient di belakangnya muncul */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* EFEK HOVER KARTU */
+.preview-card.elegant-card:hover {
+  transform: translateY(-15px) scale(1.02);
+
+  /* Ubah gradient border menjadi lebih terang & berwarna neon saat hover */
+  background-image: linear-gradient(rgba(8, 12, 16, 0.9), rgba(8, 12, 16, 0.95)),
+    linear-gradient(135deg, var(--neon-blue), #5e00ff);
+
+  /* Soft Glow futuristik */
+  box-shadow: 0 20px 60px rgba(0, 210, 255, 0.15),
+    0 0 0 1px rgba(0, 210, 255, 0.2) inset;
+}
+.preview-card.elegant-card:active {
+  cursor: grabbing;
+  transform: scale(0.98);
+}
+
+/* --- BAGIAN VISUAL (ATAS) --- */
+.preview-visual {
+  height: 240px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Latar Belakang Warna */
+.visual-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.6;
+  transition: opacity 0.4s;
+}
+.preview-card.elegant-card:hover .visual-bg {
+  opacity: 0.8;
+}
+
+/* Overlay Pattern Grid Halus */
+.pattern-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.03) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 20px 20px;
+  z-index: 1;
+}
+
+/* Overlay Gradient Gelap ke Terang */
+.visual-overlay-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(0deg, rgba(10, 15, 20, 1) 10%, transparent 100%);
+  z-index: 2;
+}
+
+/* Badge Tipe Item */
+.item-type-badge {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  font-family: "Rajdhani", monospace;
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  padding: 6px 12px;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  z-index: 5;
+  backdrop-filter: blur(5px);
+}
+
+/* Ikon Tengah dengan Efek Scan */
+.visual-center-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 4;
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 900;
+  font-size: 3rem;
+  color: rgba(255, 255, 255, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  overflow: hidden;
+  transition: all 0.4s;
+}
+.preview-card.elegant-card:hover .visual-center-icon {
+  color: #fff;
+  border-color: var(--neon-blue);
+  box-shadow: 0 0 30px rgba(0, 210, 255, 0.3);
+}
+
+.scan-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--neon-blue);
+  box-shadow: 0 0 10px var(--neon-blue);
+  animation: scanDown 2s linear infinite;
+  opacity: 0;
+}
+.preview-card.elegant-card:hover .scan-line {
+  opacity: 1;
+}
+@keyframes scanDown {
+  0% {
+    top: -10%;
+  }
+  100% {
+    top: 110%;
+  }
+}
+
+/* --- BAGIAN INFO (BAWAH) --- */
+.preview-info {
+  padding: 2rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.01); /* Sedikit tint terang */
+}
+
+.preview-info h4 {
+  font-family: "Rajdhani", sans-serif;
+  font-size: 1.8rem;
+  margin: 0 0 0.8rem 0;
+  color: #fff;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+
+.preview-info p {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+  flex-grow: 1;
+  font-weight: 300;
+}
+
+/* Tombol Elegan */
+.view-detail-btn.elegant-btn {
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1.2rem 0;
+  width: 100%;
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 3px;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  border-radius: 8px;
+}
+
+.view-detail-btn.elegant-btn:hover {
+  background: var(--neon-blue);
+  color: #000;
+  border-color: var(--neon-blue);
+  box-shadow: 0 5px 20px rgba(0, 210, 255, 0.3);
+}
+
+.btn-arrow {
+  transition: transform 0.3s;
+  font-size: 1.1rem;
+}
+.view-detail-btn.elegant-btn:hover .btn-arrow {
+  transform: translateX(8px);
 }
