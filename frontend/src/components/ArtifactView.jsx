@@ -1,10 +1,12 @@
 import React, { Suspense, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Stage, Html, useGLTF } from "@react-three/drei";
+import "./ArtifactView.css";
 
 /* --- KOMPONEN PEMUAT MODEL 3D --- */
 function ArtifactModel({ path }) {
   // Memuat file GLB/GLTF
+  // Gunakan suspense untuk menangani loading state
   const { scene } = useGLTF(path);
 
   return (
@@ -19,8 +21,9 @@ function ArtifactModel({ path }) {
 const ArtifactView = ({ onBack }) => {
   const [activeTab, setActiveTab] = useState("history");
 
-  // GANTI INI: Sesuaikan dengan nama file di folder public/models/
-  const MODEL_PATH = "/models/arkeologi/kapak perunggu.glb";
+  // PATH MODEL (Pastikan file ini ada di folder public/models/hewan/vertebrata/)
+  // Sesuaikan path ini jika lokasi file berbeda
+  const MODEL_PATH = "/models/hewan/vertebrata/komodo_dragon_lizard-v2.glb";
 
   return (
     <div className="artifact-view-container animate-fade-in">
@@ -45,6 +48,7 @@ const ArtifactView = ({ onBack }) => {
               <ArtifactModel path={MODEL_PATH} />
             </Stage>
           </Suspense>
+
           <OrbitControls autoRotate autoRotateSpeed={0.5} enableZoom={true} />
         </Canvas>
 
@@ -114,7 +118,7 @@ const ArtifactView = ({ onBack }) => {
   );
 };
 
-// Pre-load model agar lebih cepat saat dibuka (Opsional)
-// useGLTF.preload("/models/nama-file-anda.glb");
+// Pre-load model (Opsional, uncomment jika ingin load lebih awal untuk performa)
+// useGLTF.preload("/models/hewan/vertebrata/komodo_dragon_lizard-v2.glb");
 
 export default ArtifactView;

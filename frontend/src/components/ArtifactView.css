@@ -1,0 +1,289 @@
+/* --- ARTIFACT VIEW STYLES (DEFAULT DESKTOP) --- */
+
+.artifact-view-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  background: #050a10;
+  overflow: hidden;
+  position: relative;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Tombol Kembali */
+.back-btn {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  z-index: 50;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  padding: 0.8rem 1.5rem;
+  font-family: "Rajdhani", sans-serif;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.3s;
+  backdrop-filter: blur(5px);
+}
+
+.back-btn:hover {
+  border-color: #00d2ff;
+  color: #00d2ff;
+  background: rgba(0, 210, 255, 0.1);
+}
+
+/* Area 3D Canvas */
+.canvas-wrapper {
+  flex: 1;
+  position: relative;
+  background: radial-gradient(circle at center, #0b1a26 0%, #000 100%);
+}
+
+.artifact-title-overlay {
+  position: absolute;
+  bottom: 3rem;
+  left: 3rem;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.item-id {
+  font-family: "Rajdhani", monospace;
+  color: #00d2ff;
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+}
+
+.artifact-title-overlay h1 {
+  font-family: "Rajdhani", sans-serif;
+  font-size: 4rem;
+  margin: 0;
+  line-height: 0.9;
+  color: #fff;
+}
+
+.outline-text {
+  color: transparent;
+  -webkit-text-stroke: 1px #fff;
+}
+
+/* Panel Informasi Kanan */
+.article-panel {
+  width: 450px; /* Lebar tetap di desktop */
+  background: rgba(5, 10, 16, 0.85);
+  backdrop-filter: blur(20px);
+  border-left: 1px solid rgba(0, 210, 255, 0.2);
+  display: flex;
+  flex-direction: column;
+  padding: 3rem;
+  box-shadow: -10px 0 50px rgba(0, 0, 0, 0.5);
+  z-index: 20;
+}
+
+.panel-header {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tab-btn {
+  background: none;
+  border: none;
+  color: #8fa3b0;
+  font-family: "Rajdhani", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding-bottom: 1rem;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s;
+}
+
+.tab-btn.active {
+  color: #00d2ff;
+  border-bottom-color: #00d2ff;
+}
+
+.panel-content {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 1rem;
+}
+
+.content-title {
+  font-family: "Rajdhani", sans-serif;
+  font-size: 1.8rem;
+  color: #fff;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.content-text {
+  color: #a0aab5;
+  line-height: 1.8;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  text-align: justify;
+}
+
+.data-row {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1rem 0;
+  font-family: "Rajdhani", monospace;
+  color: #00d2ff;
+  font-size: 0.9rem;
+}
+
+.tech-stat {
+  margin-bottom: 1.5rem;
+}
+
+.tech-stat label {
+  display: block;
+  font-family: "Rajdhani", sans-serif;
+  font-size: 0.8rem;
+  color: #8fa3b0;
+  margin-bottom: 0.5rem;
+}
+
+.bar-container {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  margin-bottom: 0.5rem;
+}
+
+.bar-fill {
+  height: 100%;
+  background: #00d2ff;
+  box-shadow: 0 0 10px #00d2ff;
+}
+
+.loading-text {
+  color: #00d2ff;
+  font-family: "Rajdhani", monospace;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* ==========================================================================
+   MOBILE RESPONSIVE (HP) - FIX JARAK BEZEL & KERAPIAN
+   ========================================================================== */
+@media screen and (max-width: 768px) {
+  .artifact-view-container {
+    flex-direction: column; /* Susun Atas-Bawah */
+    height: 100vh;
+    height: 100dvh; /* Tinggi dinamis mengikuti browser HP */
+  }
+
+  /* 1. Area 3D (Atas) - 45% Tinggi Layar */
+  .canvas-wrapper {
+    width: 100%;
+    height: 45%;
+    flex: none;
+  }
+
+  /* Judul Overlay: Diperkecil & Digeser agar rapi */
+  .artifact-title-overlay {
+    bottom: 1rem;
+    left: 1.5rem;
+    width: 90%;
+  }
+
+  .item-id {
+    font-size: 0.7rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .artifact-title-overlay h1 {
+    font-size: 2.2rem;
+    line-height: 1;
+  }
+
+  /* Tombol Back: Lebih ringkas */
+  .back-btn {
+    top: 1rem;
+    left: 1rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+    background: rgba(0, 0, 0, 0.6);
+  }
+
+  /* 2. Panel Info (Bawah) - 55% Tinggi Layar (Lebih luas untuk teks) */
+  .article-panel {
+    width: 100%;
+    height: 55%;
+
+    border-left: none;
+    border-top: 2px solid var(--neon-blue);
+
+    /* FIX JARAK BEZEL DI SINI: Padding diperbesar */
+    padding: 2rem 2rem 1rem 2rem;
+
+    border-radius: 24px 24px 0 0; /* Lengkungan sudut atas lebih halus */
+    background: rgba(5, 10, 16, 0.98);
+    box-sizing: border-box; /* Pastikan padding tidak membuat layar jebol ke samping */
+  }
+
+  .panel-header {
+    margin-bottom: 1.5rem;
+    gap: 1rem;
+    justify-content: center; /* Tombol tab di tengah */
+  }
+
+  .tab-btn {
+    flex: 1;
+    text-align: center;
+    font-size: 0.9rem;
+    padding-bottom: 0.8rem;
+  }
+
+  /* Konten Teks */
+  .panel-content {
+    /* Padding kanan dihilangkan karena sudah ada padding induk */
+    padding-right: 0;
+  }
+
+  .content-title {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    text-align: center; /* Judul Deskripsi di tengah agar simetris */
+  }
+
+  .content-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #b0c0d0;
+    margin-bottom: 2rem;
+    /* Rata kiri-kanan agar rapi tapi tetap berjarak dari pinggir */
+    text-align: justify;
+  }
+
+  .data-row {
+    padding: 1rem 0;
+    font-size: 0.9rem;
+  }
+}

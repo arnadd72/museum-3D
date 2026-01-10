@@ -1,63 +1,80 @@
 import React, { useEffect, useRef } from "react";
 import "../App.css";
+import "./LandingPage.css";
+import { Link } from "react-router-dom";
 
 const LandingPage = ({ onExplore }) => {
   const observerRef = useRef(null);
 
-  // --- DATA: 7 ARTEFAK ---
-  const featuredArtifacts = [
+  // --- DATA FOSIL & HEWAN PURBA ---
+  // Kategori: Vertebrata, Invertebrata, Mikrofosil
+  // Era: Paleozoikum, Mesozoikum, Kenozoikum
+  const featuredFossils = [
     {
       id: 1,
-      title: "KERIS NOGO SOSRO",
-      desc: "Mahakarya metalurgi era Majapahit dengan pamor meteorit.",
-      type: "WEAPONRY",
-      color: "linear-gradient(135deg, #FFD700 0%, #B8860B 100%)",
+      title: "TYRANNOSAURUS REX",
+      desc: "Predator puncak era Mesozoikum (Kapur). Fosil tubuh yang menunjukkan struktur rahang mematikan.",
+      type: "VERTEBRATA",
+      era: "MESOZOIKUM",
+      image: "/ImageModels/trex.jpg", // Pastikan ada gambar ini
+      accentColor: "#ff4d4d", // Merah (Bahaya/Predator)
     },
     {
       id: 2,
-      title: "MAHKOTA BINOKASIH",
-      desc: "Simbol kedaulatan Kerajaan Sumedang Larang berbahan emas murni.",
-      type: "ROYALTY",
-      color: "linear-gradient(135deg, #00d2ff 0%, #0055ff 100%)",
+      title: "TRILOBITE",
+      desc: "Invertebrata laut ikonik dari era Paleozoikum. Salah satu bentuk kehidupan kompleks paling awal.",
+      type: "INVERTEBRATA",
+      era: "PALEOZOIKUM",
+      image: "/ImageModels/trilobite.jpg",
+      accentColor: "#00d2ff", // Biru (Laut)
     },
     {
       id: 3,
-      title: "PRASASTI CIARUTEUN",
-      desc: "Batu tulis peninggalan Tarumanegara dengan cetakan tapak kaki.",
-      type: "INSCRIPTION",
-      color: "linear-gradient(135deg, #ff4d4d 0%, #a60000 100%)",
+      title: "WOOLLY MAMMOTH",
+      desc: "Mamalia raksasa era Kenozoikum. Sering ditemukan sebagai fosil terawetkan dalam es (Permafrost).",
+      type: "MAMALIA",
+      era: "KENOZOIKUM",
+      image: "/ImageModels/mammoth.jpg",
+      accentColor: "#ffffff", // Putih (Es/Salju)
     },
     {
       id: 4,
-      title: "TOPENG PANJI",
-      desc: "Artefak topeng kayu yang merepresentasikan kehalusan budi manusia.",
-      type: "ART",
-      color: "linear-gradient(135deg, #00ff88 0%, #008844 100%)",
+      title: "AMMONITE",
+      desc: "Moluska laut purba dengan cangkang spiral. Fosil indeks penting untuk penanggalan lapisan batuan.",
+      type: "INVERTEBRATA",
+      era: "MESOZOIKUM",
+      image: "/ImageModels/ammonite.jpg",
+      accentColor: "#FF8C00", // Oranye (Cangkang)
     },
     {
       id: 5,
-      title: "GONG KYAI PRADAH",
-      desc: "Gamelan keramat peninggalan Mataram Kuno yang digunakan untuk upacara.",
-      type: "INSTRUMENT",
-      color: "linear-gradient(135deg, #A020F0 0%, #4B0082 100%)", // Ungu
+      title: "VELOCIRAPTOR",
+      desc: "Dinosaurus teropoda kecil namun cerdas. Fosil jejak (Trace Fossil) sering menunjukkan perilaku berburu.",
+      type: "VERTEBRATA",
+      era: "MESOZOIKUM",
+      image: "/ImageModels/velociraptor.jpg",
+      accentColor: "#00ff88", // Hijau (Lincah)
     },
     {
       id: 6,
-      title: "RELIEF BOROBUDUR",
-      desc: "Potongan panel relief Karmawibhangga yang menceritakan hukum sebab akibat.",
-      type: "RELIEF",
-      color: "linear-gradient(135deg, #FF8C00 0%, #FF4500 100%)", // Oranye
+      title: "ARCHAEOPTERYX",
+      desc: "Fosil transisi penting yang menghubungkan dinosaurus non-unggas dengan burung modern.",
+      type: "TRANSISI",
+      era: "JURA AKHIR",
+      image: "/ImageModels/archaeopteryx.jpg",
+      accentColor: "#A020F0", // Ungu (Misterius/Langka)
     },
     {
       id: 7,
-      title: "PERAHU PHINISI",
-      desc: "Miniatur kapal layar legendaris suku Bugis penjelajah samudra.",
-      type: "MARITIME",
-      color: "linear-gradient(135deg, #00CED1 0%, #20B2AA 100%)", // Cyan Gelap
+      title: "MEGALODON TOOTH",
+      desc: "Gigi hiu raksasa prasejarah. Sisa fosil paling umum dari predator laut terbesar sepanjang masa.",
+      type: "MIKRO/BAGIAN",
+      era: "KENOZOIKUM",
+      image: "/ImageModels/megalodon.jpg",
+      accentColor: "#00CED1", // Cyan Gelap
     },
   ];
 
-  // Logic Animasi Scroll (Intersection Observer)
   useEffect(() => {
     observerRef.current = new IntersectionObserver(
       (entries) => {
@@ -84,15 +101,18 @@ const LandingPage = ({ onExplore }) => {
       <nav className="navbar">
         <div className="logo-section">
           <div className="logo-symbol">N</div>
-          <span className="logo-text">NEXUS MUSEUM</span>
+          <span className="logo-text">NEXUS PALEO</span>
         </div>
         <div className="nav-links">
           <a href="#home" className="nav-link active">
             HOME
           </a>
-          <a href="#about" className="nav-link">
-            ABOUT SYSTEM
-          </a>
+
+          {/* INI YANG DIUBAH: Menggunakan Link ke route /era-geologi */}
+          <Link to="/era-geologi" className="nav-link">
+            ERA GEOLOGI
+          </Link>
+
           <a
             href="#"
             onClick={(e) => {
@@ -101,10 +121,10 @@ const LandingPage = ({ onExplore }) => {
             }}
             className="nav-link"
           >
-            GALLERY
+            KOLEKSI FOSIL
           </a>
           <a href="#" className="nav-link">
-            VIRTUAL TOUR
+            LABORATORIUM
           </a>
         </div>
       </nav>
@@ -112,128 +132,154 @@ const LandingPage = ({ onExplore }) => {
       {/* HERO SECTION */}
       <main id="home" className="hero-section">
         <div className="video-wrapper">
+          {/* SAYA SARANKAN GANTI VIDEO BACKGROUND DENGAN TEMA ALAM/HUTAN PURBA/DNA */}
           <video autoPlay loop muted playsInline className="hero-video">
             <source src="/background-kedua.mp4" type="video/mp4" />
           </video>
           <div className="video-overlay"></div>
         </div>
+
         <div className="hero-content">
-          <div className="floating-tag">/// SYSTEM READY</div>
+          <div className="floating-tag">/// PALEO-ARCHIVE READY</div>
           <h1 className="hero-title">
-            SELAMAT <br />
-            <span className="outline-text">BERKUNJUNG</span>
+            JEJAK <br />
+            <span className="outline-text">PRASEJARAH</span>
           </h1>
           <p className="hero-desc">
-            Melampaui batas waktu. Rasakan pengalaman sejarah yang hidup kembali
-            melalui arsip digital.
+            Menghidupkan kembali raksasa masa lalu. Eksplorasi kehidupan dari
+            era Paleozoikum hingga Kenozoikum melalui rekonstruksi digital
+            presisi tinggi.
           </p>
           <div className="cta-container">
             <button className="explore-btn" onClick={onExplore}>
-              MULAI PENJELAJAHAN
+              MULAI EKSKAVASI
             </button>
             <div className="play-btn-wrapper">
               <div className="play-icon">▶</div>
-              <span>WATCH BRAND STORY</span>
+              <span>LIHAT TIMELINE BUMI</span>
             </div>
           </div>
         </div>
         <div className="decorative-line"></div>
-        <div className="coordinate-text">LAT -6.2088 // LONG 106.8456</div>
+        <div className="coordinate-text">
+          LAT -6.2088 // LONG 106.8456 // ERA: HOLOCENE
+        </div>
       </main>
 
-      {/* ABOUT SECTION */}
+      {/* ABOUT SECTION (Penjelasan Klasifikasi) */}
       <section id="about" className="about-section">
         <div className="about-container">
           <div className="about-header animate-hidden slide-up">
             <h2 className="section-title">
-              Artefacta: <span className="accent">Museum Digital</span>
+              Klasifikasi <span className="accent">Kehidupan Purba</span>
             </h2>
             <div className="section-line"></div>
             <p className="section-desc">
-              Platform ini bukan sekadar museum. Ini adalah{" "}
-              <span className="highlight">Portal Arsip</span> digital.
+              Database kami mengkategorikan spesimen berdasarkan{" "}
+              <span className="highlight">Era Geologi</span>,
+              <span className="highlight">Jenis Fosil</span>, dan{" "}
+              <span className="highlight">Kelompok Biologis</span>.
             </p>
           </div>
 
+          {/* GRID FITUR: Diganti dengan Klasifikasi Anda */}
           <div className="features-grid">
             <div className="feature-card animate-hidden slide-left">
               <div className="card-number">01</div>
-              <h3>DIGITAL ARTIFACTS</h3>
-              <p>Scan LIDAR resolusi tinggi.</p>
+              <h3>KELOMPOK HEWAN</h3>
+              <p>
+                Vertebrata (Dinosaurus, Mamalia), Invertebrata (Trilobite), dan
+                Mikrofosil.
+              </p>
               <div className="card-decoration"></div>
             </div>
             <div className="feature-card animate-hidden slide-up">
               <div className="card-number">02</div>
-              <h3>IMMERSIVE TIME</h3>
-              <p>Simulasi lingkungan masa lalu.</p>
+              <h3>JENIS FOSIL</h3>
+              <p>
+                Fosil Tubuh (Tulang/Gigi), Fosil Jejak (Tapak Kaki), dan Fosil
+                Terawetkan (Amber/Es).
+              </p>
               <div className="card-decoration"></div>
             </div>
             <div className="feature-card animate-hidden slide-right">
               <div className="card-number">03</div>
-              <h3>GLOBAL ACCESS</h3>
-              <p>Akses tanpa batas ruang.</p>
+              <h3>ERA GEOLOGI</h3>
+              <p>
+                Paleozoikum (Awal), Mesozoikum (Dinosaurus), hingga Kenozoikum
+                (Mamalia).
+              </p>
               <div className="card-decoration"></div>
             </div>
           </div>
 
-          {/* --- COLLECTION PREVIEW (INFINITE LOOP) --- */}
+          {/* --- COLLECTION PREVIEW --- */}
           <div
             className="collection-preview-section animate-hidden slide-up"
             style={{ marginTop: "8rem" }}
           >
             <div className="preview-header">
-              {/* Ubah teks indikator agar sesuai mode manual */}
               <h3>
-                FEATURED <span className="accent">COLLECTION</span>
+                KOLEKSI <span className="accent">SPESIMEN</span>
               </h3>
               <div className="scroll-indicator">
-                <span style={{ fontSize: "1.2rem" }}>←</span> DRAG OR SCROLL TO
-                EXPLORE <span style={{ fontSize: "1.2rem" }}>→</span>
+                <span style={{ fontSize: "1.2rem" }}>←</span> GESER UNTUK
+                MELIHAT
+                <span style={{ fontSize: "1.2rem" }}>→</span>
               </div>
             </div>
 
-            {/* Hapus div ".scroller-mask" karena tidak butuh masking loop lagi */}
-
-            {/* Track Scroll Manual */}
             <div className="gallery-track manual-scroll">
-              {/* HANYA RENDER DATA ASLI (SATU KALI SAJA) */}
-              {featuredArtifacts.map((item) => (
+              {featuredFossils.map((item) => (
                 <div key={item.id} className="preview-card elegant-card">
-                  {/* Bagian Visual dengan Efek Baru */}
                   <div
                     className="preview-visual"
-                    style={{ "--item-color": item.color }}
+                    style={{ "--item-color": item.accentColor }}
                   >
-                    <div className="item-type-badge">{item.type}</div>
+                    {/* Badge menampilkan ERA */}
+                    <div className="item-type-badge">{item.era}</div>
 
-                    {/* Background Gradient + Pattern Overlay */}
                     <div
                       className="visual-bg"
-                      style={{ background: item.color }}
+                      style={{
+                        backgroundImage: `url(${item.image})`,
+                        backgroundColor: item.accentColor,
+                      }}
                     ></div>
+
                     <div className="pattern-overlay"></div>
                     <div className="visual-overlay-gradient"></div>
 
-                    {/* Ikon Tengah */}
                     <div className="visual-center-icon">
                       <span className="scan-line"></span>
-                      3D
+                      FSL {/* Singkatan Fosil */}
                     </div>
                   </div>
 
                   <div className="preview-info">
                     <h4>{item.title}</h4>
+                    {/* Menampilkan Tipe Hewan kecil di atas deskripsi */}
+                    <small
+                      style={{
+                        color: item.accentColor,
+                        letterSpacing: "1px",
+                        marginBottom: "0.5rem",
+                        display: "block",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      {item.type}
+                    </small>
                     <p>{item.desc}</p>
                     <button
                       className="view-detail-btn elegant-btn"
                       onClick={onExplore}
                     >
-                      ACCESS DATA <span className="btn-arrow">→</span>
+                      ANALISIS DATA <span className="btn-arrow">→</span>
                     </button>
                   </div>
                 </div>
               ))}
-              {/* Akhir Render Data Asli */}
             </div>
           </div>
           {/* --- END COLLECTION --- */}

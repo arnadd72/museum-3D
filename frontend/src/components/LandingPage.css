@@ -1,0 +1,832 @@
+/* --- NAVBAR STYLES --- */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+
+  /* UPDATE DI SINI: Tambahkan box-sizing dan perbesar padding kanan-kiri */
+  padding: 1.5rem 5rem; /* Memberikan jarak 5rem dari kiri dan kanan */
+  box-sizing: border-box; /* KUNCI: Agar padding tidak menambah lebar total */
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo-symbol {
+  width: 40px;
+  height: 40px;
+  background: var(--neon-blue);
+  color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 900;
+  font-family: "Rajdhani", sans-serif;
+  font-size: 1.5rem;
+  clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
+}
+
+.logo-text {
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 3rem; /* Jarak antar menu */
+  margin-right: 1rem; /* Tambahan sedikit margin kanan untuk keamanan */
+}
+
+.nav-link {
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  transition: color 0.3s;
+  position: relative;
+  cursor: pointer;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--neon-blue);
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: var(--neon-blue);
+  transition: width 0.3s;
+}
+
+/* --- HERO SECTION --- */
+.hero-section {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 6rem;
+  box-sizing: border-box;
+}
+
+.video-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.hero-video {
+  width: 105%;
+  height: 105%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  opacity: 0.5;
+}
+
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    #050505 0%,
+    rgba(5, 5, 5, 0.8) 40%,
+    transparent 100%
+  );
+}
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+  max-width: 800px;
+}
+
+.floating-tag {
+  color: var(--neon-blue);
+  font-family: "Rajdhani", monospace;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  letter-spacing: 2px;
+}
+
+.hero-title {
+  font-family: "Rajdhani", sans-serif;
+  font-size: 6rem;
+  line-height: 0.9;
+  font-weight: 700;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.outline-text {
+  color: transparent;
+  -webkit-text-stroke: 2px #fff;
+  opacity: 0.5;
+}
+
+.hero-desc {
+  margin-top: 2rem;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 500px;
+  border-left: 3px solid var(--neon-blue);
+  padding-left: 1.5rem;
+}
+
+.cta-container {
+  margin-top: 3rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.explore-btn {
+  background: #fff;
+  color: #000;
+  border: none;
+  padding: 1rem 2.5rem;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  cursor: pointer;
+  clip-path: polygon(0 0, 100% 0, 95% 100%, 0% 100%);
+  transition: transform 0.2s;
+}
+
+.explore-btn:hover {
+  transform: scale(1.05);
+  background: var(--neon-blue);
+}
+
+.play-btn-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.8);
+  transition: color 0.3s;
+}
+
+.play-btn-wrapper:hover {
+  color: var(--neon-blue);
+}
+
+.play-icon {
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.8rem;
+}
+
+.decorative-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, var(--neon-blue), transparent);
+  z-index: 10;
+}
+
+.coordinate-text {
+  position: absolute;
+  bottom: 2rem;
+  right: 3rem;
+  font-family: "Rajdhani", monospace;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.9rem;
+  z-index: 10;
+  transform: rotate(-90deg);
+  transform-origin: right bottom;
+}
+
+/* --- ABOUT SECTION --- */
+.about-section {
+  position: relative;
+  min-height: 100vh;
+  background-color: #050a10;
+  padding: 8rem 4rem;
+  overflow: hidden;
+  z-index: 20;
+  background-image: radial-gradient(
+      circle at 10% 20%,
+      rgba(0, 210, 255, 0.05) 0%,
+      transparent 20%
+    ),
+    radial-gradient(
+      circle at 90% 80%,
+      rgba(0, 210, 255, 0.05) 0%,
+      transparent 20%
+    );
+}
+
+.about-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-family: "Rajdhani", sans-serif;
+  font-size: 4rem;
+  color: #fff;
+  margin: 0;
+  line-height: 1;
+}
+
+.section-line {
+  width: 100px;
+  height: 4px;
+  background: var(--neon-blue);
+  margin: 1.5rem 0;
+}
+
+.section-desc {
+  font-size: 1.2rem;
+  color: #a0aab5;
+  max-width: 600px;
+  line-height: 1.6;
+}
+
+.highlight {
+  color: var(--neon-blue);
+  font-weight: 700;
+}
+
+.accent {
+  color: var(--neon-blue);
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 5rem;
+}
+
+.feature-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 3rem 2rem;
+  position: relative;
+  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.feature-card:hover {
+  background: rgba(0, 210, 255, 0.08);
+  transform: translateY(-15px) scale(1.02);
+  border-color: var(--neon-blue);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 210, 255, 0.2),
+    inset 0 0 20px rgba(0, 210, 255, 0.05);
+}
+
+.card-number {
+  font-family: "Rajdhani", sans-serif;
+  font-size: 5rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.05);
+  position: absolute;
+  top: 0;
+  right: 1rem;
+  line-height: 1;
+  transition: all 0.5s ease;
+}
+
+.feature-card:hover .card-number {
+  color: rgba(0, 210, 255, 0.2);
+  transform: scale(1.1);
+}
+
+.feature-card h3 {
+  font-family: "Rajdhani", sans-serif;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #fff;
+  transition: color 0.3s ease;
+}
+
+.feature-card:hover h3 {
+  color: var(--neon-blue);
+  text-shadow: 0 0 10px rgba(0, 210, 255, 0.6);
+}
+
+.feature-card p {
+  color: #8fa3b0;
+  line-height: 1.5;
+  transition: color 0.3s ease;
+}
+
+.feature-card:hover p {
+  color: #e0f7fa;
+}
+
+.card-decoration {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 4px;
+  background: var(--neon-blue);
+  transition: width 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  box-shadow: 0 0 10px var(--neon-blue);
+}
+
+.feature-card:hover .card-decoration {
+  width: 100%;
+}
+
+/* --- COLLECTION PREVIEW --- */
+.collection-preview-section {
+  position: relative;
+  width: 100%;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 5rem;
+}
+
+.preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 3rem;
+  padding-right: 4rem;
+}
+
+.preview-header h3 {
+  font-family: "Rajdhani", sans-serif;
+  font-size: 3rem;
+  color: #fff;
+  margin: 0;
+  line-height: 0.9;
+  letter-spacing: 2px;
+}
+
+.scroll-indicator {
+  font-family: "Rajdhani", monospace;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 3px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  opacity: 0.7;
+}
+
+/* --- TRACK SCROLL MANUAL --- */
+.gallery-track.manual-scroll {
+  display: flex;
+  gap: 2.5rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 1rem 4rem 4rem 0;
+  animation: none;
+  width: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.gallery-track.manual-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* --- DESAIN KARTU: POLIGON FUTURISTIK --- */
+.preview-card.elegant-card {
+  min-width: 320px;
+  max-width: 320px;
+  height: auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  /* Hapus radius, ganti dengan clip-path untuk sudut terpotong */
+  border-radius: 0;
+  clip-path: polygon(
+    0 0,
+    /* Kiri atas */ 100% 0,
+    /* Kanan atas */ 100% 85%,
+    /* Kanan bawah (mulai cut) */ 85% 100%,
+    /* Kanan bawah (akhir cut) */ 0 100% /* Kiri bawah */
+  );
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  cursor: grab;
+  /* Background transparan agar pseudo-element terlihat */
+  background: transparent;
+  border: none;
+  padding: 1px; /* Jarak untuk border */
+}
+
+/* Pseudo-element: Border Gradien */
+.preview-card.elegant-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(0, 210, 255, 0.3)
+  );
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 85% 100%, 0 100%);
+  transition: all 0.4s ease;
+}
+
+/* Pseudo-element: Background Kartu (Dalam) */
+.preview-card.elegant-card::after {
+  content: "";
+  position: absolute;
+  inset: 1px; /* Membuat border setebal 1px */
+  z-index: -1;
+  background: rgba(20, 20, 25, 0.85);
+  backdrop-filter: blur(10px);
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 85% 100%, 0 100%);
+}
+
+.preview-card.elegant-card:hover {
+  transform: translateY(-10px);
+  filter: drop-shadow(0 10px 20px rgba(0, 210, 255, 0.2)); /* Glow effect */
+}
+
+.preview-card.elegant-card:hover::before {
+  background: linear-gradient(135deg, var(--neon-blue), #5e00ff);
+}
+
+/* --- BAGIAN VISUAL (ATAS) --- */
+.preview-visual {
+  width: 100%;
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: none;
+  /* Potongan sudut berlawanan di visual */
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 85%);
+  margin-bottom: -1px;
+}
+
+.visual-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.7;
+  filter: grayscale(40%) contrast(1.1);
+  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.preview-card.elegant-card:hover .visual-bg {
+  opacity: 1;
+  filter: grayscale(0%) contrast(1.2);
+  transform: scale(1.05);
+}
+
+.pattern-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.03) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 20px 20px;
+  z-index: 1;
+}
+
+.visual-overlay-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(0deg, rgba(20, 20, 25, 1) 10%, transparent 100%);
+  z-index: 2;
+}
+
+.item-type-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  left: auto;
+  transform: none;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  font-family: "Rajdhani", monospace;
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  z-index: 5;
+}
+
+.visual-center-icon {
+  width: 60px;
+  height: 60px;
+  font-size: 2rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 4;
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  overflow: hidden;
+  transition: all 0.4s;
+}
+
+.preview-card.elegant-card:hover .visual-center-icon {
+  color: #fff;
+  border-color: var(--neon-blue);
+  box-shadow: 0 0 30px rgba(0, 210, 255, 0.3);
+}
+
+.scan-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--neon-blue);
+  box-shadow: 0 0 10px var(--neon-blue);
+  animation: scanDown 2s linear infinite;
+  opacity: 0;
+}
+
+.preview-card.elegant-card:hover .scan-line {
+  opacity: 1;
+}
+
+@keyframes scanDown {
+  0% {
+    top: -10%;
+  }
+  100% {
+    top: 110%;
+  }
+}
+
+/* --- BAGIAN INFO --- */
+.preview-info {
+  padding: 2rem 2rem 3rem 2rem; /* Padding bawah extra untuk sudut cut */
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+  text-align: left;
+  align-items: flex-start;
+  position: relative;
+  z-index: 1;
+}
+
+.preview-info h4 {
+  font-family: "Rajdhani", sans-serif;
+  font-size: 1.5rem;
+  margin: 0 0 0.8rem 0;
+  color: #fff;
+  letter-spacing: 1px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.preview-info p {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  font-weight: 300;
+}
+
+.view-detail-btn.elegant-btn {
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 1rem 0;
+  font-size: 0.9rem;
+  width: 100%;
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 700;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 2px;
+}
+
+.view-detail-btn.elegant-btn:hover {
+  background: var(--neon-blue);
+  color: #000;
+  border-color: var(--neon-blue);
+  box-shadow: 0 0 15px rgba(0, 210, 255, 0.4);
+}
+
+.btn-arrow {
+  transition: transform 0.3s;
+  font-size: 1.1rem;
+}
+
+.view-detail-btn.elegant-btn:hover .btn-arrow {
+  transform: translateX(8px);
+}
+
+/* ==========================================================================
+   MEDIA QUERIES (RESPONSIVE)
+   ========================================================================== */
+
+/* Tablet & Laptop Kecil (Max Width 1024px) */
+@media screen and (max-width: 1024px) {
+  .navbar {
+    padding: 1rem 2rem;
+  }
+  .hero-section {
+    padding: 0 3rem;
+  }
+  .hero-title {
+    font-size: 4.5rem;
+  }
+  .about-section {
+    padding: 6rem 2rem;
+  }
+  .section-title {
+    font-size: 3rem;
+  }
+
+  .preview-card.elegant-card {
+    min-width: 280px;
+    max-width: 280px;
+  }
+}
+
+/* Mobile Devices (Max Width 768px) */
+@media screen and (max-width: 768px) {
+  /* Navbar Mobile */
+  .navbar {
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+    background: rgba(5, 5, 5, 0.95);
+    backdrop-filter: blur(15px);
+  }
+  .nav-links {
+    gap: 1rem;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .nav-link {
+    font-size: 0.8rem;
+  }
+  .logo-symbol {
+    width: 30px;
+    height: 30px;
+    font-size: 1rem;
+  }
+  .logo-text {
+    font-size: 1.2rem;
+  }
+
+  /* Hero Mobile */
+  .hero-section {
+    padding: 8rem 1.5rem 2rem 1.5rem;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    height: auto;
+    min-height: 100vh;
+  }
+  .hero-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .hero-title {
+    font-size: 3rem;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+  .hero-desc {
+    font-size: 1rem;
+    border-left: none;
+    border-bottom: 2px solid var(--neon-blue);
+    padding: 0 0 1rem 0;
+    margin: 1rem auto;
+    width: 100%;
+  }
+  .cta-container {
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+  }
+  .explore-btn {
+    width: 100%;
+  }
+  .coordinate-text {
+    display: none;
+  }
+
+  /* About Mobile */
+  .about-section {
+    padding: 4rem 1.5rem;
+  }
+  .section-title {
+    font-size: 2.2rem;
+  }
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  /* Gallery Mobile Fix */
+  .collection-preview-section {
+    padding-top: 3rem;
+  }
+  .preview-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding-right: 0;
+    margin-bottom: 1.5rem;
+  }
+  .preview-header h3 {
+    font-size: 2rem;
+    line-height: 1.1;
+  }
+  .scroll-indicator {
+    display: none;
+  }
+
+  .gallery-track.manual-scroll {
+    padding: 0 1.5rem 3rem 1.5rem;
+    gap: 1rem;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .preview-card.elegant-card {
+    min-width: 85vw; /* 85% lebar layar HP */
+    max-width: 85vw;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+  }
+  .preview-visual {
+    height: 180px;
+  }
+  .preview-info {
+    padding: 1.5rem;
+  }
+  .preview-info h4 {
+    font-size: 1.4rem;
+  }
+}

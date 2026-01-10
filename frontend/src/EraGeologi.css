@@ -1,0 +1,262 @@
+/* CONTAINER UTAMA */
+.era-container {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background-color: #050a10;
+  color: #fff;
+  font-family: "Inter", sans-serif;
+}
+
+/* BACKGROUND DENGAN TRANSISI HALUS */
+.era-bg-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.4;
+  transition: background-image 0.8s ease-in-out;
+  z-index: 0;
+}
+
+.era-overlay-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    #050505 0%,
+    rgba(5, 5, 5, 0.8) 40%,
+    rgba(5, 5, 5, 0.4) 100%
+  );
+  z-index: 1;
+}
+
+/* NAVBAR */
+.era-navbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 2rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  z-index: 10;
+}
+
+.back-link {
+  text-decoration: none;
+  color: #fff;
+  font-family: "Rajdhani", monospace;
+  letter-spacing: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.5rem 1.5rem;
+  transition: all 0.3s;
+}
+.back-link:hover {
+  background: #fff;
+  color: #000;
+}
+
+.system-status {
+  font-family: "Rajdhani", monospace;
+  color: var(--neon-blue);
+  animation: blink 2s infinite;
+}
+
+/* LAYOUT KONTEN */
+.era-content-wrapper {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  height: 100%;
+  padding-top: 6rem;
+}
+
+/* SIDEBAR TIMELINE (KIRI) */
+.timeline-sidebar {
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 3rem;
+  position: relative;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.timeline-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  text-align: left;
+  padding: 1.5rem 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.3s;
+  font-family: "Rajdhani", sans-serif;
+  font-size: 1.2rem;
+  position: relative;
+}
+
+.timeline-btn .dot {
+  width: 10px;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transition: all 0.3s;
+}
+
+.timeline-btn:hover,
+.timeline-btn.active {
+  color: #fff;
+  transform: translateX(10px);
+}
+
+.timeline-btn.active .dot {
+  background: var(--era-color);
+  box-shadow: 0 0 15px var(--era-color);
+  transform: scale(1.5);
+}
+
+/* INFO PANEL (KANAN) */
+.era-info-panel {
+  flex: 1;
+  padding: 2rem 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 900px;
+}
+
+.era-header-text h4 {
+  font-family: "Rajdhani", monospace;
+  letter-spacing: 3px;
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.era-header-text h1 {
+  font-family: "Rajdhani", sans-serif;
+  font-size: 5rem;
+  margin: 0 0 2rem 0;
+  line-height: 1;
+}
+
+/* GLASS CARD DESKRIPSI */
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.glass-card h3 {
+  margin-top: 0;
+  color: var(--neon-blue);
+  font-family: "Rajdhani", sans-serif;
+  letter-spacing: 2px;
+}
+
+.glass-card p {
+  line-height: 1.6;
+  color: #d0d0d0;
+  font-size: 1rem;
+}
+
+/* TAGS SPESIES */
+.species-list span {
+  display: block;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.tags {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.creature-tag {
+  border: 1px solid #fff;
+  padding: 0.3rem 1rem;
+  font-family: "Rajdhani", monospace;
+  font-size: 0.9rem;
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* VISUAL PREVIEW BOX */
+.visual-preview-box {
+  width: 100%;
+  height: 200px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.main-era-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(30%);
+  transition: transform 0.5s;
+}
+.visual-preview-box:hover .main-era-img {
+  filter: grayscale(0%);
+  transform: scale(1.05);
+}
+
+.img-caption {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 0.5rem 1rem;
+  font-size: 0.7rem;
+  font-family: "Rajdhani", monospace;
+  color: #fff;
+}
+
+/* RESPONSIVE */
+@media screen and (max-width: 768px) {
+  .era-content-wrapper {
+    flex-direction: column;
+    padding-top: 4rem;
+    overflow-y: auto;
+  }
+  .timeline-sidebar {
+    width: 100%;
+    flex-direction: row;
+    padding: 1rem;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    justify-content: space-around;
+  }
+  .timeline-btn {
+    padding: 0.5rem;
+    flex-direction: column;
+    font-size: 0.8rem;
+  }
+  .timeline-btn .dot {
+    margin-bottom: 5px;
+  }
+  .era-info-panel {
+    padding: 1.5rem;
+  }
+  .era-header-text h1 {
+    font-size: 3rem;
+  }
+}
