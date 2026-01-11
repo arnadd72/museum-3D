@@ -153,17 +153,17 @@ export const encyclopediaData = {
           "https://cdn.grid.id//crop/0x0:0x0/360x240/photo/2018/09/21/1585206829.jpg",
         items: [
           {
-            name: "TRILOBITE",
-            modelPath: "/models/hewan/vertebrata/komodo_dragon_lizard-v2.glb",
+            name: "Jejak Dinosaur",
+            modelPath: "/models/fosil/fosil_jejak/dinosaur_footprint.glb",
             image:
-              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQljOpkz5Or31nutRIesJGJQ2ZB2uTjIOogDg&s",
+              "https://images.pexels.com/photos/8876647/pexels-photo-8876647.jpeg",
             desc: "Arthropoda laut yang punah, salah satu kelompok hewan paling awal yang diketahui. Memiliki eksoskeleton keras dan tubuh bersegmen.",
           },
           {
-            name: "TRILOBITE",
-            modelPath: "/models/hewan/vertebrata/komodo_dragon_lizard-v2.glb",
+            name: "Jejak Sauropod",
+            modelPath: "/models/fosil/fosil_jejak/sauropod_footprint.glb",
             image:
-              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQljOpkz5Or31nutRIesJGJQ2ZB2uTjIOogDg&s",
+              "https://tse3.mm.bing.net/th/id/OIP.fLwHT5nkt-vfZR0mFgC0BQHaEh?rs=1&pid=ImgDetMain&o=7&rm=3",
             desc: "Arthropoda laut yang punah, salah satu kelompok hewan paling awal yang diketahui. Memiliki eksoskeleton keras dan tubuh bersegmen.",
           },
           {
@@ -197,35 +197,38 @@ export const encyclopediaData = {
         items: [
           {
             name: "TRILOBITE",
-            modelPath: "/models/hewan/vertebrata/komodo_dragon_lizard-v2.glb",
+            modelPath: "/models/fosil/fosil_terawetkan/eduf104_fern_leaves.glb",
             image:
               "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQljOpkz5Or31nutRIesJGJQ2ZB2uTjIOogDg&s",
             desc: "Arthropoda laut yang punah, salah satu kelompok hewan paling awal yang diketahui. Memiliki eksoskeleton keras dan tubuh bersegmen.",
           },
           {
             name: "TRILOBITE",
-            modelPath: "/models/hewan/vertebrata/komodo_dragon_lizard-v2.glb",
+            modelPath:
+              "/models/fosil/fosil_terawetkan/eduf407_petrified_wood.glb",
             image:
               "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQljOpkz5Or31nutRIesJGJQ2ZB2uTjIOogDg&s",
             desc: "Arthropoda laut yang punah, salah satu kelompok hewan paling awal yang diketahui. Memiliki eksoskeleton keras dan tubuh bersegmen.",
           },
           {
             name: "TRILOBITE",
-            modelPath: "/models/hewan/vertebrata/komodo_dragon_lizard-v2.glb",
+            modelPath:
+              "/models/fosil/fosil_terawetkan/lyuba_the_woolly_mammoth_calf.glb",
             image:
               "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQljOpkz5Or31nutRIesJGJQ2ZB2uTjIOogDg&s",
             desc: "Arthropoda laut yang punah, salah satu kelompok hewan paling awal yang diketahui. Memiliki eksoskeleton keras dan tubuh bersegmen.",
           },
           {
             name: "TRILOBITE",
-            modelPath: "/models/hewan/vertebrata/komodo_dragon_lizard-v2.glb",
+            modelPath: "/models/fosil/fosil_terawetkan/mammoth_mummy_dima.glb",
             image:
               "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQljOpkz5Or31nutRIesJGJQ2ZB2uTjIOogDg&s",
             desc: "Arthropoda laut yang punah, salah satu kelompok hewan paling awal yang diketahui. Memiliki eksoskeleton keras dan tubuh bersegmen.",
           },
           {
             name: "TRILOBITE",
-            modelPath: "/models/hewan/vertebrata/komodo_dragon_lizard-v2.glb",
+            modelPath:
+              "/models/fosil/fosil_terawetkan/real-time_refraction_demo_mosquito_in_amber.glb",
             image:
               "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQljOpkz5Or31nutRIesJGJQ2ZB2uTjIOogDg&s",
             desc: "Arthropoda laut yang punah, salah satu kelompok hewan paling awal yang diketahui. Memiliki eksoskeleton keras dan tubuh bersegmen.",
@@ -240,35 +243,54 @@ export const encyclopediaData = {
         items: [
           {
             name: "TRILOBITE",
-            modelPath: "/models/hewan/vertebrata/komodo_dragon_lizard-v2.glb",
+            modelPath:
+              "/models/fosil/fosil_tubuh/deinonychus_velociraptor_claw.glb",
             image:
               "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQljOpkz5Or31nutRIesJGJQ2ZB2uTjIOogDg&s",
             desc: "Arthropoda laut yang punah, salah satu kelompok hewan paling awal yang diketahui. Memiliki eksoskeleton keras dan tubuh bersegmen.",
           },
           {
             name: "TRILOBITE",
-            modelPath: "/models/hewan/vertebrata/komodo_dragon_lizard-v2.glb",
+            modelPath:
+              "/models/fosil/fosil_tubuh/giant_deer_teeth_115000_years_old.glb",
             image:
               "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQljOpkz5Or31nutRIesJGJQ2ZB2uTjIOogDg&s",
             desc: "Arthropoda laut yang punah, salah satu kelompok hewan paling awal yang diketahui. Memiliki eksoskeleton keras dan tubuh bersegmen.",
           },
           {
             name: "TRILOBITE",
-            modelPath: "/models/hewan/vertebrata/komodo_dragon_lizard-v2.glb",
+            modelPath: "/models/fosil/fosil_tubuh/megalodon_teeth_fossil.glb",
             image:
               "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQljOpkz5Or31nutRIesJGJQ2ZB2uTjIOogDg&s",
             desc: "Arthropoda laut yang punah, salah satu kelompok hewan paling awal yang diketahui. Memiliki eksoskeleton keras dan tubuh bersegmen.",
           },
           {
             name: "TRILOBITE",
-            modelPath: "/models/hewan/vertebrata/komodo_dragon_lizard-v2.glb",
+            modelPath:
+              "/models/fosil/fosil_tubuh/saber-toothed_tiger_cat_-_ice_age_smilodon.glb",
             image:
               "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQljOpkz5Or31nutRIesJGJQ2ZB2uTjIOogDg&s",
             desc: "Arthropoda laut yang punah, salah satu kelompok hewan paling awal yang diketahui. Memiliki eksoskeleton keras dan tubuh bersegmen.",
           },
           {
             name: "TRILOBITE",
-            modelPath: "/models/hewan/vertebrata/komodo_dragon_lizard-v2.glb",
+            modelPath: "/models/fosil/fosil_tubuh/triceratops_skull.glb",
+            image:
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQljOpkz5Or31nutRIesJGJQ2ZB2uTjIOogDg&s",
+            desc: "Arthropoda laut yang punah, salah satu kelompok hewan paling awal yang diketahui. Memiliki eksoskeleton keras dan tubuh bersegmen.",
+          },
+          {
+            name: "TRILOBITE",
+            modelPath:
+              "/models/fosil/fosil_tubuh/vertebrate_tyrannosaurus_rex_skull_mote.glb",
+            image:
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQljOpkz5Or31nutRIesJGJQ2ZB2uTjIOogDg&s",
+            desc: "Arthropoda laut yang punah, salah satu kelompok hewan paling awal yang diketahui. Memiliki eksoskeleton keras dan tubuh bersegmen.",
+          },
+          {
+            name: "TRILOBITE",
+            modelPath:
+              "/models/fosil/fosil_tubuh/eduf32_belemnite_phragmacone.glb",
             image:
               "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQljOpkz5Or31nutRIesJGJQ2ZB2uTjIOogDg&s",
             desc: "Arthropoda laut yang punah, salah satu kelompok hewan paling awal yang diketahui. Memiliki eksoskeleton keras dan tubuh bersegmen.",
@@ -293,35 +315,61 @@ export const encyclopediaData = {
         items: [
           {
             name: "TRILOBITE",
-            modelPath: "/models/hewan/vertebrata/komodo_dragon_lizard-v2.glb",
+            modelPath:
+              "/models/geologi/era_paleozoikum/anomalocaris_3d_model.glb",
             image:
               "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQljOpkz5Or31nutRIesJGJQ2ZB2uTjIOogDg&s",
             desc: "Arthropoda laut yang punah, salah satu kelompok hewan paling awal yang diketahui. Memiliki eksoskeleton keras dan tubuh bersegmen.",
           },
           {
             name: "TRILOBITE",
-            modelPath: "/models/hewan/vertebrata/komodo_dragon_lizard-v2.glb",
+            modelPath: "/models/geologi/era_paleozoikum/dimetrodon.glb",
             image:
               "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQljOpkz5Or31nutRIesJGJQ2ZB2uTjIOogDg&s",
             desc: "Arthropoda laut yang punah, salah satu kelompok hewan paling awal yang diketahui. Memiliki eksoskeleton keras dan tubuh bersegmen.",
           },
           {
             name: "TRILOBITE",
-            modelPath: "/models/hewan/vertebrata/komodo_dragon_lizard-v2.glb",
+            modelPath:
+              "/models/geologi/era_paleozoikum/dinorauls_arthropleura.glb",
             image:
               "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQljOpkz5Or31nutRIesJGJQ2ZB2uTjIOogDg&s",
             desc: "Arthropoda laut yang punah, salah satu kelompok hewan paling awal yang diketahui. Memiliki eksoskeleton keras dan tubuh bersegmen.",
           },
           {
             name: "TRILOBITE",
-            modelPath: "/models/hewan/vertebrata/komodo_dragon_lizard-v2.glb",
+            modelPath:
+              "/models/geologi/era_paleozoikum/dinorauls_arthropleura.glb",
             image:
               "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQljOpkz5Or31nutRIesJGJQ2ZB2uTjIOogDg&s",
             desc: "Arthropoda laut yang punah, salah satu kelompok hewan paling awal yang diketahui. Memiliki eksoskeleton keras dan tubuh bersegmen.",
           },
           {
             name: "TRILOBITE",
-            modelPath: "/models/hewan/vertebrata/komodo_dragon_lizard-v2.glb",
+            modelPath: "/models/geologi/era_paleozoikum/meganeura.glb",
+            image:
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQljOpkz5Or31nutRIesJGJQ2ZB2uTjIOogDg&s",
+            desc: "Arthropoda laut yang punah, salah satu kelompok hewan paling awal yang diketahui. Memiliki eksoskeleton keras dan tubuh bersegmen.",
+          },
+          {
+            name: "TRILOBITE",
+            modelPath:
+              "/models/geologi/era_paleozoikum/model_of_a_trilobite.glb",
+            image:
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQljOpkz5Or31nutRIesJGJQ2ZB2uTjIOogDg&s",
+            desc: "Arthropoda laut yang punah, salah satu kelompok hewan paling awal yang diketahui. Memiliki eksoskeleton keras dan tubuh bersegmen.",
+          },
+          {
+            name: "TRILOBITE",
+            modelPath:
+              "/models/geologi/era_paleozoikum/primeval_-_gorgonopsid.glb",
+            image:
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQljOpkz5Or31nutRIesJGJQ2ZB2uTjIOogDg&s",
+            desc: "Arthropoda laut yang punah, salah satu kelompok hewan paling awal yang diketahui. Memiliki eksoskeleton keras dan tubuh bersegmen.",
+          },
+          {
+            name: "TRILOBITE",
+            modelPath: "/models/geologi/era_paleozoikum/scutosaurus.glb",
             image:
               "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQljOpkz5Or31nutRIesJGJQ2ZB2uTjIOogDg&s",
             desc: "Arthropoda laut yang punah, salah satu kelompok hewan paling awal yang diketahui. Memiliki eksoskeleton keras dan tubuh bersegmen.",
