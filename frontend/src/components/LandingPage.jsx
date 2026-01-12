@@ -1,10 +1,15 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import "../App.css";
 import "./LandingPage.css";
 
 const LandingPage = ({ onStart, onTimeline }) => {
   const observerRef = useRef(null);
+  const scrollRef = useRef(null); // Ref untuk container galeri
+  const [isPaused, setIsPaused] = useState(false); // State untuk pause saat hover
+
+  // STATE BARU: Untuk mengecek apakah ini mobile device
+  const [isMobile, setIsMobile] = useState(false);
 
   // Link Gambar Dinosaurus
   const dinoImageLink =
@@ -83,6 +88,65 @@ const LandingPage = ({ onStart, onTimeline }) => {
     },
   ];
 
+  // LOGIC 1: Cek ukuran layar saat pertama kali load & resize
+  useEffect(() => {
+    const checkScreenSize = () => {
+      // Jika lebar layar kurang dari 768px, anggap mobile
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    checkScreenSize(); // Jalankan sekali di awal
+    window.addEventListener("resize", checkScreenSize); // Update jika layar di-resize
+
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
+
+  // LOGIC SCROLL BUTTON
+  const scroll = (direction) => {
+    if (scrollRef.current) {
+      const { current } = scrollRef;
+      // Di HP kita geser lebih sedikit agar tidak terlalu jauh lompatnya
+      const scrollAmount = isMobile ? 280 : 350;
+
+      if (direction === "left") {
+        current.scrollLeft -= scrollAmount;
+      } else {
+        current.scrollLeft += scrollAmount;
+      }
+    }
+  };
+
+  // LOGIC AUTO SCROLL (Diupdate agar MATI di Mobile)
+  useEffect(() => {
+    // Jika sedang di Mobile, JANGAN jalankan auto scroll
+    if (isMobile) return;
+
+    const autoScrollSpeed = 1; // Kecepatan pixel per tick
+    let animationId;
+
+    const startScroll = () => {
+      if (scrollRef.current && !isPaused) {
+        // Jika sudah mentok kanan, kembalikan ke awal (looping sederhana)
+        if (
+          scrollRef.current.scrollLeft + scrollRef.current.clientWidth >=
+          scrollRef.current.scrollWidth - 1
+        ) {
+          scrollRef.current.scrollLeft = 0;
+        } else {
+          scrollRef.current.scrollLeft += autoScrollSpeed;
+        }
+        animationId = requestAnimationFrame(startScroll);
+      }
+    };
+
+    if (!isPaused) {
+      animationId = requestAnimationFrame(startScroll);
+    }
+
+    return () => cancelAnimationFrame(animationId);
+  }, [isPaused, isMobile]); // Tambahkan isMobile ke dependency array
+
+  // LOGIC ANIMASI MUNCUL (INTERSECTION OBSERVER)
   useEffect(() => {
     observerRef.current = new IntersectionObserver(
       (entries) => {
@@ -253,7 +317,6 @@ const LandingPage = ({ onStart, onTimeline }) => {
 
           <div className="collection-preview-section animate-hidden slide-up">
             <div className="preview-header">
-              {/* --- PERUBAHAN DI SINI: TEXT GROUP --- */}
               <div className="header-text-group">
                 <h3>
                   KOLEKSI <span className="accent">SPESIMEN</span>
@@ -263,17 +326,43 @@ const LandingPage = ({ onStart, onTimeline }) => {
                   detail ilmiah.
                 </p>
               </div>
-              {/* ----------------------------------- */}
 
-              <div className="scroll-indicator">
-                <span style={{ fontSize: "0.8rem", letterSpacing: "2px" }}>
-                  AUTO SCROLLING ///
-                </span>
+              {/* --- BAGIAN TOMBOL SCROLL BARU --- */}
+              <div className="scroll-controls">
+                <button
+                  className="scroll-btn"
+                  onClick={() => scroll("left")}
+                  aria-label="Scroll Left"
+                >
+                  ←
+                </button>
+                <div className="scroll-indicator">
+                  <span style={{ fontSize: "0.8rem", letterSpacing: "2px" }}>
+                    {isMobile ? "SWIPE TO EXPLORE ///" : "AUTO SCROLLING ///"}
+                  </span>
+                </div>
+                <button
+                  className="scroll-btn"
+                  onClick={() => scroll("right")}
+                  aria-label="Scroll Right"
+                >
+                  →
+                </button>
               </div>
+              {/* ---------------------------------- */}
             </div>
 
             <div className="gallery-track-wrapper">
-              <div className="gallery-track auto-scroll">
+              <div
+                className="gallery-track"
+                ref={scrollRef}
+                // LOGIC PENTING: Pause juga saat disentuh jari (Touch)
+                onMouseEnter={() => setIsPaused(true)}
+                onMouseLeave={() => setIsPaused(false)}
+                onTouchStart={() => setIsPaused(true)} // HP: Sentuh = Pause
+                onTouchEnd={() => setIsPaused(false)} // HP: Lepas = Jalan (jika tidak mobile)
+              >
+                {/* Kita duplikasi data beberapa kali agar cukup panjang untuk discroll */}
                 {featuredFossils.map((item, index) => (
                   <FossilCard
                     key={`set1-${index}`}
@@ -284,6 +373,13 @@ const LandingPage = ({ onStart, onTimeline }) => {
                 {featuredFossils.map((item, index) => (
                   <FossilCard
                     key={`set2-${index}`}
+                    item={item}
+                    onStart={onStart}
+                  />
+                ))}
+                {featuredFossils.map((item, index) => (
+                  <FossilCard
+                    key={`set3-${index}`}
                     item={item}
                     onStart={onStart}
                   />

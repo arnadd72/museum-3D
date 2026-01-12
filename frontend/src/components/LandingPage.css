@@ -481,7 +481,7 @@ body {
   width: 100%;
 }
 
-/* --- PERBAIKAN JEDA LEBAR DI SINI --- */
+/* --- PERBAIKAN JEDA LEBAR & TOMBOL SCROLL DI SINI --- */
 .collection-preview-section {
   position: relative;
   width: 100%;
@@ -490,12 +490,15 @@ body {
   margin-top: 4rem;
 }
 
+/* Layout Header & Tombol */
 .preview-header {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end; /* Pastikan indikator scroll sejajar bawah */
+  align-items: flex-end;
   margin-bottom: 3rem;
-  padding-right: 4rem;
+  padding-right: 0;
+  flex-wrap: wrap; /* Agar responsif */
+  gap: 2rem;
 }
 .preview-header h3 {
   font-family: "Rajdhani", sans-serif;
@@ -505,6 +508,37 @@ body {
   line-height: 0.9;
   letter-spacing: 2px;
 }
+
+/* Tombol Scroll Bulat */
+.scroll-controls {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+.scroll-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--neon-blue);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.scroll-btn:hover {
+  background: var(--neon-blue);
+  color: #000;
+  box-shadow: 0 0 15px rgba(0, 210, 255, 0.5);
+  transform: scale(1.1);
+}
+.scroll-btn:active {
+  transform: scale(0.95);
+}
+
 .scroll-indicator {
   font-family: "Rajdhani", monospace;
   font-size: 0.8rem;
@@ -517,55 +551,58 @@ body {
 }
 .preview-desc {
   font-size: 1rem;
-  color: #8fa3b0; /* Warna abu-abu kebiruan agar elegan */
+  color: #8fa3b0;
   margin: 0;
   max-width: 500px;
   line-height: 1.5;
 }
 
-/* AUTO SCROLL WRAPPER */
+/* SCROLL WRAPPER (TANPA CSS ANIMATION) */
 .gallery-track-wrapper {
   width: 100%;
   overflow: hidden;
   position: relative;
+  /* Masking gradasi kiri-kanan agar terlihat seamless */
   mask-image: linear-gradient(
     to right,
-    transparent,
-    black 10%,
-    black 90%,
-    transparent
+    transparent 0%,
+    black 5%,
+    black 95%,
+    transparent 100%
   );
   -webkit-mask-image: linear-gradient(
     to right,
-    transparent,
-    black 10%,
-    black 90%,
-    transparent
+    transparent 0%,
+    black 5%,
+    black 95%,
+    transparent 100%
   );
 }
-.gallery-track.auto-scroll {
+
+.gallery-track {
   display: flex;
   gap: 2.5rem;
-  width: max-content;
-  animation: scrollLeft 40s linear infinite;
-  padding: 1rem 0 4rem 0;
+  /* GANTI ANIMASI CSS DENGAN SCROLL NATIVE */
+  overflow-x: auto;
+  scroll-behavior: smooth; /* Gerakan halus saat tombol ditekan */
+  padding: 1rem 1rem 4rem 1rem;
+  width: 100%;
+  box-sizing: border-box;
+
+  /* Sembunyikan scrollbar default tapi fungsi tetap jalan */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
 }
-.gallery-track.auto-scroll:hover {
-  animation-play-state: paused;
-}
-@keyframes scrollLeft {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  } /* Karena kita duplikat konten, geser 50% untuk loop */
+
+.gallery-track::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
 }
 
 /* KARTU PREVIEW */
 .preview-card.elegant-card {
   min-width: 320px;
   max-width: 320px;
+  flex-shrink: 0; /* Agar tidak gepeng */
   height: auto;
   position: relative;
   display: flex;
@@ -827,50 +864,67 @@ body {
 
 /* Mobile Devices (Max Width 768px) */
 @media screen and (max-width: 768px) {
+  /* --- 1. NAVBAR --- */
   .navbar {
     flex-direction: column;
     padding: 1rem;
     gap: 1rem;
-    background: rgba(5, 5, 5, 0.95);
+    background: rgba(5, 5, 5, 0.98); /* Lebih gelap agar tulisan lebih jelas */
     backdrop-filter: blur(15px);
   }
+
   .nav-links {
-    gap: 1rem;
+    gap: 15px; /* Jarak antar menu diperkecil */
     width: 100%;
     justify-content: center;
     flex-wrap: wrap;
   }
+
   .nav-link {
-    font-size: 0.8rem;
+    font-size: 0.75rem; /* Ukuran font menu diperkecil */
+    padding: 5px 10px;
+    background: rgba(
+      255,
+      255,
+      255,
+      0.05
+    ); /* Kotak tipis agar area klik lebih jelas */
+    border-radius: 4px;
   }
+
   .logo-symbol {
     width: 30px;
     height: 30px;
     font-size: 1rem;
   }
+
   .logo-text {
     font-size: 1.2rem;
   }
 
+  /* --- 2. HERO SECTION --- */
   .hero-section {
-    padding: 8rem 1.5rem 2rem 1.5rem;
+    padding: 8rem 1.5rem 4rem 1.5rem; /* Padding bawah ditambah agar konten tidak mepet */
     flex-direction: column;
     justify-content: center;
     text-align: center;
-    height: auto;
+    height: auto; /* Ubah ke auto agar konten panjang tidak terpotong */
     min-height: 100vh;
   }
+
   .hero-content {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
+
   .hero-title {
-    font-size: 3rem;
+    font-size: 3rem; /* Ukuran font diperkecil dari desktop */
     line-height: 1.1;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
   }
+
   .hero-desc {
     font-size: 1rem;
     border-left: none;
@@ -879,66 +933,134 @@ body {
     margin: 1rem auto;
     width: 100%;
   }
+
   .cta-container {
     flex-direction: column;
     width: 100%;
-    gap: 1rem;
+    gap: 1.5rem;
   }
+
   .explore-btn {
     width: 100%;
+    padding: 1rem;
   }
+
   .coordinate-text {
-    display: none;
+    display: none; /* Sembunyikan dekorasi yang memakan tempat */
   }
 
+  /* --- 3. ABOUT & FEATURES --- */
   .about-section {
-    padding: 4rem 1.5rem;
-  }
-  .section-title {
-    font-size: 2.2rem;
-  }
-  .features-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-    margin-top: 3rem;
+    padding: 4rem 1.5rem; /* Padding horizontal diperkecil */
   }
 
-  .collection-preview-section {
-    padding-top: 3rem;
+  .about-header {
+    flex-direction: column-reverse; /* Gambar dipindah ke atas teks */
+    gap: 2rem;
+    margin-bottom: 3rem;
   }
+
+  .header-image-wrapper {
+    width: 100%;
+    max-width: 100%;
+    height: 200px; /* Tinggi gambar dibatasi */
+  }
+
+  .section-title {
+    font-size: 2rem; /* Judul section diperkecil */
+    margin-top: 1rem;
+  }
+
+  .features-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem; /* Jarak vertikal antar kartu fitur */
+    margin-top: 2rem;
+    margin-bottom: 4rem; /* Jarak aman ke section berikutnya */
+  }
+
+  .feature-card {
+    padding: 2rem 1.5rem;
+    min-height: auto;
+  }
+
+  .feature-card h3 {
+    font-size: 1.5rem;
+  }
+
+  .card-number {
+    font-size: 3rem;
+    top: 1rem;
+    right: 1rem;
+  }
+
+  /* --- 4. KOLEKSI SPESIMEN & GALERI --- */
+  .collection-preview-section {
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 0;
+  }
+
   .preview-header {
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.5rem;
+    gap: 1.5rem;
     padding-right: 0;
-    margin-bottom: 1.5rem;
-  }
-  .preview-header h3 {
-    font-size: 2rem;
-    line-height: 1.1;
-  }
-  .scroll-indicator {
-    display: none;
+    margin-bottom: 2rem;
   }
 
-  .gallery-track.manual-scroll {
-    padding: 0 1.5rem 3rem 1.5rem;
+  .preview-header h3 {
+    font-size: 1.8rem;
+  }
+
+  /* Kontrol Scroll (Tombol & Indikator) */
+  .scroll-controls {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.5rem;
+    padding: 0 10px;
+    box-sizing: border-box;
+  }
+
+  .scroll-indicator span {
+    font-size: 0.65rem !important;
+    letter-spacing: 1px !important;
+  }
+
+  .scroll-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+
+  /* Track Galeri */
+  .gallery-track {
+    padding: 0 1rem 3rem 1rem;
     gap: 1rem;
+    overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
   }
+
+  /* Kartu Galeri */
   .preview-card.elegant-card {
-    min-width: 85vw;
-    max-width: 85vw;
+    min-width: 80vw; /* Lebar kartu 80% layar HP agar pas */
+    max-width: 80vw;
     scroll-snap-align: center;
+    margin-right: 0;
   }
+
   .preview-visual {
     height: 180px;
   }
+
   .preview-info {
-    padding: 1.5rem;
+    padding: 1.2rem;
   }
+
   .preview-info h4 {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
   }
 }

@@ -1,7 +1,10 @@
-/* --- CONTAINER UTAMA --- */
+/* ==========================================================================
+   CONTAINER UTAMA
+   ========================================================================== */
 .hub-container {
   width: 100vw;
-  height: 100vh;
+  height: 100vh; /* Fallback */
+  height: 100dvh; /* Dynamic Viewport Height untuk Mobile Browser modern */
   background-color: #050505;
   color: #fff;
   font-family: "Rajdhani", sans-serif;
@@ -21,7 +24,9 @@
   z-index: 0;
 }
 
-/* --- NAVBAR --- */
+/* ==========================================================================
+   NAVBAR
+   ========================================================================== */
 .hub-nav {
   position: relative;
   z-index: 10;
@@ -29,7 +34,8 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(5, 5, 5, 0.9);
+  backdrop-filter: blur(10px);
   border-bottom: 1px solid #333;
 }
 
@@ -39,6 +45,7 @@
   letter-spacing: 2px;
   font-weight: bold;
   transition: 0.3s;
+  font-size: 0.9rem;
 }
 .hub-back-btn:hover {
   color: #fff;
@@ -49,14 +56,29 @@
   font-size: 1.5rem;
   letter-spacing: 4px;
   font-weight: 700;
+  text-transform: uppercase;
 }
+
 .hub-status {
   color: #00ff88;
   font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #00ff88;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #00ff88;
   animation: pulse 2s infinite;
 }
 
-/* --- CONTENT --- */
+/* ==========================================================================
+   CONTENT AREA
+   ========================================================================== */
 .hub-content {
   flex: 1;
   position: relative;
@@ -66,110 +88,239 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  /* Scrollbar Custom */
+  scrollbar-width: thin;
+  scrollbar-color: #333 #111;
 }
 
+.hub-content::-webkit-scrollbar {
+  width: 8px;
+}
+.hub-content::-webkit-scrollbar-track {
+  background: #111;
+}
+.hub-content::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+
+/* Header & Filter */
 .hub-header {
   text-align: center;
   margin-bottom: 3rem;
+  width: 100%;
+  max-width: 1000px;
 }
+
 .hub-header h1 {
   font-size: 3rem;
   margin-bottom: 1.5rem;
   letter-spacing: 5px;
+  font-weight: 700;
 }
 
-/* Filter Bar */
+/* ==========================================================================
+   SEARCH BAR STYLE (SCI-FI THEME)
+   ========================================================================== */
+.search-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto 3rem auto;
+  /* Membuat container untuk efek border cahaya di bawahnya */
+  padding-bottom: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 210, 255, 0.5),
+    transparent
+  );
+  animation: scanlineMove 4s ease-in-out infinite alternate;
+}
+
+@keyframes scanlineMove {
+  0% {
+    background-position: -200px 0;
+    opacity: 0.3;
+  }
+  100% {
+    background-position: 200px 0;
+    opacity: 0.7;
+  }
+}
+
+.search-input {
+  width: 100%;
+  padding: 1.2rem 3.5rem 1.2rem 1.5rem;
+  background: rgba(10, 10, 15, 0.8);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(0, 210, 255, 0.2);
+  border-bottom: 2px solid rgba(0, 210, 255, 0.5);
+  color: #fff;
+  font-family: "Rajdhani", sans-serif;
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+
+  /* Bentuk sudut teknis */
+  clip-path: polygon(0 0, 100% 0, 100% 80%, 98% 100%, 2% 100%, 0 80%);
+
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  box-sizing: border-box;
+}
+
+.search-input::placeholder {
+  color: rgba(0, 210, 255, 0.4);
+  font-weight: normal;
+  letter-spacing: 1px;
+  text-transform: none;
+}
+
+.search-input:focus {
+  outline: none;
+  background: rgba(5, 5, 10, 0.95);
+  border-color: rgba(0, 210, 255, 0.8);
+  box-shadow: inset 0 0 20px rgba(0, 210, 255, 0.2),
+    0 0 25px rgba(0, 210, 255, 0.4);
+  letter-spacing: 3px;
+}
+
+.search-icon {
+  position: absolute;
+  right: 1.5rem;
+  top: 48%;
+  transform: translateY(-50%);
+  font-size: 1.4rem;
+  color: #00d2ff;
+  text-shadow: 0 0 10px rgba(0, 210, 255, 0.6);
+  pointer-events: none;
+  opacity: 0.8;
+  transition: 0.4s;
+}
+
+.search-input:focus + .search-icon {
+  opacity: 1;
+  transform: translateY(-50%) scale(1.1) rotate(10deg);
+  color: #fff;
+}
+
+/* --- FILTER BAR --- */
 .filter-bar {
   display: flex;
   gap: 1rem;
   justify-content: center;
   flex-wrap: wrap;
 }
+
 .filter-btn {
   background: transparent;
   border: 1px solid #444;
   color: #888;
   padding: 0.8rem 2rem;
-  font-family: "Rajdhani";
+  font-family: "Rajdhani", sans-serif;
   font-weight: bold;
   cursor: pointer;
-  transition: 0.3s;
+  transition: all 0.3s ease;
   clip-path: polygon(10% 0, 100% 0, 100% 100%, 0 100%, 0 40%);
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
+
 .filter-btn:hover,
 .filter-btn.active {
   background: #fff;
   color: #000;
   border-color: #fff;
   box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
 }
 
-/* --- GRID LAYOUT --- */
+/* ==========================================================================
+   GRID LAYOUT & CARDS
+   ========================================================================== */
 .hub-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
   width: 100%;
   max-width: 1400px;
-  padding-bottom: 4rem;
+  padding-bottom: 6rem;
 }
 
-/* --- DATA CHIP (CARD) --- */
+/* Data Chip (Card) */
 .data-chip {
   position: relative;
-  background: rgba(20, 20, 20, 0.8);
+  background: rgba(20, 20, 20, 0.6);
+  backdrop-filter: blur(5px);
   border: 1px solid #333;
-  height: 300px;
+  height: 320px;
   cursor: pointer;
   overflow: hidden;
-  transition: all 0.3s ease;
+  transition: all 0.4s ease;
+  animation: fadeInUp 0.5s ease backwards;
 }
 
 .data-chip:hover {
   border-color: var(--accent);
-  transform: translateY(-5px);
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+  transform: translateY(-10px);
+  background: rgba(30, 30, 30, 0.9);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  z-index: 2;
 }
 
 .chip-img-box {
-  height: 60%;
+  height: 65%;
   width: 100%;
   position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
+
 .chip-img-box img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: grayscale(80%);
-  transition: 0.5s;
+  filter: grayscale(80%) contrast(1.2);
+  transition: all 0.5s ease;
 }
+
 .data-chip:hover img {
-  filter: grayscale(0%);
+  filter: grayscale(0%) contrast(1);
   transform: scale(1.1);
 }
 
 .chip-info {
-  padding: 1rem;
+  padding: 1.2rem;
   position: relative;
 }
+
 .chip-cat {
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   color: var(--accent);
   letter-spacing: 2px;
   margin-bottom: 0.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
 }
+
 .chip-info h3 {
   margin: 0;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   letter-spacing: 1px;
+  line-height: 1.1;
+  color: #fff;
 }
+
 .chip-decor-line {
   height: 2px;
   width: 30px;
   background: var(--accent);
   margin-top: 1rem;
-  transition: width 0.3s;
+  transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  box-shadow: 0 0 10px var(--accent);
 }
+
 .data-chip:hover .chip-decor-line {
   width: 100%;
 }
@@ -181,138 +332,222 @@
   right: 0;
   width: 0;
   height: 0;
-  border-bottom: 20px solid var(--accent);
-  border-left: 20px solid transparent;
-  opacity: 0.5;
-  transition: 0.3s;
-}
-.data-chip:hover .corner-decor {
-  opacity: 1;
-  transform: scale(1.5);
+  border-bottom: 25px solid var(--accent);
+  border-left: 25px solid transparent;
+  opacity: 0.3;
+  transition: all 0.3s ease;
 }
 
-/* --- MODAL KONFIRMASI --- */
+.data-chip:hover .corner-decor {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+/* --- NO RESULTS STYLE --- */
+.no-results {
+  text-align: center;
+  padding: 4rem 1rem;
+  color: #888;
+  border: 1px dashed #333;
+  width: 100%;
+  max-width: 600px;
+  background: rgba(20, 20, 20, 0.5);
+  margin-top: 2rem;
+  animation: fadeInUp 0.5s ease;
+}
+
+.error-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  animation: pulse 2s infinite;
+}
+
+.no-results h2 {
+  color: #fff;
+  font-size: 2rem;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: 2px;
+}
+
+.no-results p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+.reset-search-btn {
+  background: transparent;
+  border: 1px solid #00d2ff;
+  color: #00d2ff;
+  padding: 0.8rem 2rem;
+  font-family: "Rajdhani", sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.reset-search-btn:hover {
+  background: #00d2ff;
+  color: #000;
+  box-shadow: 0 0 15px rgba(0, 210, 255, 0.6);
+}
+
+/* ==========================================================================
+   MODAL KONFIRMASI
+   ========================================================================== */
 .modal-overlay {
   position: fixed;
   inset: 0;
   z-index: 100;
-  background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(10px);
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 1rem;
   animation: fadeIn 0.3s;
 }
 
 .modal-box {
-  width: 90%;
-  max-width: 700px;
-  background: #111;
+  width: 100%;
+  max-width: 800px;
+  background: #0a0a0a;
   border: 1px solid #444;
-  box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .modal-header {
-  padding: 0.5rem 1rem;
+  padding: 0.8rem 1.5rem;
   color: #000;
-  font-weight: bold;
-  letter-spacing: 2px;
-  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 3px;
+  font-size: 0.9rem;
+  text-transform: uppercase;
 }
 
 .modal-body {
   display: flex;
   padding: 2rem;
   gap: 2rem;
+  align-items: flex-start;
 }
+
 .modal-img {
-  width: 200px;
-  height: 200px;
+  width: 250px;
+  height: 250px;
   position: relative;
   border: 1px solid #333;
+  flex-shrink: 0;
 }
+
 .modal-img img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
+
 .scan-anim {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 2px;
-  background: cyan;
-  box-shadow: 0 0 10px cyan;
-  animation: scanDown 2s infinite;
+  animation: scanDown 2s infinite linear;
 }
 
 .modal-text {
   flex: 1;
 }
+
 .modal-text h2 {
   margin: 0;
   color: #fff;
-  font-size: 2rem;
+  font-size: 2.5rem;
   letter-spacing: 2px;
+  line-height: 1;
 }
+
 .modal-text h4 {
   margin: 0.5rem 0 1.5rem 0;
-  color: #888;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
 }
+
+.modal-text p {
+  color: #ccc;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
 .modal-stats {
   display: flex;
   gap: 2rem;
   margin-top: 2rem;
   border-top: 1px solid #333;
   padding-top: 1rem;
-  color: cyan;
+  color: #fff;
   font-size: 0.9rem;
+  font-family: "Rajdhani", monospace;
 }
 
 .modal-actions {
   display: flex;
   border-top: 1px solid #333;
 }
+
 .modal-actions button {
   flex: 1;
   padding: 1.5rem;
-  font-family: "Rajdhani";
-  font-weight: bold;
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 800;
   font-size: 1.1rem;
   cursor: pointer;
   border: none;
   transition: 0.3s;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
+
 .cancel-btn {
-  background: #1a1a1a;
-  color: #fff;
+  background: #151515;
+  color: #888;
 }
 .cancel-btn:hover {
-  background: #333;
+  background: #222;
+  color: #fff;
 }
+
 .launch-btn {
-  background: rgba(0, 0, 0, 0.5);
-  letter-spacing: 2px;
+  background: rgba(0, 0, 0, 0.3);
 }
 .launch-btn:hover {
   background: #fff;
   color: #000 !important;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
+/* ==========================================================================
+   ANIMATIONS
+   ========================================================================== */
 @keyframes pulse {
   0% {
     opacity: 1;
+    transform: scale(1);
   }
   50% {
     opacity: 0.5;
+    transform: scale(1.2);
   }
   100% {
     opacity: 1;
+    transform: scale(1);
   }
 }
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -321,12 +556,140 @@
     opacity: 1;
   }
 }
-@media (max-width: 768px) {
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slide-up {
+  animation: slideUp 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+@keyframes scanDown {
+  0% {
+    top: 0%;
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+/* ==========================================================================
+   MOBILE DEVICES (Max Width 768px)
+   ========================================================================== */
+@media screen and (max-width: 768px) {
+  /* NAVBAR */
+  .hub-nav {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .hub-title {
+    font-size: 1.2rem;
+  }
+
+  /* HEADER & SEARCH */
+  .hub-content {
+    padding: 1rem;
+  }
+
+  .hub-header h1 {
+    font-size: 2rem;
+  }
+
+  /* Perbaikan Search di Mobile */
+  .search-wrapper {
+    width: 95%; /* Lebih lebar di HP */
+    margin-bottom: 2rem;
+  }
+
+  .search-input {
+    font-size: 1rem;
+    padding: 1rem 3rem 1rem 1.2rem;
+    letter-spacing: 1px;
+  }
+
+  .search-icon {
+    right: 1rem;
+    font-size: 1.2rem;
+  }
+
+  .filter-btn {
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+    flex: 1 1 40%;
+  }
+
+  /* GRID */
+  .hub-grid {
+    grid-template-columns: 1fr; /* 1 Kolom di HP */
+    gap: 1.5rem;
+  }
+
+  .data-chip {
+    height: 300px;
+  }
+
+  /* NO RESULTS */
+  .no-results {
+    width: 90%;
+  }
+
+  /* MODAL */
+  .modal-box {
+    max-height: 85vh;
+    overflow-y: auto;
+  }
+
   .modal-body {
     flex-direction: column;
+    padding: 1.5rem;
+    gap: 1.5rem;
   }
+
   .modal-img {
     width: 100%;
-    height: 150px;
+    height: 200px;
+  }
+
+  .modal-text h2 {
+    font-size: 1.8rem;
+  }
+
+  .modal-stats {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .modal-actions button {
+    padding: 1rem;
+    font-size: 0.9rem;
   }
 }
