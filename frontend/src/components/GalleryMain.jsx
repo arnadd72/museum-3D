@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "../App.css";
 import "./GalleryMain.css";
-
-// IMPORT DATA DARI FILE EKSTERNAL
 import { encyclopediaData } from "../data/encyclopediaData";
 
 const GalleryMain = () => {
@@ -11,22 +9,18 @@ const GalleryMain = () => {
   const [selectedSubCategory, setSelectedSubCategory] = useState(null);
   const [activeItem, setActiveItem] = useState(null);
   const [isExiting, setIsExiting] = useState(false);
-
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Efek untuk menangani navigasi dari Landing Page
   useEffect(() => {
     if (location.state && location.state.targetCategory) {
       const target = location.state.targetCategory;
-      if (encyclopediaData[target]) {
+      if (encyclopediaData[target])
         setSelectedCategory(encyclopediaData[target]);
-      }
       window.history.replaceState({}, document.title);
     }
   }, [location]);
 
-  // Handle Pilih Kategori Utama (Level 1)
   const handleSelect = (key) => {
     setIsExiting(true);
     setTimeout(() => {
@@ -34,8 +28,6 @@ const GalleryMain = () => {
       setIsExiting(false);
     }, 500);
   };
-
-  // Handle Kembali ke Level 1
   const handleBack = () => {
     setIsExiting(true);
     setTimeout(() => {
@@ -44,21 +36,14 @@ const GalleryMain = () => {
       setIsExiting(false);
     }, 500);
   };
-
-  // Handle Pilih Sub Kategori (Level 2) -> Masuk ke Level 3
   const handleSubSelect = (sub) => {
     setIsExiting(true);
     setTimeout(() => {
       setSelectedSubCategory(sub);
-      // Set item pertama sebagai default active item agar layar kanan tidak kosong
-      if (sub.items && sub.items.length > 0) {
-        setActiveItem(sub.items[0]);
-      }
+      if (sub.items?.length > 0) setActiveItem(sub.items[0]);
       setIsExiting(false);
     }, 500);
   };
-
-  // Handle Kembali dari Level 3 ke Level 2
   const handleBackToSub = () => {
     setIsExiting(true);
     setTimeout(() => {
@@ -68,16 +53,10 @@ const GalleryMain = () => {
     }, 500);
   };
 
-  // Handle Pilih Item di List Kiri (Level 3)
-  const handleItemClick = (item) => {
-    setActiveItem(item);
-  };
-
   return (
     <div className="gallery-container">
       <div className="grid-bg"></div>
       <div className="vignette"></div>
-
       <nav className="gallery-nav">
         <Link to="/" className="nav-back">
           /// KELUAR SISTEM
@@ -88,7 +67,6 @@ const GalleryMain = () => {
       </nav>
 
       <main className="gallery-content">
-        {/* === VIEW 1: PILIH KATEGORI UTAMA === */}
         {!selectedCategory && (
           <div
             className={`selection-grid ${
@@ -124,7 +102,6 @@ const GalleryMain = () => {
           </div>
         )}
 
-        {/* === VIEW 2: PILIH SUB-KATEGORI (LIST VERTIKAL) === */}
         {selectedCategory && !selectedSubCategory && (
           <div
             className={`sub-selection-view ${
@@ -142,7 +119,6 @@ const GalleryMain = () => {
                 </span>
               </h2>
             </div>
-            {/* Wrapper ini sekarang diatur menjadi vertikal di CSS */}
             <div className="sub-cards-wrapper">
               {selectedCategory.subCategories.map((sub, index) => (
                 <div
@@ -173,14 +149,12 @@ const GalleryMain = () => {
           </div>
         )}
 
-        {/* === VIEW 3: DETAIL SPLIT SCREEN === */}
         {selectedSubCategory && activeItem && (
           <div
             className={`split-view-container ${
               isExiting ? "fade-out-down" : "fade-in-up"
             }`}
           >
-            {/* PANEL KIRI: LIST ITEM */}
             <div className="left-panel-list">
               <button
                 onClick={handleBackToSub}
@@ -189,7 +163,6 @@ const GalleryMain = () => {
               >
                 ← KEMBALI KE {selectedCategory.title}
               </button>
-
               <h3
                 className="list-heading"
                 style={{ color: selectedCategory.color }}
@@ -203,7 +176,7 @@ const GalleryMain = () => {
                     className={`list-item-btn ${
                       activeItem.name === item.name ? "active" : ""
                     }`}
-                    onClick={() => handleItemClick(item)}
+                    onClick={() => setActiveItem(item)}
                     style={{ "--accent": selectedCategory.color }}
                   >
                     <span className="item-idx">0{idx + 1}</span>
@@ -213,7 +186,6 @@ const GalleryMain = () => {
               </div>
             </div>
 
-            {/* PANEL KANAN: DETAIL KONTEN */}
             <div className="right-panel-detail">
               <div className="detail-image-wrapper">
                 <img
@@ -226,13 +198,16 @@ const GalleryMain = () => {
                   {activeItem.name} /// DATA VISUAL
                 </div>
               </div>
-
               <div className="detail-info-box">
                 <h1 style={{ color: selectedCategory.color }}>
                   {activeItem.name}
                 </h1>
-                <p>{activeItem.desc}</p>
-
+                {/* --- GUNAKAN DESKRIPSI LENGKAP (FULL) --- */}
+                <p>
+                  {activeItem.description
+                    ? activeItem.description.full
+                    : activeItem.desc}
+                </p>
                 <div className="data-metrics">
                   <div className="metric">
                     <span>TIPE:</span> {selectedSubCategory.title}
@@ -241,7 +216,6 @@ const GalleryMain = () => {
                     <span>STATUS:</span> PUNAH
                   </div>
                 </div>
-
                 <div className="action-row">
                   <button
                     className="view-3d-btn"
