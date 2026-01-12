@@ -1,18 +1,19 @@
 import React, { Suspense, Component, useState, useRef, useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Canvas, useFrame } from "@react-three/fiber";
-// HAPUS IMPORT Cylinder
 import {
   OrbitControls,
   useGLTF,
   Html,
   Float,
   Sparkles,
+  Center,
+  Resize,
 } from "@react-three/drei";
 import "../App.css";
 import "./ModelViewer.css";
 
-// --- ERROR BOUNDARY ---
+// --- 1. ERROR BOUNDARY ---
 class ModelErrorBoundary extends Component {
   constructor(props) {
     super(props);
@@ -25,78 +26,99 @@ class ModelErrorBoundary extends Component {
     console.error("Gagal memuat model:", error);
   }
   render() {
-    if (this.state.hasError)
+    if (this.state.hasError) {
       return <PlaceholderModel color={this.props.color} />;
+    }
     return this.props.children;
   }
 }
 
-// --- PLACEHOLDER ---
+// --- 2. PLACEHOLDER (WIREFRAME) ---
 const PlaceholderModel = ({ color }) => {
   const meshRef = useRef();
   useFrame((state, delta) => {
     meshRef.current.rotation.x += delta * 0.2;
     meshRef.current.rotation.y += delta * 0.5;
   });
+
   return (
     <Float speed={2} rotationIntensity={1} floatIntensity={1}>
       <mesh ref={meshRef} scale={1.8}>
         <icosahedronGeometry args={[1, 1]} />
         <meshStandardMaterial
           color={color || "#00ff88"}
-          wireframe
+          wireframe={true}
           transparent
           opacity={0.8}
-          emissive={color}
-          emissiveIntensity={0.8}
+          emissive={color || "#00ff88"}
+          emissiveIntensity={0.5}
         />
       </mesh>
     </Float>
   );
 };
 
-// --- MODEL LOADER ---
+// --- 3. MODEL LOADER ---
 const Model3D = ({ path }) => {
   const { scene } = useGLTF(path);
-  return <primitive object={scene} />;
+  // Clone scene agar aman saat navigasi bolak-balik
+  const clonedScene = useMemo(() => scene.clone(), [scene]);
+
+  // --- PERBAIKAN: HAPUS BAGIAN TRAVERSE EMISSIVE ---
+  // Kode traverse sebelumnya dihapus karena membuat model bertekstur jadi hitam.
+  // Kita mengandalkan cahaya manual yang sudah terang.
+
+  return <primitive object={clonedScene} />;
 };
 
-const Loader = () => (
-  <Html center>
-    <div className="loader-text">MENGAKTIFKAN HOLOGRAM...</div>
-  </Html>
-);
+// --- 4. LOADING ---
+const Loader = () => {
+  return (
+    <Html center>
+      <div className="loader-text">MEMUAT ASET...</div>
+    </Html>
+  );
+};
 
+// --- MAIN COMPONENT ---
 const ModelViewer = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("OVERVIEW");
+
   const data = location.state?.itemData;
 
+  // --- 5. SMART DATA GENERATOR ---
   const extendedData = useMemo(() => {
     if (!data) return null;
+
+    // Ambil deskripsi dari database jika ada
     const dbDesc = data.description || {};
 
-    // Fallback logic jika data detail belum ada
-    return {
-      scientificName: data.name + " sp.",
-      location: "Lokasi Global",
+    let info = {
+      scientificName:
+        data.name.charAt(0) + data.name.slice(1).toLowerCase() + " sp.",
+      location: "Tidak Diketahui",
       period: "Prasejarah",
       size: "Bervariasi",
       weight: "Tidak Diketahui",
-      taxonomy: "Animalia",
-      // GUNAKAN 'KEY' description untuk Tab Edukasi
-      funFact: dbDesc.key || "Spesimen ini menyimpan rahasia evolusi bumi.",
+      taxonomy: "Animalia > Chordata",
+      // LOGIKA: Gunakan deskripsi KUNCI (Key) untuk Edukasi
+      funFact:
+        dbDesc.key ||
+        "Spesimen ini merupakan bagian penting dari sejarah evolusi bumi.",
       diet: "Omnivora",
       sizeCompare: 50,
     };
+
+    return info;
   }, [data]);
 
   if (!data) {
     return (
       <div className="viewer-error">
         <h1>AKSES DITOLAK</h1>
-        <button onClick={() => navigate("/gallery")}>KEMBALI</button>
+        <button onClick={() => navigate("/gallery")}>KEMBALI KE GALERI</button>
       </div>
     );
   }
@@ -106,17 +128,12 @@ const ModelViewer = () => {
 
   return (
     <div className="viewer-container">
+      {/* BACKGROUND 3D */}
       <div className="canvas-wrapper">
         <div className="hologram-overlay"></div>
         <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 2, 8], fov: 40 }}>
-          {/* EFEK HOLOGRAM (HANYA PARTIKEL) */}
+          {/* EFEK HOLOGRAM (HANYA PARTIKEL & FOG) */}
           <fog attach="fog" args={["#000000", 5, 30]} />
-
-          {/* --- LINGKARAN DIHAPUS --- */}
-          {/* <Cylinder args={[2.5, 2.5, 0.05, 32]} position={[0, -1.6, 0]} receiveShadow>
-             <meshStandardMaterial color={hologramCyan} transparent opacity={0.4} emissive={hologramCyan} emissiveIntensity={1} />
-          </Cylinder> */}
-          {/* ------------------------- */}
 
           <Sparkles
             count={100}
@@ -128,25 +145,18 @@ const ModelViewer = () => {
           />
 
           {/* --- PENCAHAYAAN MANUAL (AGAR MODEL JELAS) --- */}
-          {/* Ambient light tinggi untuk menerangi bayangan */}
           <ambientLight intensity={2.5} color="#ffffff" />
-
-          {/* Lampu Utama dari depan-kanan-atas */}
           <directionalLight
             position={[10, 10, 5]}
             intensity={3.5}
             color="#ffffff"
             castShadow
           />
-
-          {/* Lampu Pengisi dari kiri-belakang (sedikit biru) */}
           <directionalLight
             position={[-10, 5, -10]}
             intensity={2.0}
             color="#b0e0ff"
           />
-
-          {/* Lampu Bawah untuk detail perut/bawah */}
           <pointLight
             position={[0, -2, 0]}
             intensity={1.5}
@@ -161,14 +171,19 @@ const ModelViewer = () => {
               floatIntensity={0.5}
               position={[0, -0.5, 0]}
             >
-              {/* Kita tidak pakai Stage di sini agar kontrol lampu manual maksimal */}
               <group scale={1.5}>
                 <ModelErrorBoundary color={themeColor}>
-                  <Model3D path={data.modelPath} />
+                  {/* UPDATE: Gunakan Center (tanpa prop top) agar pas di tengah */}
+                  <Center>
+                    <Resize scale={3}>
+                      <Model3D path={data.modelPath} />
+                    </Resize>
+                  </Center>
                 </ModelErrorBoundary>
               </group>
             </Float>
           </Suspense>
+
           <OrbitControls
             autoRotate
             autoRotateSpeed={0.5}
@@ -179,15 +194,17 @@ const ModelViewer = () => {
         </Canvas>
       </div>
 
-      {/* UI LAYER */}
+      {/* --- UI LAYER --- */}
+
       <div className="ui-top-left">
         <button onClick={() => navigate(-1)} className="back-btn">
           ← KEMBALI
         </button>
       </div>
+
       <div className="ui-bottom-left">
         <div className="item-id" style={{ color: themeColor }}>
-          /// ID: {data.name.substring(0, 3)}-{Math.floor(Math.random() * 999)}
+          /// ID: {data.name.substring(0, 3)}-{Math.floor(Math.random() * 9999)}
         </div>
         <h1
           className="main-title"
@@ -195,7 +212,15 @@ const ModelViewer = () => {
         >
           {data.name}
         </h1>
-        <div style={{ color: "#aaa", fontStyle: "italic" }}>
+        <div
+          style={{
+            color: "#aaa",
+            letterSpacing: "2px",
+            marginTop: "10px",
+            fontStyle: "italic",
+            fontSize: "1.1rem",
+          }}
+        >
           {extendedData.scientificName}
         </div>
       </div>
@@ -238,13 +263,16 @@ const ModelViewer = () => {
         </div>
 
         <div className="panel-content">
+          {/* TAB 1: RINGKASAN */}
           {activeTab === "OVERVIEW" && (
             <>
               <h3 className="panel-heading">KLASIFIKASI & ASAL</h3>
+
               {/* --- GUNAKAN DESKRIPSI SINGKAT (SHORT) --- */}
               <p className="panel-desc">
                 {data.description ? data.description.short : data.desc}
               </p>
+
               <div className="info-grid">
                 <div className="info-item">
                   <label style={{ color: themeColor }}>KATEGORI</label>
@@ -257,8 +285,10 @@ const ModelViewer = () => {
                   </span>
                 </div>
                 <div className="info-item">
-                  <label style={{ color: themeColor }}>LOKASI</label>
-                  <span>{extendedData.location}</span>
+                  <label style={{ color: themeColor }}>LOKASI TEMUAN</label>
+                  <span style={{ fontSize: "0.9rem" }}>
+                    {extendedData.location}
+                  </span>
                 </div>
                 <div className="info-item">
                   <label style={{ color: themeColor }}>STATUS</label>
@@ -267,37 +297,201 @@ const ModelViewer = () => {
               </div>
             </>
           )}
+
+          {/* TAB 2: DATA FISIK */}
           {activeTab === "ANATOMY" && (
             <>
-              <h3 className="panel-heading">STATISTIK</h3>
+              <h3 className="panel-heading">STATISTIK BIOLOGIS</h3>
+
               <div className="info-grid">
                 <div className="info-item">
                   <label style={{ color: themeColor }}>MAKANAN</label>
                   <span>{extendedData.diet}</span>
                 </div>
                 <div className="info-item">
+                  <label style={{ color: themeColor }}>DIMENSI</label>
+                  <span style={{ fontSize: "0.9rem" }}>
+                    {extendedData.size}
+                  </span>
+                </div>
+                <div className="info-item">
                   <label style={{ color: themeColor }}>BERAT</label>
                   <span>{extendedData.weight}</span>
                 </div>
               </div>
-            </>
-          )}
-          {activeTab === "FUNFACT" && (
-            <>
-              <h3 className="panel-heading">FAKTA UNIK</h3>
+
               <div
                 style={{
-                  background: "rgba(255,255,255,0.05)",
-                  padding: "15px",
-                  borderLeft: `3px solid ${themeColor}`,
+                  marginTop: "30px",
+                  borderTop: "1px solid rgba(255,255,255,0.1)",
+                  paddingTop: "20px",
                 }}
               >
-                <div style={{ color: "#fff", fontWeight: "bold" }}>
-                  Tahukah Kamu?
+                <div
+                  style={{
+                    fontSize: "0.8rem",
+                    color: themeColor,
+                    fontWeight: "bold",
+                    marginBottom: "10px",
+                    letterSpacing: "1px",
+                  }}
+                >
+                  PERBANDINGAN UKURAN
                 </div>
-                {/* --- OTOMATIS MENGGUNAKAN KEY DESCRIPTION --- */}
-                <div style={{ color: "#ccc", fontStyle: "italic" }}>
-                  "{extendedData.funFact}"
+
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    marginBottom: "8px",
+                  }}
+                >
+                  <div
+                    style={{ width: "60px", fontSize: "0.7rem", color: "#888" }}
+                  >
+                    MANUSIA
+                  </div>
+                  <div
+                    style={{
+                      flex: 1,
+                      background: "#333",
+                      height: "6px",
+                      borderRadius: "3px",
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: "20%",
+                        height: "100%",
+                        background: "#fff",
+                        borderRadius: "3px",
+                      }}
+                    ></div>
+                  </div>
+                </div>
+
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <div
+                    style={{
+                      width: "60px",
+                      fontSize: "0.7rem",
+                      color: themeColor,
+                    }}
+                  >
+                    SPESIMEN
+                  </div>
+                  <div
+                    style={{
+                      flex: 1,
+                      background: "#333",
+                      height: "6px",
+                      borderRadius: "3px",
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: `${extendedData.sizeCompare}%`,
+                        height: "100%",
+                        background: themeColor,
+                        borderRadius: "3px",
+                        boxShadow: `0 0 10px ${themeColor}`,
+                      }}
+                    ></div>
+                  </div>
+                </div>
+                <div
+                  style={{
+                    fontSize: "0.7rem",
+                    color: "#666",
+                    marginTop: "5px",
+                    fontStyle: "italic",
+                  }}
+                >
+                  *Skala aproksimasi visual
+                </div>
+              </div>
+            </>
+          )}
+
+          {/* TAB 3: EDUKASI */}
+          {activeTab === "FUNFACT" && (
+            <>
+              <h3 className="panel-heading">WAWASAN & SEJARAH</h3>
+
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "25px",
+                }}
+              >
+                <div>
+                  <div
+                    style={{
+                      fontSize: "0.8rem",
+                      color: themeColor,
+                      fontWeight: "bold",
+                      marginBottom: "5px",
+                      letterSpacing: "1px",
+                    }}
+                  >
+                    PERIODE WAKTU
+                  </div>
+                  <div
+                    style={{
+                      background: "rgba(255,255,255,0.1)",
+                      padding: "8px",
+                      borderRadius: "4px",
+                      textAlign: "center",
+                      color: "#fff",
+                      fontWeight: "bold",
+                      border: `1px solid ${themeColor}`,
+                    }}
+                  >
+                    {extendedData.period}
+                  </div>
+                </div>
+
+                <div
+                  style={{
+                    background: "rgba(255,255,255,0.05)",
+                    padding: "15px",
+                    borderLeft: `3px solid ${themeColor}`,
+                    marginTop: "5px",
+                  }}
+                >
+                  <div
+                    style={{
+                      fontSize: "0.9rem",
+                      color: "#fff",
+                      fontWeight: "bold",
+                      marginBottom: "5px",
+                    }}
+                  >
+                    Tahukah Kamu?
+                  </div>
+
+                  {/* --- OTOMATIS MENGGUNAKAN KEY DESCRIPTION --- */}
+                  <div
+                    style={{
+                      fontSize: "0.95rem",
+                      color: "#ccc",
+                      fontStyle: "italic",
+                      lineHeight: "1.6",
+                    }}
+                  >
+                    "{extendedData.funFact}"
+                  </div>
+                </div>
+
+                <div
+                  style={{
+                    marginTop: "10px",
+                    fontSize: "0.7rem",
+                    color: "#555",
+                  }}
+                >
+                  Database v2.4 // {data.modelPath || "No Asset"}
                 </div>
               </div>
             </>
