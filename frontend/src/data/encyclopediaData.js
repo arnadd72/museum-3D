@@ -141,19 +141,39 @@ export const encyclopediaData = {
           "https://cdn.grid.id//crop/0x0:0x0/360x240/photo/2018/09/21/1585206829.jpg",
         items: [
           {
-            name: "JEJAK DINOSAURUS",
-            modelPath: "/models/fosil/fosil_jejak/dinosaur_footprint.glb",
-            // Link Perbaikan (Direct Link)
+            name: "TRILOBITE",
+            modelPath: "/models/hewan/vertebrata/komodo_dragon_lizard-v2.glb",
             image:
-              "https://upload.wikimedia.org/wikipedia/commons/e/e4/Dinosaur_Footprint_-_geograph.org.uk_-_1018758.jpg",
-            desc: "Jejak kaki yang membatu, bukti aktivitas dinosaurus berjalan di masa lampau.",
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQljOpkz5Or31nutRIesJGJQ2ZB2uTjIOogDg&s",
+            desc: "Arthropoda laut yang punah, salah satu kelompok hewan paling awal yang diketahui. Memiliki eksoskeleton keras dan tubuh bersegmen.",
           },
           {
-            name: "JEJAK SAUROPODA",
-            modelPath: "/models/fosil/fosil_jejak/sauropod_footprint.glb",
+            name: "TRILOBITE",
+            modelPath: "/models/hewan/vertebrata/komodo_dragon_lizard-v2.glb",
             image:
-              "https://upload.wikimedia.org/wikipedia/commons/6/69/Sauropod_tracks_plagne.jpg",
-            desc: "Jejak masif dari dinosaurus leher panjang raksasa.",
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQljOpkz5Or31nutRIesJGJQ2ZB2uTjIOogDg&s",
+            desc: "Arthropoda laut yang punah, salah satu kelompok hewan paling awal yang diketahui. Memiliki eksoskeleton keras dan tubuh bersegmen.",
+          },
+          {
+            name: "TRILOBITE",
+            modelPath: "/models/hewan/vertebrata/komodo_dragon_lizard-v2.glb",
+            image:
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQljOpkz5Or31nutRIesJGJQ2ZB2uTjIOogDg&s",
+            desc: "Arthropoda laut yang punah, salah satu kelompok hewan paling awal yang diketahui. Memiliki eksoskeleton keras dan tubuh bersegmen.",
+          },
+          {
+            name: "TRILOBITE",
+            modelPath: "/models/hewan/vertebrata/komodo_dragon_lizard-v2.glb",
+            image:
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQljOpkz5Or31nutRIesJGJQ2ZB2uTjIOogDg&s",
+            desc: "Arthropoda laut yang punah, salah satu kelompok hewan paling awal yang diketahui. Memiliki eksoskeleton keras dan tubuh bersegmen.",
+          },
+          {
+            name: "TRILOBITE",
+            modelPath: "/models/hewan/vertebrata/komodo_dragon_lizard-v2.glb",
+            image:
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQljOpkz5Or31nutRIesJGJQ2ZB2uTjIOogDg&s",
+            desc: "Arthropoda laut yang punah, salah satu kelompok hewan paling awal yang diketahui. Memiliki eksoskeleton keras dan tubuh bersegmen.",
           },
         ],
       },
@@ -165,33 +185,39 @@ export const encyclopediaData = {
           "https://blue.kumparan.com/image/upload/fl_progressive,fl_lossy,c_fill,f_auto,q_auto:best,w_640/v1634025439/01jatjwnnhdqartezvr6zbs9p6.jpg",
         items: [
           {
-            name: "NYAMUK AMBER",
-            modelPath: "/models/fosil/fosil_terawetkan/real-time_refraction_demo_mosquito_in_amber.glb",
-            // Link Perbaikan (Direct Link)
+            name: "TRILOBITE",
+            modelPath: "/models/hewan/vertebrata/komodo_dragon_lizard-v2.glb",
             image:
               "https://upload.wikimedia.org/wikipedia/commons/0/02/Ancient_mosquito.jpg",
             desc: "Serangga purba yang terperangkap utuh dalam getah pohon yang mengeras jutaan tahun.",
           },
           {
-            name: "MUMI MAMMOTH",
-            modelPath: "/models/fosil/fosil_terawetkan/lyuba_the_woolly_mammoth_calf.glb",
+            name: "TRILOBITE",
+            modelPath: "/models/hewan/vertebrata/komodo_dragon_lizard-v2.glb",
             image:
               "https://upload.wikimedia.org/wikipedia/commons/b/b5/Lyuba_Mammoth_Museum.jpg",
             desc: "Bayi mammoth yang terawetkan sempurna oleh es abadi di Siberia.",
           },
           {
-            name: "DAUN PAKIS",
-            modelPath: "/models/fosil/fosil_terawetkan/eduf104_fern_leaves.glb",
+            name: "TRILOBITE",
+            modelPath: "/models/hewan/vertebrata/komodo_dragon_lizard-v2.glb",
             image:
               "https://upload.wikimedia.org/wikipedia/commons/8/8d/Neuropteris_ovata.jpg",
             desc: "Cetakan karbon dari daun tanaman purba yang mendominasi hutan Paleozoikum.",
           },
           {
-            name: "KAYU MEMBATU",
-            modelPath: "/models/fosil/fosil_terawetkan/eduf407_petrified_wood.glb",
+            name: "TRILOBITE",
+            modelPath: "/models/hewan/vertebrata/komodo_dragon_lizard-v2.glb",
             image:
-              "https://upload.wikimedia.org/wikipedia/commons/7/77/Petrified_forest_log_2.jpg",
-            desc: "Batang pohon yang materi organiknya telah tergantikan sepenuhnya oleh mineral batu.",
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQljOpkz5Or31nutRIesJGJQ2ZB2uTjIOogDg&s",
+            desc: "Arthropoda laut yang punah, salah satu kelompok hewan paling awal yang diketahui. Memiliki eksoskeleton keras dan tubuh bersegmen.",
+          },
+          {
+            name: "TRILOBITE",
+            modelPath: "/models/hewan/vertebrata/komodo_dragon_lizard-v2.glb",
+            image:
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQljOpkz5Or31nutRIesJGJQ2ZB2uTjIOogDg&s",
+            desc: "Arthropoda laut yang punah, salah satu kelompok hewan paling awal yang diketahui. Memiliki eksoskeleton keras dan tubuh bersegmen.",
           },
         ],
       },
@@ -203,37 +229,36 @@ export const encyclopediaData = {
           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUZmQmivoRDpHKjtsx_1RgqVpFs_M2N3kwkg&s",
         items: [
           {
-            name: "TENGKORAK T-REX",
-            modelPath: "/models/fosil/fosil_tubuh/vertebrate_tyrannosaurus_rex_skull_mote.glb",
-            // Link Perbaikan (Direct Link)
+            name: "TRILOBITE",
+            modelPath: "/models/hewan/vertebrata/komodo_dragon_lizard-v2.glb",
             image:
               "https://upload.wikimedia.org/wikipedia/commons/c/c2/Tyrannoskull.jpg",
             desc: "Tengkorak raja dinosaurus dengan rahang kuat penghancur tulang.",
           },
           {
-            name: "GIGI MEGALODON",
-            modelPath: "/models/fosil/fosil_tubuh/megalodon_teeth_fossil.glb",
+            name: "TRILOBITE",
+            modelPath: "/models/hewan/vertebrata/komodo_dragon_lizard-v2.glb",
             image:
               "https://upload.wikimedia.org/wikipedia/commons/3/3b/Megalodon_tooth_with_great_white_sharks_teeth-3-2.jpg",
             desc: "Gigi hiu raksasa purba yang ukurannya sebesar telapak tangan manusia.",
           },
           {
-            name: "TENGKORAK SMILODON",
-            modelPath: "/models/fosil/fosil_tubuh/saber-toothed_tiger_cat_-_ice_age_smilodon.glb",
+            name: "TRILOBITE",
+            modelPath: "/models/hewan/vertebrata/komodo_dragon_lizard-v2.glb",
             image:
               "https://upload.wikimedia.org/wikipedia/commons/5/53/Smilodon_fatalis.jpg",
             desc: "Tengkorak macan gigi pedang dengan taring ikonik yang mematikan.",
           },
           {
-            name: "TENGKORAK TRICERATOPS",
-            modelPath: "/models/fosil/fosil_tubuh/triceratops_skull.glb",
+            name: "TRILOBITE",
+            modelPath: "/models/hewan/vertebrata/komodo_dragon_lizard-v2.glb",
             image:
               "https://upload.wikimedia.org/wikipedia/commons/6/69/Tric1.JPG",
             desc: "Tengkorak dinosaurus herbivora dengan tiga tanduk pelindung yang khas.",
           },
           {
-            name: "CAKAR RAPTOR",
-            modelPath: "/models/fosil/fosil_tubuh/deinonychus_velociraptor_claw.glb",
+            name: "TRILOBITE",
+            modelPath: "/models/hewan/vertebrata/komodo_dragon_lizard-v2.glb",
             image:
               "https://upload.wikimedia.org/wikipedia/commons/a/a8/Deinonychus_claw.jpg",
             desc: "Cakar kaki melengkung tajam milik predator gesit Velociraptor.",
@@ -259,33 +284,39 @@ export const encyclopediaData = {
           "https://blue.kumparan.com/image/upload/fl_progressive,fl_lossy,c_fill,f_auto,q_auto:best,w_640/v1608281832/sp4i8vlqmegorxozvxce.jpg",
         items: [
           {
-            name: "DUNKLEOSTEUS",
-            modelPath: "/models/geologi/era_paleozoikum/dinorauls_dunkleosteus_2.glb",
-            // Link Perbaikan (Direct Link)
+            name: "TRILOBITE",
+            modelPath: "/models/hewan/vertebrata/komodo_dragon_lizard-v2.glb",
             image:
               "https://upload.wikimedia.org/wikipedia/commons/5/5e/Dunkleosteus_terrelli_2.jpg",
             desc: "Ikan purba raksasa berlapis baja, predator puncak lautan Paleozoikum.",
           },
           {
-            name: "ANOMALOCARIS",
-            modelPath: "/models/geologi/era_paleozoikum/anomalocaris_3d_model.glb",
+            name: "TRILOBITE",
+            modelPath: "/models/hewan/vertebrata/komodo_dragon_lizard-v2.glb",
             image:
               "https://upload.wikimedia.org/wikipedia/commons/c/c3/Anomalocaris_canadensis.jpg",
             desc: "Predator pertama di Bumi dari periode Kambrium dengan bentuk tubuh alien.",
           },
           {
-            name: "ARTHROPLEURA",
-            modelPath: "/models/geologi/era_paleozoikum/dinorauls_arthropleura.glb",
+            name: "TRILOBITE",
+            modelPath: "/models/hewan/vertebrata/komodo_dragon_lizard-v2.glb",
             image:
               "https://upload.wikimedia.org/wikipedia/commons/e/ea/Arthropleura_armata_reconstruction.jpg",
             desc: "Kelabang raksasa seukuran mobil, invertebrata darat terbesar dalam sejarah.",
           },
           {
-            name: "DIMETRODON",
-            modelPath: "/models/geologi/era_paleozoikum/dimetrodon.glb",
+            name: "TRILOBITE",
+            modelPath: "/models/hewan/vertebrata/komodo_dragon_lizard-v2.glb",
             image:
-              "https://upload.wikimedia.org/wikipedia/commons/9/9e/Dimetrodon_grandis_3D.jpg",
-            desc: "Reptil layar punggung (bukan dinosaurus) yang merupakan nenek moyang mamalia.",
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQljOpkz5Or31nutRIesJGJQ2ZB2uTjIOogDg&s",
+            desc: "Arthropoda laut yang punah, salah satu kelompok hewan paling awal yang diketahui. Memiliki eksoskeleton keras dan tubuh bersegmen.",
+          },
+          {
+            name: "TRILOBITE",
+            modelPath: "/models/hewan/vertebrata/komodo_dragon_lizard-v2.glb",
+            image:
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQljOpkz5Or31nutRIesJGJQ2ZB2uTjIOogDg&s",
+            desc: "Arthropoda laut yang punah, salah satu kelompok hewan paling awal yang diketahui. Memiliki eksoskeleton keras dan tubuh bersegmen.",
           },
         ],
       },
