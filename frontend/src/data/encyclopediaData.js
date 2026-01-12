@@ -644,7 +644,7 @@ export const encyclopediaData = {
             name: "PARASAUROLOPHUS",
             modelPath:
               "/models/geologi/era_mesozoikum/parasaurolophus_walkeri.glb",
-            image: "",
+            image: "https://www.extinctanimals.org/wp-content/uploads/2015/09/Parasaurolophus-Photos.jpg",
             description: {
               short:
                 "Dinosaurus pemakan tumbuhan dengan jambul tabung panjang di belakang kepala yang berfungsi seperti terompet untuk berkomunikasi.",
@@ -655,7 +655,7 @@ export const encyclopediaData = {
           {
             name: "PTERANODON",
             modelPath: "/models/geologi/era_mesozoikum/pteranodon.glb",
-            image: "",
+            image: "https://cdn.mos.cms.futurecdn.net/6vA8wWskCkUgffN9dbQhvh-1200-80.jpg",
             description: {
               short:
                 "Reptil terbang terkenal yang memiliki paruh panjang tanpa gigi dan jambul kepala menonjol, ahli meluncur di atas samudra purba.",
@@ -666,7 +666,7 @@ export const encyclopediaData = {
           {
             name: "SPINOSAURUS",
             modelPath: "/models/geologi/era_mesozoikum/spinosaurus.glb",
-            image: "",
+            image: "https://www.superherotoystore.com/cdn/shop/articles/Blog_Banners_11_e325b223-a705-4062-a83a-66a2548fde70_1600x.jpg?v=1746545950",
             description: {
               short:
                 "Karnivora terbesar di bumi yang beradaptasi untuk hidup di air dan darat, memiliki layar punggung raksasa dan moncong panjang pemakan ikan.",
@@ -677,7 +677,7 @@ export const encyclopediaData = {
           {
             name: "STEGOSAURUS",
             modelPath: "/models/geologi/era_mesozoikum/stegosaurus_armatus.glb",
-            image: "",
+            image: "https://dinosaurlady.com/wp-content/uploads/2024/08/4802592-311672367.jpg?w=1200",
             description: {
               short:
                 "Dinosaurus herbivora dengan barisan lempeng tulang di punggung dan empat duri tajam di ekor, namun memiliki otak yang sangat kecil.",
@@ -689,7 +689,7 @@ export const encyclopediaData = {
             name: "T-REX",
             modelPath: "/models/geologi/era_mesozoikum/t-rex.glb",
             image:
-              "https://upload.wikimedia.org/wikipedia/commons/6/6f/Tyrannosaurus_rex_Reconstruction_by_Nobu_Tamura.jpg",
+              "https://ichef.bbci.co.uk/ace/standard/976/cpsprodpb/6260/production/_126048152_gettyimages-1363838708.jpg",
             description: {
               short:
                 "Tyrannosaurus Rex, raja dinosaurus karnivora dengan gigitan terkuat di daratan, lengan kecil, dan indra penciuman yang sangat tajam.",
@@ -701,7 +701,7 @@ export const encyclopediaData = {
             name: "TRICERATOPS",
             modelPath: "/models/geologi/era_mesozoikum/triceratop.glb",
             image:
-              "https://upload.wikimedia.org/wikipedia/commons/0/00/Triceratops_horridus_12.jpg",
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0zUdVREIP4qVQLBkN257QoEFPhqPYVWk3Gw&s",
             description: {
               short:
                 "Dinosaurus berbadan badak dengan tiga tanduk wajah dan tameng leher, herbivora tangguh yang berani berhadapan dengan T-Rex.",
@@ -710,22 +710,10 @@ export const encyclopediaData = {
             },
           },
           {
-            name: "TYRANNOSAURUS KING",
-            modelPath:
-              "/models/geologi/era_mesozoikum/tyrant_king_-_tyrannosaurus.glb",
-            image: "",
-            description: {
-              short:
-                "Representasi artistik definisi tinggi dari T-Rex, menampilkan detail kulit bersisik dan anatomi otot sang raja dinosaurus.",
-              full: "Model ini adalah varian visualisasi Tyrannosaurus Rex yang menekankan pada akurasi detail tekstur kulit, proporsi otot, dan keagungan sang 'Raja Kadal Tiran'. Dalam paleontologi modern, rekonstruksi T-Rex terus berkembang, mulai dari postur yang berdiri tegak (model lama) hingga postur horizontal dengan ekor lurus (model akurat) seperti ini. Model ini menangkap esensi kekuatan predator puncak yang menguasai ekosistem Kapur Akhir.",
-              key: "Visualisasi mendalam untuk memahami biomekanik dan penampilan fisik sang predator legendaris.",
-            },
-          },
-          {
             name: "VELOCIRAPTOR",
             modelPath: "/models/geologi/era_mesozoikum/velociraptor.glb",
             image:
-              "https://upload.wikimedia.org/wikipedia/commons/a/a6/Velociraptor_mongoliensis.jpg",
+              "https://www.extinctanimals.org/wp-content/uploads/2015/08/Velociraptor.jpg",
             description: {
               short:
                 "Dinosaurus pemangsa berukuran kecil, lincah, cerdas, dan tertutup bulu, terkenal dengan cakar sabit besar di kakinya.",
@@ -746,7 +734,7 @@ export const encyclopediaData = {
             modelPath:
               "/models/geologi/era_kenozoikum/dinorauls_paraceratherium.glb",
             image:
-              "https://upload.wikimedia.org/wikipedia/commons/9/9b/Paraceratherium_orgosensis.jpg",
+              "https://www.fossilguy.com/gallery/vert/mammal/land/paraceratherium/paraceratherium-statue-5820747273.jpg",
             description: {
               short:
                 "Mamalia darat terbesar yang pernah berjalan di bumi, kerabat badak raksasa tanpa cula dengan leher panjang pemakan daun tinggi.",
@@ -758,7 +746,7 @@ export const encyclopediaData = {
             name: "MAMMOTH",
             modelPath: "/models/geologi/era_kenozoikum/mammoth.glb",
             image:
-              "https://upload.wikimedia.org/wikipedia/commons/b/b9/Mammuthus_primigenius_by_Charles_Knight.jpg",
+              "https://awsimages.detik.net.id/community/media/visual/2022/03/19/replika-mammoth-berbulu.webp?w=1200",
             description: {
               short:
                 "Gajah purba ikonik Zaman Es yang tubuhnya tertutup rambut tebal dan memiliki gading melengkung besar, hidup berdampingan dengan manusia purba.",
@@ -771,7 +759,7 @@ export const encyclopediaData = {
             modelPath:
               "/models/geologi/era_kenozoikum/phorusrhacos_longissimus_terror_bird.glb",
             image:
-              "https://upload.wikimedia.org/wikipedia/commons/c/c2/Phorusrhacos.jpg",
+              "https://imgapps.okezone.com/dynamic/content/2023/04/17/56/2800114/mengenal-terror-bird-burung-predator-purba-yang-sempat-jadi-puncak-rantai-makanan-gzmizQFatb.jpg?w=350",
             description: {
               short:
                 "Burung pemangsa raksasa yang tidak bisa terbang, predator puncak berkaki cepat dengan paruh besar mematikan yang menguasai Amerika Selatan.",
@@ -782,7 +770,7 @@ export const encyclopediaData = {
           {
             name: "SMILODON",
             modelPath: "/models/geologi/era_kenozoikum/smilodon.glb",
-            image: "",
+            image: "https://www.extinctanimals.org/wp-content/uploads/2018/09/Smilodon-Size.jpg",
             description: {
               short:
                 "Kucing besar prasejarah yang terkenal dengan dua gigi taring atas yang sangat panjang seperti pedang, pemburu hewan besar di Zaman Es.",
