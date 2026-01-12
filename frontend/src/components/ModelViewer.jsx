@@ -61,13 +61,8 @@ const PlaceholderModel = ({ color }) => {
 // --- 3. MODEL LOADER ---
 const Model3D = ({ path }) => {
   const { scene } = useGLTF(path);
-  // Clone scene agar aman saat navigasi bolak-balik
+  // Clone scene agar aman saat navigasi
   const clonedScene = useMemo(() => scene.clone(), [scene]);
-
-  // --- PERBAIKAN: HAPUS BAGIAN TRAVERSE EMISSIVE ---
-  // Kode traverse sebelumnya dihapus karena membuat model bertekstur jadi hitam.
-  // Kita mengandalkan cahaya manual yang sudah terang.
-
   return <primitive object={clonedScene} />;
 };
 
@@ -88,28 +83,78 @@ const ModelViewer = () => {
 
   const data = location.state?.itemData;
 
-  // --- 5. SMART DATA GENERATOR ---
+  // --- 5. SMART DATA GENERATOR (CUSTOMIZABLE) ---
   const extendedData = useMemo(() => {
     if (!data) return null;
 
-    // Ambil deskripsi dari database jika ada
     const dbDesc = data.description || {};
+    const name = data.name.toUpperCase();
 
+    // Default Values (Bisa Anda ganti default-nya di sini)
     let info = {
+      // TAB 1: RINGKASAN
       scientificName:
         data.name.charAt(0) + data.name.slice(1).toLowerCase() + " sp.",
-      location: "Tidak Diketahui",
-      period: "Prasejarah",
+      category: data.category || "Unknown Class",
+      taxonomy: "Kingdom Animalia",
+      location: "Global / Tersebar Luas",
+      status: "PUNAH",
+
+      // TAB 2: DATA FISIK
+      diet: "Tidak Diketahui",
       size: "Bervariasi",
       weight: "Tidak Diketahui",
-      taxonomy: "Animalia > Chordata",
-      // LOGIKA: Gunakan deskripsi KUNCI (Key) untuk Edukasi
+      lifespan: "Tidak Diketahui", // Tambahan baru yang simpel
+      sizeCompare: 50, // 0-100% relative to human
+
+      // TAB 3: EDUKASI
+      period: "Zaman Prasejarah",
       funFact:
-        dbDesc.key ||
-        "Spesimen ini merupakan bagian penting dari sejarah evolusi bumi.",
-      diet: "Omnivora",
-      sizeCompare: 50,
+        dbDesc.key || "Spesies ini memiliki peran unik dalam ekosistem purba.",
+      discoveryYear: "Abad ke-19", // Tambahan baru
     };
+
+    // --- LOGIKA KUSTOMISASI DATA BERDASARKAN NAMA ---
+    // Anda bisa menambahkan 'else if' baru untuk model lain di sini.
+
+    if (name.includes("REX")) {
+      info.scientificName = "Tyrannosaurus rex";
+      info.category = "Theropoda";
+      info.taxonomy = "Dinosauria > Saurischia";
+      info.location = "Amerika Utara";
+      info.diet = "Karnivora (Daging)";
+      info.size = "Panjang: 12-13 Meter";
+      info.weight = "8.000 - 14.000 kg";
+      info.lifespan = "~30 Tahun";
+      info.sizeCompare = 100; // Sangat Besar
+      info.period = "Kapur Akhir (68-66 Juta thn)";
+      info.discoveryYear = "1902 (Barnum Brown)";
+    } else if (name.includes("TRILOBITE")) {
+      info.scientificName = "Trilobita classis";
+      info.category = "Arthropoda";
+      info.taxonomy = "Arthropoda > Trilobita";
+      info.location = "Lautan Seluruh Dunia";
+      info.diet = "Detritivora (Sisa Organik)";
+      info.size = "3 - 70 cm";
+      info.weight = "< 1 kg";
+      info.lifespan = "3 - 5 Tahun";
+      info.sizeCompare = 10; // Kecil
+      info.period = "Kambrium - Permian";
+      info.discoveryYear = "Sejak Awal Paleontologi";
+    } else if (name.includes("AMMONITE")) {
+      info.scientificName = "Ammonoidea";
+      info.category = "Cephalopoda";
+      info.taxonomy = "Mollusca > Cephalopoda";
+      info.location = "Lautan Terbuka";
+      info.diet = "Karnivora (Plankton/Krustasea)";
+      info.size = "Diameter: 20cm - 2m";
+      info.weight = "1 - 100 kg";
+      info.lifespan = "Singkat (Reproduksi Cepat)";
+      info.sizeCompare = 25;
+      info.period = "Devon - Kapur Akhir";
+      info.discoveryYear = "Zaman Kuno (Disebut 'Ular Batu')";
+    }
+    // ... Tambahkan else if lain untuk model Anda ...
 
     return info;
   }, [data]);
@@ -132,9 +177,7 @@ const ModelViewer = () => {
       <div className="canvas-wrapper">
         <div className="hologram-overlay"></div>
         <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 2, 8], fov: 40 }}>
-          {/* EFEK HOLOGRAM (HANYA PARTIKEL & FOG) */}
           <fog attach="fog" args={["#000000", 5, 30]} />
-
           <Sparkles
             count={100}
             scale={5}
@@ -144,7 +187,6 @@ const ModelViewer = () => {
             position={[0, 0, 0]}
           />
 
-          {/* --- PENCAHAYAAN MANUAL (AGAR MODEL JELAS) --- */}
           <ambientLight intensity={2.5} color="#ffffff" />
           <directionalLight
             position={[10, 10, 5]}
@@ -173,7 +215,6 @@ const ModelViewer = () => {
             >
               <group scale={1.5}>
                 <ModelErrorBoundary color={themeColor}>
-                  {/* UPDATE: Gunakan Center (tanpa prop top) agar pas di tengah */}
                   <Center>
                     <Resize scale={3}>
                       <Model3D path={data.modelPath} />
@@ -194,8 +235,7 @@ const ModelViewer = () => {
         </Canvas>
       </div>
 
-      {/* --- UI LAYER --- */}
-
+      {/* UI LAYER */}
       <div className="ui-top-left">
         <button onClick={() => navigate(-1)} className="back-btn">
           ← KEMBALI
@@ -263,63 +303,64 @@ const ModelViewer = () => {
         </div>
 
         <div className="panel-content">
-          {/* TAB 1: RINGKASAN */}
+          {/* === TAB 1: RINGKASAN (Simple & Informatif) === */}
           {activeTab === "OVERVIEW" && (
             <>
               <h3 className="panel-heading">KLASIFIKASI & ASAL</h3>
-
-              {/* --- GUNAKAN DESKRIPSI SINGKAT (SHORT) --- */}
               <p className="panel-desc">
                 {data.description ? data.description.short : data.desc}
               </p>
 
               <div className="info-grid">
                 <div className="info-item">
-                  <label style={{ color: themeColor }}>KATEGORI</label>
-                  <span>{data.category}</span>
+                  <label style={{ color: themeColor }}>KELOMPOK</label>
+                  <span>{extendedData.category}</span>
                 </div>
                 <div className="info-item">
                   <label style={{ color: themeColor }}>TAKSONOMI</label>
-                  <span style={{ fontSize: "0.8rem", textTransform: "none" }}>
+                  <span style={{ fontSize: "0.8rem" }}>
                     {extendedData.taxonomy}
                   </span>
                 </div>
                 <div className="info-item">
-                  <label style={{ color: themeColor }}>LOKASI TEMUAN</label>
-                  <span style={{ fontSize: "0.9rem" }}>
-                    {extendedData.location}
-                  </span>
+                  <label style={{ color: themeColor }}>HABITAT</label>
+                  <span>{extendedData.location}</span>
                 </div>
                 <div className="info-item">
                   <label style={{ color: themeColor }}>STATUS</label>
-                  <span style={{ color: "#ff3333" }}>PUNAH</span>
+                  <span style={{ color: "#ff3333", fontWeight: "bold" }}>
+                    {extendedData.status}
+                  </span>
                 </div>
               </div>
             </>
           )}
 
-          {/* TAB 2: DATA FISIK */}
+          {/* === TAB 2: DATA FISIK (Simple & To-The-Point) === */}
           {activeTab === "ANATOMY" && (
             <>
-              <h3 className="panel-heading">STATISTIK BIOLOGIS</h3>
+              <h3 className="panel-heading">KARAKTERISTIK FISIK</h3>
 
               <div className="info-grid">
                 <div className="info-item">
-                  <label style={{ color: themeColor }}>MAKANAN</label>
+                  <label style={{ color: themeColor }}>DIET (MAKANAN)</label>
                   <span>{extendedData.diet}</span>
                 </div>
                 <div className="info-item">
-                  <label style={{ color: themeColor }}>DIMENSI</label>
-                  <span style={{ fontSize: "0.9rem" }}>
-                    {extendedData.size}
-                  </span>
+                  <label style={{ color: themeColor }}>ESTIMASI UMUR</label>
+                  <span>{extendedData.lifespan}</span>
                 </div>
                 <div className="info-item">
-                  <label style={{ color: themeColor }}>BERAT</label>
+                  <label style={{ color: themeColor }}>UKURAN TUBUH</label>
+                  <span>{extendedData.size}</span>
+                </div>
+                <div className="info-item">
+                  <label style={{ color: themeColor }}>BERAT (PERKIRAAN)</label>
                   <span>{extendedData.weight}</span>
                 </div>
               </div>
 
+              {/* Visualisasi Size Bar Sederhana */}
               <div
                 style={{
                   marginTop: "30px",
@@ -336,9 +377,10 @@ const ModelViewer = () => {
                     letterSpacing: "1px",
                   }}
                 >
-                  PERBANDINGAN UKURAN
+                  SKALA UKURAN (VS MANUSIA)
                 </div>
 
+                {/* Bar Manusia (Fixed) */}
                 <div
                   style={{
                     display: "flex",
@@ -347,9 +389,9 @@ const ModelViewer = () => {
                   }}
                 >
                   <div
-                    style={{ width: "60px", fontSize: "0.7rem", color: "#888" }}
+                    style={{ width: "80px", fontSize: "0.7rem", color: "#888" }}
                   >
-                    MANUSIA
+                    MANUSIA (1.7m)
                   </div>
                   <div
                     style={{
@@ -361,7 +403,7 @@ const ModelViewer = () => {
                   >
                     <div
                       style={{
-                        width: "20%",
+                        width: "30%",
                         height: "100%",
                         background: "#fff",
                         borderRadius: "3px",
@@ -370,10 +412,11 @@ const ModelViewer = () => {
                   </div>
                 </div>
 
+                {/* Bar Spesimen (Dynamic) */}
                 <div style={{ display: "flex", alignItems: "center" }}>
                   <div
                     style={{
-                      width: "60px",
+                      width: "80px",
                       fontSize: "0.7rem",
                       color: themeColor,
                     }}
@@ -399,21 +442,11 @@ const ModelViewer = () => {
                     ></div>
                   </div>
                 </div>
-                <div
-                  style={{
-                    fontSize: "0.7rem",
-                    color: "#666",
-                    marginTop: "5px",
-                    fontStyle: "italic",
-                  }}
-                >
-                  *Skala aproksimasi visual
-                </div>
               </div>
             </>
           )}
 
-          {/* TAB 3: EDUKASI */}
+          {/* === TAB 3: EDUKASI (Fakta & Sejarah) === */}
           {activeTab === "FUNFACT" && (
             <>
               <h3 className="panel-heading">WAWASAN & SEJARAH</h3>
@@ -422,9 +455,10 @@ const ModelViewer = () => {
                 style={{
                   display: "flex",
                   flexDirection: "column",
-                  gap: "25px",
+                  gap: "20px",
                 }}
               >
+                {/* Periode Waktu */}
                 <div>
                   <div
                     style={{
@@ -432,15 +466,14 @@ const ModelViewer = () => {
                       color: themeColor,
                       fontWeight: "bold",
                       marginBottom: "5px",
-                      letterSpacing: "1px",
                     }}
                   >
-                    PERIODE WAKTU
+                    PERIODE HIDUP
                   </div>
                   <div
                     style={{
                       background: "rgba(255,255,255,0.1)",
-                      padding: "8px",
+                      padding: "10px",
                       borderRadius: "4px",
                       textAlign: "center",
                       color: "#fff",
@@ -452,6 +485,28 @@ const ModelViewer = () => {
                   </div>
                 </div>
 
+                {/* Tahun Penemuan (Info Baru) */}
+                <div>
+                  <div
+                    style={{
+                      fontSize: "0.8rem",
+                      color: themeColor,
+                      fontWeight: "bold",
+                      marginBottom: "5px",
+                    }}
+                  >
+                    SEJARAH PENEMUAN
+                  </div>
+                  <div style={{ color: "#ccc", fontSize: "0.9rem" }}>
+                    Pertama kali diidentifikasi atau dipelajari secara luas
+                    pada:{" "}
+                    <strong style={{ color: "#fff" }}>
+                      {extendedData.discoveryYear}
+                    </strong>
+                  </div>
+                </div>
+
+                {/* Fakta Unik (Key Description) */}
                 <div
                   style={{
                     background: "rgba(255,255,255,0.05)",
@@ -468,10 +523,8 @@ const ModelViewer = () => {
                       marginBottom: "5px",
                     }}
                   >
-                    Tahukah Kamu?
+                    TAHUKAH KAMU?
                   </div>
-
-                  {/* --- OTOMATIS MENGGUNAKAN KEY DESCRIPTION --- */}
                   <div
                     style={{
                       fontSize: "0.95rem",
@@ -491,7 +544,7 @@ const ModelViewer = () => {
                     color: "#555",
                   }}
                 >
-                  Database v2.4 // {data.modelPath || "No Asset"}
+                  Database v3.0 // Asset Path: {data.modelPath}
                 </div>
               </div>
             </>

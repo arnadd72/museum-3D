@@ -9,14 +9,16 @@ const GalleryMain = () => {
   const [selectedSubCategory, setSelectedSubCategory] = useState(null);
   const [activeItem, setActiveItem] = useState(null);
   const [isExiting, setIsExiting] = useState(false);
+
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
     if (location.state && location.state.targetCategory) {
       const target = location.state.targetCategory;
-      if (encyclopediaData[target])
+      if (encyclopediaData[target]) {
         setSelectedCategory(encyclopediaData[target]);
+      }
       window.history.replaceState({}, document.title);
     }
   }, [location]);
@@ -28,6 +30,7 @@ const GalleryMain = () => {
       setIsExiting(false);
     }, 500);
   };
+
   const handleBack = () => {
     setIsExiting(true);
     setTimeout(() => {
@@ -36,14 +39,18 @@ const GalleryMain = () => {
       setIsExiting(false);
     }, 500);
   };
+
   const handleSubSelect = (sub) => {
     setIsExiting(true);
     setTimeout(() => {
       setSelectedSubCategory(sub);
-      if (sub.items?.length > 0) setActiveItem(sub.items[0]);
+      if (sub.items && sub.items.length > 0) {
+        setActiveItem(sub.items[0]);
+      }
       setIsExiting(false);
     }, 500);
   };
+
   const handleBackToSub = () => {
     setIsExiting(true);
     setTimeout(() => {
@@ -53,10 +60,15 @@ const GalleryMain = () => {
     }, 500);
   };
 
+  const handleItemClick = (item) => {
+    setActiveItem(item);
+  };
+
   return (
     <div className="gallery-container">
       <div className="grid-bg"></div>
       <div className="vignette"></div>
+
       <nav className="gallery-nav">
         <Link to="/" className="nav-back">
           /// KELUAR SISTEM
@@ -67,6 +79,7 @@ const GalleryMain = () => {
       </nav>
 
       <main className="gallery-content">
+        {/* === VIEW 1: PILIH KATEGORI UTAMA === */}
         {!selectedCategory && (
           <div
             className={`selection-grid ${
@@ -102,6 +115,7 @@ const GalleryMain = () => {
           </div>
         )}
 
+        {/* === VIEW 2: PILIH SUB-KATEGORI === */}
         {selectedCategory && !selectedSubCategory && (
           <div
             className={`sub-selection-view ${
@@ -149,12 +163,14 @@ const GalleryMain = () => {
           </div>
         )}
 
+        {/* === VIEW 3: DETAIL SPLIT SCREEN === */}
         {selectedSubCategory && activeItem && (
           <div
             className={`split-view-container ${
               isExiting ? "fade-out-down" : "fade-in-up"
             }`}
           >
+            {/* PANEL KIRI: LIST ITEM */}
             <div className="left-panel-list">
               <button
                 onClick={handleBackToSub}
@@ -163,6 +179,7 @@ const GalleryMain = () => {
               >
                 ← KEMBALI KE {selectedCategory.title}
               </button>
+
               <h3
                 className="list-heading"
                 style={{ color: selectedCategory.color }}
@@ -176,7 +193,7 @@ const GalleryMain = () => {
                     className={`list-item-btn ${
                       activeItem.name === item.name ? "active" : ""
                     }`}
-                    onClick={() => setActiveItem(item)}
+                    onClick={() => handleItemClick(item)}
                     style={{ "--accent": selectedCategory.color }}
                   >
                     <span className="item-idx">0{idx + 1}</span>
@@ -186,28 +203,37 @@ const GalleryMain = () => {
               </div>
             </div>
 
+            {/* PANEL KANAN: DETAIL KONTEN */}
             <div className="right-panel-detail">
               <div className="detail-image-wrapper">
+                {/* --- PERBAIKAN DI SINI --- */}
+                {/* Menambahkan inline style objectFit: "contain" agar gambar utuh */}
                 <img
                   src={activeItem.image}
                   alt={activeItem.name}
                   className="detail-img"
+                  style={{ objectFit: "contain", backgroundColor: "#000" }}
                 />
+                {/* ------------------------- */}
+
                 <div className="scan-overlay"></div>
                 <div className="img-caption">
                   {activeItem.name} /// DATA VISUAL
                 </div>
               </div>
+
               <div className="detail-info-box">
                 <h1 style={{ color: selectedCategory.color }}>
                   {activeItem.name}
                 </h1>
-                {/* --- GUNAKAN DESKRIPSI LENGKAP (FULL) --- */}
+
+                {/* Menggunakan Deskripsi Lengkap (Full) */}
                 <p>
                   {activeItem.description
                     ? activeItem.description.full
                     : activeItem.desc}
                 </p>
+
                 <div className="data-metrics">
                   <div className="metric">
                     <span>TIPE:</span> {selectedSubCategory.title}
@@ -216,6 +242,7 @@ const GalleryMain = () => {
                     <span>STATUS:</span> PUNAH
                   </div>
                 </div>
+
                 <div className="action-row">
                   <button
                     className="view-3d-btn"

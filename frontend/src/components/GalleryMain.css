@@ -78,6 +78,7 @@
   text-align: center;
   width: 100%;
   max-width: 1200px;
+  animation: fadeInUp 0.5s ease-out;
 }
 .main-heading {
   font-size: 3rem;
@@ -158,10 +159,11 @@
   width: 100%;
 }
 
-/* --- VIEW 2: SUB-KATEGORI (LAYOUT VERTIKAL BARU) --- */
+/* --- VIEW 2: SUB-KATEGORI (LAYOUT VERTIKAL) --- */
 .sub-selection-view {
   width: 100%;
   max-width: 1000px;
+  animation: fadeInUp 0.5s ease-out;
 }
 
 .sub-header {
@@ -186,19 +188,17 @@
   border-color: #fff;
 }
 
-/* Wrapper List Vertikal */
 .sub-cards-wrapper {
   display: flex;
-  flex-direction: column; /* Menyusun ke bawah */
+  flex-direction: column;
   gap: 20px;
   width: 100%;
   padding-bottom: 50px;
 }
 
-/* Kartu Horizontal (List Item) */
 .sub-card-visual {
   display: flex;
-  flex-direction: row; /* Gambar kiri, Teks kanan */
+  flex-direction: row;
   height: 200px;
   width: 100%;
   background: rgba(10, 10, 10, 0.8);
@@ -219,11 +219,11 @@
 }
 
 .sub-visual-box {
-  width: 35%; /* Gambar 35% */
+  width: 35%;
   height: 100%;
   position: relative;
   overflow: hidden;
-  clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%); /* Potongan miring */
+  clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
 }
 .sub-visual-box img {
   width: 100%;
@@ -287,24 +287,30 @@
   box-shadow: 0 0 15px var(--item-color);
 }
 
-/* --- VIEW 3: SPLIT VIEW LAYOUT --- */
+/* --- VIEW 3: SPLIT VIEW LAYOUT (UPDATED FOR ADAPTIVE IMAGE) --- */
 .split-view-container {
-  display: flex;
+  display: grid;
+  grid-template-columns: 350px 1fr; /* Kiri tetap, Kanan fleksibel */
   width: 100%;
   max-width: 1400px;
-  height: 80vh;
+  /* Hapus fixed height agar konten bisa menyesuaikan tinggi */
+  min-height: 80vh;
+  height: calc(
+    100vh - 100px
+  ); /* Batasi tinggi total agar tidak scroll halaman utama */
   gap: 2rem;
+  animation: fadeInUp 0.5s ease-out;
 }
 
 /* PANEL KIRI (LIST) */
 .left-panel-list {
-  width: 30%;
   background: rgba(0, 0, 0, 0.6);
   border-right: 1px solid rgba(255, 255, 255, 0.1);
   padding: 2rem;
   display: flex;
   flex-direction: column;
   backdrop-filter: blur(10px);
+  height: 100%; /* Isi penuh tinggi container */
 }
 .list-heading {
   font-size: 1.5rem;
@@ -361,28 +367,38 @@
   letter-spacing: 1px;
 }
 
-/* PANEL KANAN (DETAIL) */
+/* PANEL KANAN (DETAIL) - UPDATED */
 .right-panel-detail {
-  width: 70%;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  /* Agar bisa scroll jika konten terlalu panjang */
   overflow-y: auto;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+/* IMAGE WRAPPER - UPDATED UNTUK ADAPTIF */
 .detail-image-wrapper {
   width: 100%;
-  height: 50%;
+  /* Hapus height: 50% yang kaku */
   min-height: 300px;
+  max-height: 55vh; /* Batas tinggi maksimal agar tidak mendominasi layar */
   position: relative;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   overflow: hidden;
+  background: #000; /* Fallback background hitam */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
 .detail-img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  /* PENTING: Gunakan contain agar gambar utuh */
+  object-fit: contain;
 }
+
 .scan-overlay {
   position: absolute;
   inset: 0;
@@ -402,21 +418,21 @@
 }
 
 .detail-info-box {
-  background: rgba(255, 255, 255, 0.03);
   padding: 2rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
   flex: 1;
 }
 .detail-info-box h1 {
   font-size: 2.5rem;
   margin: 0 0 1rem 0;
   letter-spacing: 3px;
+  text-transform: uppercase;
 }
 .detail-info-box p {
-  font-size: 1rem;
+  font-size: 1.1rem;
   line-height: 1.6;
   color: #ccc;
   margin-bottom: 2rem;
+  max-width: 900px;
 }
 
 .data-metrics {
@@ -462,7 +478,7 @@
     opacity: 0;
   }
 }
-@keyframes fade-in-up {
+@keyframes fadeInUp {
   from {
     opacity: 0;
     transform: translateY(20px);
@@ -484,7 +500,26 @@
 }
 
 .fade-in-up {
-  animation: fade-in-up 0.5s ease-out;
+  animation: fadeInUp 0.5s ease-out;
+}
+
+@media screen and (max-width: 1024px) {
+  .split-view-container {
+    grid-template-columns: 1fr; /* Tumpuk vertikal di Tablet */
+    grid-template-rows: auto 1fr;
+    height: auto;
+    overflow-y: auto;
+  }
+
+  .left-panel-list {
+    height: 300px; /* List fixed height */
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .detail-image-wrapper {
+    max-height: 400px;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -499,11 +534,6 @@
     border-bottom: 1px solid #333;
   }
   .split-view-container {
-    flex-direction: column;
-    height: auto;
-  }
-  .left-panel-list,
-  .right-panel-detail {
-    width: 100%;
+    padding: 0 1rem;
   }
 }
