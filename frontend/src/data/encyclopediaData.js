@@ -55,14 +55,26 @@ export const encyclopediaData = {
         image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Nanoplankton-fossil-sediment_hg.jpg/330px-Nanoplankton-fossil-sediment_hg.jpg",
         items: [
           {
-            name: "FORAMINIFERA",
-            modelPath: "/models/hewan/mikrofosil/foraminifera_-_globigerinella_calida.glb",
+            name: "Globigerinella bullodes",
+            modelPath: "/models/hewan/mikrofosil/globigerina_bulloides.glb",
             image: "https://upload.wikimedia.org/wikipedia/commons/3/3f/Foraminifera_hg.jpg",
             desc: "Plankton bercangkang kapur, indikator iklim purba.",
           },
           {
+            name: "Globigerinella calida",
+            modelPath: "/models/hewan/mikrofosil/foraminifera_-_globigerinella_calida.glb",
+            image: "https://upload.wikimedia.org/wikipedia/commons/3/3f/Foraminifera_hg.jpg",
+            desc: "Globigerinella calida adalah spesies foraminifera planktonik kecil yang hidup di lautan, dikenal sebagai indikator penting dalam studi geologi dan paleoceanografi karena fosilnya membantu menentukan usia sedimen laut dan kondisi iklim purba, terutama pada masa Kuarter, dan ditemukan sebagai fosil penunjuk di berbagai perairan, termasuk perairan Indonesia. ",
+          },
+          {
             name: "RADIOLARIA",
             modelPath: "/models/hewan/mikrofosil/radiolarian_spumellaria.glb",
+            image: "https://upload.wikimedia.org/wikipedia/commons/8/86/Haeckel_Radiolaria_31.jpg",
+            desc: "Mikrofosil laut dengan kerangka silika yang rumit.",
+          },
+          {
+            name: "COCCOLITHOPHORE",
+            modelPath: "/models/hewan/mikrofosil/coccolithophore.glb",
             image: "https://upload.wikimedia.org/wikipedia/commons/8/86/Haeckel_Radiolaria_31.jpg",
             desc: "Mikrofosil laut dengan kerangka silika yang rumit.",
           },
@@ -138,8 +150,8 @@ export const encyclopediaData = {
             desc: "Cetakan kaki fosil Tyrannosaurus Rex yang masif.",
           },
           {
-            name: "JEJAK Anomoepus",
-            modelPath: "/models/fosil/fosil_jejak/footprint_anomoepus_isp..glb",
+            name: "JEJAK Velociraptor",
+            modelPath: "/models/fosil/fosil_jejak/footprint_raptor.glb",
             image: "",
             desc: "Cetakan kaki fosil anomopeus yang masif.",
           },
@@ -286,12 +298,6 @@ export const encyclopediaData = {
             modelPath: "/models/geologi/era_paleozoikum/primeval_-_gorgonopsid.glb",
             image: "",
             desc: "Reptil mirip mamalia dengan gigi saber (Permian).",
-          },
-          {
-            name: "SCUTOSAURUS",
-            modelPath: "/models/geologi/era_paleozoikum/scutosaurus.glb",
-            image: "",
-            desc: "Reptil herbivora besar berlapis baja.",
           },
         ],
       },
