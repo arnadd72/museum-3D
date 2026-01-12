@@ -10,12 +10,10 @@ const Visual3DHub = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedItem, setSelectedItem] = useState(null);
 
-  // 1. SCROLL RESET: Halaman mulai dari atas saat dibuka
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  // 2. DATA FLATTENING: Meratakan struktur data
   const allItems = useMemo(() => {
     let collected = [];
     if (encyclopediaData) {
@@ -41,36 +39,25 @@ const Visual3DHub = () => {
     return collected;
   }, []);
 
-  // 3. LOGIKA FILTER GANDA (Category + Search Text)
   const filteredItems = useMemo(() => {
     return allItems.filter((item) => {
-      // Cek Filter Kategori
       const matchesCategory = filter === "ALL" || item.categoryId === filter;
-
-      // Cek Search Query (Case Insensitive)
       const query = searchQuery.toLowerCase();
       const matchesSearch =
         item.name.toLowerCase().includes(query) ||
         item.subCategory.toLowerCase().includes(query);
-
       return matchesCategory && matchesSearch;
     });
   }, [filter, searchQuery, allItems]);
 
-  const handleItemClick = (item) => {
-    setSelectedItem(item);
-  };
-
   const handleProceed = () => {
-    if (selectedItem) {
+    if (selectedItem)
       navigate("/model-viewer", { state: { itemData: selectedItem } });
-    }
   };
 
   return (
     <div className="hub-container">
       <div className="hub-grid-bg"></div>
-
       <nav className="hub-nav">
         <Link to="/" className="hub-back-btn">
           ← KEMBALI KE MENU UTAMA
@@ -84,8 +71,6 @@ const Visual3DHub = () => {
       <main className="hub-content">
         <div className="hub-header">
           <h1>PILIH SPESIMEN</h1>
-
-          {/* INPUT SEARCH SCI-FI */}
           <div className="search-wrapper">
             <input
               type="text"
@@ -96,8 +81,6 @@ const Visual3DHub = () => {
             />
             <div className="search-icon">🔍</div>
           </div>
-
-          {/* FILTER BUTTONS */}
           <div className="filter-bar">
             {["ALL", "BIO", "FOSSIL", "ERA"].map((f) => (
               <button
@@ -117,14 +100,13 @@ const Visual3DHub = () => {
           </div>
         </div>
 
-        {/* GRID CONTENT ATAU PESAN KOSONG */}
         {filteredItems.length > 0 ? (
           <div className="hub-grid">
             {filteredItems.map((item, idx) => (
               <div
                 key={idx}
                 className="data-chip fade-in-up"
-                onClick={() => handleItemClick(item)}
+                onClick={() => setSelectedItem(item)}
                 style={{
                   "--accent": item.color,
                   animationDelay: `${idx * 0.05}s`,
@@ -145,11 +127,7 @@ const Visual3DHub = () => {
           </div>
         ) : (
           <div className="no-results fade-in-up">
-            <div className="error-icon">⚠️</div>
             <h2>DATA TIDAK DITEMUKAN</h2>
-            <p>
-              Spesimen "{searchQuery}" tidak ada dalam database klasifikasi ini.
-            </p>
             <button
               className="reset-search-btn"
               onClick={() => {
@@ -163,7 +141,7 @@ const Visual3DHub = () => {
         )}
       </main>
 
-      {/* MODAL KONFIRMASI */}
+      {/* MODAL */}
       {selectedItem && (
         <div className="modal-overlay">
           <div className="modal-box slide-up">
@@ -189,9 +167,14 @@ const Visual3DHub = () => {
                 <h4 style={{ color: selectedItem.color }}>
                   OBJEK: {selectedItem.name}
                 </h4>
-                <p>{selectedItem.desc}</p>
+                {/* --- GUNAKAN DESKRIPSI PENTING (KEY) --- */}
+                <p>
+                  {selectedItem.description
+                    ? selectedItem.description.key
+                    : selectedItem.desc}
+                </p>
                 <div className="modal-stats">
-                  <span>Status: Siap Ditampilkan</span>
+                  <span>Status: Siap</span>
                   <span>Tipe: Model Digital</span>
                 </div>
               </div>
