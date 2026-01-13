@@ -395,7 +395,7 @@ export const encyclopediaData = {
               short:
                 "Cetakan kaki raksasa berjarak tiga dari Tyrannosaurus Rex yang membatu, menunjukkan ukuran masif dan tekanan langkah predator puncak ini.",
               full: "Fosil jejak (ichnofosil) berupa cetakan kaki T-Rex memberikan informasi berharga yang tidak bisa didapat dari tulang belulang saja, seperti kecepatan berjalan, postur tubuh, dan biomekanik pergerakan. Jejak ini menunjukkan kaki berjari tiga dengan bantalan tumit yang tebal dan luas untuk menopang berat tubuh yang mencapai 8 ton. Dalamnya cetakan pada batuan sedimen menunjukkan kekuatan impak langkah sang raja dinosaurus.",
-              key: "Bukti fisik langsung interaksi T-Rex dengan lingkungannya saat masih hidup.",
+              key: "Jejak kaki T-Rex menunjukkan ukuran tubuhnya yang sangat besar. Dari jarak antar jejak, ilmuwan dapat memperkirakan kecepatan berjalan dinosaurus ini.",
             },
             details: {
               diet: "N/A (Jejak)",
@@ -408,7 +408,7 @@ export const encyclopediaData = {
             },
           },
           {
-            name: "JEJAK Velociraptor",
+            name: "JEJAK VELOCIRAPTOR",
             modelPath: "/models/fosil/fosil_jejak/footprint_raptor.glb",
             image:
               "https://media.sciencephoto.com/c0/59/74/79/c0597479-800px-wm.jpg",
@@ -416,7 +416,7 @@ export const encyclopediaData = {
               short:
                 "Jejak kaki unik dinosaurus raptor yang hanya menampakkan dua jari menapak tanah, karena satu jari bercakar besar diangkat ke atas.",
               full: "Jejak kaki ini mengkonfirmasi anatomi kaki dromaeosaurid (raptor) yang unik, yaitu kondisi 'didactyl' (dua jari). Raptor berjalan hanya menggunakan jari ketiga dan keempat, sementara jari kedua yang memiliki cakar sabit besar yang melengkung (killing claw) diangkat tinggi agar tetap tajam dan siap digunakan untuk menyerang. Pola jejak ini sangat berbeda dengan dinosaurus theropoda lain yang umumnya menapak dengan tiga jari.",
-              key: "Memberikan bukti perilaku bahwa raptor menjaga ketajaman senjata utamanya dengan tidak menapakkannya ke tanah.",
+              key: "Jejak Velociraptor biasanya hanya menunjukkan dua jari yang menyentuh tanah. Cakar melengkung di jari ketiganya terangkat saat berjalan agar tetap tajam.",
             },
             details: {
               diet: "N/A (Jejak)",
@@ -437,7 +437,7 @@ export const encyclopediaData = {
               short:
                 "Jejak kaki bulat berukuran sangat besar yang ditinggalkan kawanan dinosaurus leher panjang saat bermigrasi melintasi dataran lumpur purba.",
               full: "Trackway (jalur jejak) sauropoda sering ditemukan membentang panjang, menunjukkan perilaku sosial hidup berkelompok. Jejak kaki depan biasanya berbentuk bulan sabit yang lebih kecil, sedangkan kaki belakang berbentuk bulat lonjong yang sangat besar. Kedalaman dan jarak antar jejak membantu ilmuwan memperkirakan kecepatan berjalan dan ukuran tubuh dinosaurus tersebut. Lubang jejak yang dalam ini terkadang menjadi perangkap mematikan bagi hewan kecil lainnya.",
-              key: "Merekam momen migrasi hewan darat terbesar yang pernah berjalan di muka bumi.",
+              key: "Jejak Sauropoda berukuran sangat besar dan sering ditemukan berkelompok. Hal ini menjadi bukti bahwa dinosaurus raksasa ini kemungkinan hidup dan bermigrasi bersama.",
             },
             details: {
               diet: "N/A (Jejak)",
@@ -466,7 +466,7 @@ export const encyclopediaData = {
               short:
                 "Cetakan karbon daun tumbuhan paku dari zaman Karbon, sisa hutan rawa purba yang kini menjadi sumber batu bara dunia.",
               full: "Fosil daun pakis (fern) ini terbentuk melalui proses karbonisasi, di mana tumbuhan tertimbun sedimen dalam kondisi tanpa oksigen, menyisakan lapisan karbon tipis yang mencetak detail bentuk daun pada batuan. Tumbuhan ini mendominasi hutan rawa lembap pada Periode Karbon (300 juta tahun lalu). Penumpukan biomassa tanaman ini selama jutaan tahun adalah asal mula sebagian besar cadangan batu bara yang kita gunakan sebagai energi saat ini.",
-              key: "Saksi bisu era di mana kadar oksigen bumi sangat tinggi, memungkinkan serangga tumbuh raksasa.",
+              key: "Fosil daun pakis adalah bukti tumbuhan purba yang hidup sejaman dengan dinosaurus. Bentuk daunnya bisa terawetkan sangat detail hingga pola uratnya masih terlihat.",
             },
             details: {
               diet: "Fotosintesis",
@@ -488,7 +488,7 @@ export const encyclopediaData = {
               short:
                 "Batang pohon purba yang materi organiknya telah tergantikan sepenuhnya oleh mineral batu namun tetap mempertahankan struktur serat kayunya.",
               full: "Kayu membatu (Petrified Wood) terbentuk melalui proses permineralisasi. Ketika pohon purba tertimbun abu vulkanik atau sedimen basah, air tanah yang kaya mineral (seperti silika) meresap ke dalam pori-pori sel kayu. Seiring waktu, materi organik membusuk dan digantikan molekul demi molekul oleh mineral batu, mengawetkan bentuk asli pohon hingga ke tingkat sel mikroskopis. Hasilnya adalah fosil yang sekeras batu namun terlihat persis seperti kayu.",
-              key: "Contoh sempurna transformasi materi organik menjadi anorganik tanpa mengubah bentuk fisik aslinya.",
+              key: "Kayu membatu terbentuk ketika jaringan kayu asli tergantikan mineral selama jutaan tahun. Meski telah menjadi batu, struktur serat kayunya tetap terlihat jelas.",
             },
             details: {
               diet: "N/A",
@@ -510,7 +510,7 @@ export const encyclopediaData = {
               short:
                 "Mumi bayi Mammoth berbulu paling utuh yang pernah ditemukan, terawetkan sempurna di dalam es abadi Siberia selama 40.000 tahun.",
               full: "Lyuba adalah spesimen bayi Mammoth berbulu (Mammuthus primigenius) betina yang meninggal sekitar usia 1 bulan akibat tenggelam di lumpur, yang kemudian membeku menjadi permafrost. Kondisi pengawetannya sangat luar biasa; kulit, daging, belalai, organ dalam, bahkan sisa susu ibu di dalam perutnya masih utuh. Penemuan ini memberikan data biologis yang tak ternilai mengenai anatomi dan fisiologi hewan zaman es yang tidak bisa didapat dari fosil tulang.",
-              key: "Jendela waktu yang nyata ke masa lalu, menampilkan rupa asli hewan punah dengan detail sempurna.",
+              key: "Lyuba adalah bayi Mammoth yang ditemukan membeku hampir sempurna di Siberia. Organ dalam, kulit, dan bulunya terawetkan sangat baik selama lebih dari 40.000 tahun.",
             },
             details: {
               diet: "Herbivora (Susu)",
@@ -562,7 +562,7 @@ export const encyclopediaData = {
               short:
                 "Fosil cakar kaki melengkung tajam berbentuk sabit, senjata utama dinosaurus raptor untuk menusuk dan mencengkeram mangsanya.",
               full: "Ini adalah fosil 'Terrible Claw' atau cakar pembunuh yang menjadi ciri khas dinosaurus Dromaeosaurid seperti Velociraptor dan Deinonychus. Cakar ini terletak di jari kaki kedua dan memiliki persendian khusus yang memungkinkannya ditarik ke atas (retractable) saat berjalan dan diayunkan ke bawah dengan kekuatan besar saat menyerang. Bentuknya yang melengkung dan tajam dirancang untuk menembus kulit tebal mangsa atau memanjat tubuh dinosaurus yang lebih besar.",
-              key: "Adaptasi evolusioner yang mengubah kaki menjadi senjata ofensif yang mematikan.",
+              key: "Cakar Velociraptor berbentuk sabit tajam dan digunakan untuk mengunci mangsa. Cakar ini bukan untuk menusuk, melainkan menahan sambil mencabik.",
             },
             details: {
               diet: "N/A (Bagian Tubuh)",
@@ -626,7 +626,7 @@ export const encyclopediaData = {
               short:
                 "Gigi fosil berukuran raksasa, berbentuk segitiga dan bergerigi tajam, satu-satunya sisa yang tertinggal dari hiu terbesar sepanjang masa.",
               full: "Megalodon (Otodus megalodon) adalah hiu terbesar yang pernah meneror lautan. Karena kerangka hiu terbuat dari tulang rawan yang mudah hancur, gigi adalah satu-satunya bagian tubuh yang umum memfosil. Gigi ini bisa mencapai ukuran diagonal lebih dari 18 cm, dengan tepi bergerigi halus seperti gergaji untuk memotong daging paus dan mamalia laut besar lainnya. Ukuran gigi ini mengindikasikan kekuatan gigitan yang mencapai 180.000 Newton.",
-              key: "Gigi terbesar di dunia hewan, simbol kekuatan predator puncak lautan purba.",
+              key: "Gigi Megalodon adalah yang terbesar di dunia hewan, simbol kekuatan predator puncak lautan purba.",
             },
             details: {
               diet: "Karnivora (Paus)",
@@ -648,7 +648,7 @@ export const encyclopediaData = {
               short:
                 "Tengkorak macan purba dengan sepasang gigi taring atas yang sangat panjang seperti pedang, rahangnya bisa membuka sangat lebar.",
               full: "Tengkorak Smilodon fatalis memperlihatkan adaptasi predator yang sangat spesifik. Taring 'saber' (pedang) yang panjangnya bisa mencapai 28 cm ini sebenarnya cukup rapuh terhadap tekanan samping. Oleh karena itu, Smilodon memiliki struktur rahang yang bisa membuka hingga 120 derajat dan otot leher yang sangat kuat untuk menancapkan taringnya ke leher mangsa yang sudah dilumpuhkan, memutus pembuluh darah utama dengan presisi bedah.",
-              key: "Ikon predator Zaman Es yang menunjukkan spesialisasi evolusi berburu yang ekstrem.",
+              key: "Smilodon adalah Ikon predator Zaman Es yang menunjukkan spesialisasi evolusi berburu yang ekstrem.",
             },
             details: {
               diet: "Karnivora",
@@ -669,7 +669,7 @@ export const encyclopediaData = {
               short:
                 "Salah satu tengkorak terbesar hewan darat, dilengkapi paruh keras, tiga tanduk tajam, dan tameng leher tulang yang kokoh.",
               full: "Tengkorak Triceratops adalah mahakarya pertahanan alam. Panjangnya bisa mencapai 2,5 meter, hampir sepertiga panjang tubuhnya. Paruh di bagian depan sangat kuat untuk mematahkan dahan tanaman keras. Tiga tanduknya digunakan untuk bertarung sesama pejantan atau melawan predator. Tameng leher (frill) yang terbuat dari tulang padat berfungsi melindungi leher dari gigitan dan tempat melekatnya otot rahang yang kuat.",
-              key: "Sering ditemukan memfosil secara utuh karena struktur tulangnya yang sangat tebal dan keras.",
+              key: "Tengkorak Triceratops Sering ditemukan memfosil secara utuh karena struktur tulangnya yang sangat tebal dan keras.",
             },
             details: {
               diet: "Herbivora",
@@ -691,7 +691,7 @@ export const encyclopediaData = {
               short:
                 "Tengkorak kokoh dengan rahang yang sangat kuat dan gigi berbentuk pisang yang tebal, didesain untuk meremukkan tulang mangsa.",
               full: "Tengkorak Tyrannosaurus rex berbeda dari theropoda lain karena bentuknya yang lebar di bagian belakang, memberikan penglihatan binokular (kedalaman visual) yang sangat baik. Tulang tengkoraknya menyatu dan sangat tebal untuk menahan gaya gigitan yang ekstrem. Giginya tidak pipih dan tajam untuk mengiris, melainkan tebal dan bulat seperti pasak besi, dirancang untuk menusuk dan menghancurkan tulang (osteophagy) mangsanya hingga hancur.",
-              key: "Struktur kepala pemangsa paling mematikan dengan kekuatan gigitan terkuat di antara hewan darat yang pernah ada.",
+              key: "Tengkorak T-rex adalah Struktur kepala pemangsa paling mematikan dengan kekuatan gigitan terkuat di antara hewan darat yang pernah ada.",
             },
             details: {
               diet: "Karnivora",
@@ -731,7 +731,7 @@ export const encyclopediaData = {
               short:
                 "Predator laut raksasa pertama di bumi dari zaman Kambrium, memiliki mata majemuk besar dan sepasang lengan berduri di dekat mulut untuk menangkap mangsa.",
               full: "Anomalocaris ('Udang Aneh') adalah penguasa lautan Kambrium sekitar 500 juta tahun lalu. Dengan panjang mencapai 1 meter, ia adalah raksasa di zamannya. Hewan ini memiliki tubuh bersegmen dengan sirip samping untuk berenang, mulut berbentuk cincin yang unik untuk meremukkan mangsa bercangkang lunak, dan sepasang lengan berduri untuk menyambar trilobita. Mata majemuknya sangat canggih, memberinya penglihatan tajam sebagai pemburu visual.",
-              key: "Merupakan predator puncak (apex predator) pertama yang diketahui dalam sejarah evolusi hewan.",
+              key: "Anomalocaris Merupakan predator puncak (apex predator) pertama yang diketahui dalam sejarah evolusi hewan.",
             },
             details: {
               diet: "Karnivora (Trilobita)",
