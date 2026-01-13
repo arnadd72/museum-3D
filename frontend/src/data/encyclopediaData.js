@@ -20,7 +20,7 @@ export const encyclopediaData = {
             modelPath: "/models/hewan/invertebrata/ammonite.glb",
             image:
               "https://lovelymeregis.co.uk/images/gallery/ammonite-creature.jpg",
-            period: "Zaman Mesozoikum",
+            period: "Mesozoikum (Devon - Kapur Akhir)",
             description: {
               short:
                 "Kerabat purba cumi-cumi dan gurita dengan cangkang spiral yang hidup di laut sekitar 400 hingga 66 juta tahun lalu, memiliki tentakel untuk menangkap mangsa dan bergerak dengan menyemprotkan air.",
@@ -43,7 +43,7 @@ export const encyclopediaData = {
               "/models/hewan/invertebrata/gastropods_turritella_terebralis.glb",
             image:
               "https://upload.wikimedia.org/wikipedia/commons/f/f2/Turritella_duplicata_01.jpg",
-            period: "Zaman Prasejarah",
+            period: "Kenozoikum - Sekarang (Eosen - Holosen)",
             description: {
               short:
                 "Siput laut dengan cangkang berbentuk menara runcing yang hidup berkelompok di dasar laut berlumpur, menyaring makanan dari air, dan fosilnya sering ditemukan melimpah membentuk batuan.",
@@ -66,7 +66,7 @@ export const encyclopediaData = {
               "/models/hewan/invertebrata/modern_brachiopod_animation.glb",
             image:
               "https://upload.wikimedia.org/wikipedia/commons/e/ea/Liospiriferina_rostrata_Noir.jpg",
-            period: "Era Paleozoikum",
+            period: "Paleozoikum - Sekarang (Kambrium - Holosen)",
             description: {
               short:
                 "Hewan laut bercangkang tangkup atas-bawah yang menempel di dasar laut menggunakan tangkai, sekilas mirip kerang tetapi memiliki anatomi dalam yang sangat berbeda.",
@@ -88,7 +88,7 @@ export const encyclopediaData = {
             modelPath: "/models/hewan/invertebrata/sponge.glb",
             image:
               "https://unsir.ac.id/wp-content/uploads/2024/01/WhatsApp-Image-2023-09-01-at-132835-2748392327.webp",
-            period: "Zaman Prasejarah",
+            period: "Prekambrium - Sekarang",
             description: {
               short:
                 "Hewan multiseluler paling sederhana yang dikenal sebagai spons laut, tubuhnya penuh pori-pori untuk menyaring air guna mendapatkan oksigen dan makanan, serta tidak memiliki organ sejati.",
@@ -110,7 +110,7 @@ export const encyclopediaData = {
             modelPath: "/models/hewan/invertebrata/starfish.glb",
             image:
               "https://www.thoughtco.com/thmb/PHXqLrrhvo1wVZGne0ddMCef9E0=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/close-up-of-orange-starfish-on-sand-489010151-59847f7f22fa3a0010518acc.jpg",
-            period: "Zaman Prasejarah",
+            period: "Paleozoikum - Sekarang (Ordovisium - Holosen)",
             description: {
               short:
                 "Hewan laut berbentuk bintang dengan kulit berduri dan kemampuan regenerasi luar biasa, bergerak menggunakan kaki tabung dan memakan kerang dengan cara mengeluarkan lambungnya.",
@@ -132,7 +132,7 @@ export const encyclopediaData = {
             modelPath: "/models/hewan/invertebrata/trilobite_proetida.glb",
             image:
               "https://alchetron.com/cdn/proetida-95e7880c-345a-4c53-98e4-3039e8fd566-resize-750.jpeg",
-            period: "Era Paleozoikum",
+            period: "Paleozoikum (Ordovisium - Permian)",
             description: {
               short:
                 "Kelompok artropoda laut purba terakhir yang bertahan hidup, memiliki tubuh bersegmen tiga lobus dan cangkang keras, hidup di dasar laut sebelum punah pada akhir masa Paleozoikum.",
@@ -162,7 +162,7 @@ export const encyclopediaData = {
             modelPath: "/models/hewan/mikrofosil/globigerina_bulloides.glb",
             image:
               "https://upload.wikimedia.org/wikipedia/commons/3/39/Gbulloides.jpg",
-            period: "Zaman Prasejarah",
+            period: "Kenozoikum (Miosen - Sekarang)",
             description: {
               short:
                 "Plankton mikroskopis bersel tunggal dengan cangkang kapur berpori, hidup melayang di permukaan laut, dan fosilnya digunakan ilmuwan untuk mengetahui suhu laut masa lalu.",
@@ -185,7 +185,7 @@ export const encyclopediaData = {
               "/models/hewan/mikrofosil/foraminifera_-_globigerinella_calida.glb",
             image:
               "https://www.mikrotax.org/images/pf_cenozoic/Globigerinidae/Globigerinella/Globigerinella%20calida/Lam%20&%20Leckie%202020%20pl04%2006-7.jpg",
-            period: "Zaman Prasejarah",
+            period: "Kenozoikum (Pleistosen - Sekarang)",
             description: {
               short:
                 "Mikroorganisme laut dengan cangkang spiral longgar yang hidup di perairan tropis hangat, sering dijadikan penunjuk usia lapisan batuan muda di wilayah Indonesia.",
@@ -207,7 +207,7 @@ export const encyclopediaData = {
             modelPath: "/models/hewan/mikrofosil/radiolarian_spumellaria.glb",
             image:
               "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkP0QwHGroMqOdmKi2audGutfkxosskEjhgA&s",
-            period: "Zaman Prasejarah",
+            period: "Paleozoikum - Sekarang (Kambrium - Holosen)",
             description: {
               short:
                 "Protozoa laut mikroskopis yang memiliki kerangka rumit dari kaca (silika) dengan bentuk geometris indah, endapannya membentuk lumpur di dasar laut dalam.",
@@ -229,7 +229,7 @@ export const encyclopediaData = {
             modelPath: "/models/hewan/mikrofosil/coccolithophore.glb",
             image:
               "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Gephyrocapsa_oceanica.jpg/330px-Gephyrocapsa_oceanica.jpg",
-            period: "Zaman Prasejarah",
+            period: "Mesozoikum - Sekarang (Trias - Holosen)",
             description: {
               short:
                 "Ganggang mikroskopis penghasil kapur yang menutupi tubuhnya dengan lempengan bulat, berperan besar menghasilkan oksigen dan membentuk endapan kapur putih raksasa.",
@@ -259,7 +259,7 @@ export const encyclopediaData = {
             modelPath: "/models/hewan/vertebrata/allosaurus.glb",
             image:
               "https://www.extinctanimals.org/wp-content/uploads/2015/12/Allosaurus-Images.jpg",
-            period: "Era Mesozoikum (Jura Akhir)",
+            period: "Mesozoikum (Jura Akhir)",
             description: {
               short:
                 "Dinosaurus karnivora puncak pada zaman Jura yang berburu mangsa besar dengan gigi tajam bergerigi dan cakar tangan yang kuat, hidup jauh sebelum T-Rex muncul.",
@@ -281,7 +281,7 @@ export const encyclopediaData = {
             modelPath: "/models/hewan/vertebrata/coelacanth.glb",
             image:
               "https://cdn.grid.id/crop/0x0:0x0/x/photo/2022/12/07/3jpg-20221207021026.jpg",
-            period: "Zaman Prasejarah",
+            period: "Paleozoikum - Sekarang (Devon - Holosen)",
             description: {
               short:
                 "Ikan purba legendaris yang memiliki sirip berdaging mirip kaki, sempat dianggap punah jutaan tahun lalu sebelum ditemukan masih hidup di laut dalam Afrika dan Indonesia.",
@@ -299,11 +299,33 @@ export const encyclopediaData = {
             },
           },
           {
+            name: "LATIMERIA",
+            modelPath: "/models/hewan/vertebrata/dinorauls_latimeria_2.glb",
+            image:
+              "https://upload.wikimedia.org/wikipedia/commons/4/42/Latimeria_chalumnae01.jpg",
+            period: "Kenozoikum - Sekarang (Holosen)",
+            description: {
+              short:
+                "Genus modern dari ikan purba Coelacanth yang masih hidup hingga saat ini, memiliki sisik kosmoid tebal dan sirip seperti tungkai.",
+              full: "Latimeria adalah satu-satunya genus Coelacanth yang masih bertahan hidup (extant) di bumi. Terdapat dua spesies utama: Latimeria chalumnae (Afrika) dan Latimeria menadoensis (Indonesia). Struktur tubuhnya mempertahankan ciri-ciri primitif dari nenek moyang ikan yang hidup 400 juta tahun lalu tanpa banyak perubahan, menjadikannya contoh sempurna dari 'takson Lazarus' yang muncul kembali setelah dianggap punah.",
+              key: "Spesies Latimeria menadoensis secara mengejutkan ditemukan hidup dan berenang di perairan Manado, Indonesia, pada tahun 1997!",
+            },
+            details: {
+              diet: "Karnivora (Ikan dasar laut)",
+              lifespan: "60 - 100 Tahun",
+              weight: "Hingga 95 kg",
+              size: "Panjang 1.8 - 2 m",
+              discoveryYear: "Devon - Sekarang (400 Juta Tahun Lalu - Sekarang)",
+              taxonomy: "Sarcopterygii > Latimeriidae",
+              stats: { completeness: 100, rarity: 100, value: 100 },
+            },
+          },
+          {
             name: "KOMODO",
             modelPath: "/models/hewan/vertebrata/komodo_dragon_lizard-v2.glb",
             image:
               "https://samaraliveaboard.com/wp-content/uploads/2025/03/komodo-1-1024x683.jpg",
-            period: "Zaman Prasejarah",
+            period: "Kenozoikum - Sekarang (Pliosen - Holosen)",
             description: {
               short:
                 "Kadal terbesar di dunia yang hanya hidup di beberapa pulau di Indonesia, predator puncak dengan gigitan berbisa dan air liur penuh bakteri mematikan.",
@@ -325,7 +347,7 @@ export const encyclopediaData = {
             modelPath: "/models/hewan/vertebrata/pteranodon.glb",
             image:
               "https://cdn.mos.cms.futurecdn.net/6vA8wWskCkUgffN9dbQhvh-1200-80.jpg",
-            period: "Era Mesozoikum (Kapur)",
+            period: "Mesozoikum (Kapur Akhir)",
             description: {
               short:
                 "Reptil terbang raksasa dari zaman Kapur dengan bentang sayap lebar dan jambul kepala yang khas, hidup di pesisir pantai dan memakan ikan.",
@@ -347,7 +369,7 @@ export const encyclopediaData = {
             modelPath: "/models/hewan/vertebrata/spinosaurus.glb",
             image:
               "https://st2.depositphotos.com/1042659/6280/i/450/depositphotos_62803335-stock-photo-dinosaur-spinosaurus.jpg",
-            period: "Era Mesozoikum (Kapur)",
+            period: "Mesozoikum (Kapur Awal-Tengah)",
             description: {
               short:
                 "Dinosaurus karnivora terbesar yang pernah ada, hidup semi-akuatik di sungai purba dengan ciri khas layar besar di punggung dan moncong panjang mirip buaya.",
@@ -369,7 +391,7 @@ export const encyclopediaData = {
             modelPath: "/models/hewan/vertebrata/triceratop.glb",
             image:
               "https://cdn.grid.id/crop/0x127:1024x741/x/photo/2025/08/11/triceratops_-_jurapark_baltowjp-20250811114312.jpg",
-            period: "Era Mesozoikum (Kapur)",
+            period: "Mesozoikum (Kapur Akhir)",
             description: {
               short:
                 "Dinosaurus herbivora berbadan besar dengan tiga tanduk di wajah dan tameng leher lebar, hidup berkelompok dan sering bertarung melawan T-Rex.",
@@ -409,7 +431,7 @@ export const encyclopediaData = {
             modelPath: "/models/fosil/fosil_jejak/dinosaur_Trex_footprint.glb",
             image:
               "https://www.theprehistoricstore.com/cdn/shop/files/20250117-131441_683x700.jpg?v=1737288879",
-            period: "Era Mesozoikum (Kapur)",
+            period: "Mesozoikum (Kapur Akhir)",
             description: {
               short:
                 "Cetakan kaki raksasa berjarak tiga dari Tyrannosaurus Rex yang membatu, menunjukkan ukuran masif dan tekanan langkah predator puncak ini.",
@@ -431,7 +453,7 @@ export const encyclopediaData = {
             modelPath: "/models/fosil/fosil_jejak/footprint_raptor.glb",
             image:
               "https://media.sciencephoto.com/c0/59/74/79/c0597479-800px-wm.jpg",
-            period: "Era Mesozoikum (Kapur)",
+            period: "Mesozoikum (Kapur Akhir)",
             description: {
               short:
                 "Jejak kaki unik dinosaurus raptor yang hanya menampakkan dua jari menapak tanah, karena satu jari bercakar besar diangkat ke atas.",
@@ -453,7 +475,7 @@ export const encyclopediaData = {
             modelPath: "/models/fosil/fosil_jejak/sauropod_footprint.glb",
             image:
               "https://cdn.mos.cms.futurecdn.net/G7CKGktH2mtEQbdo7qDsGE-1200-80.jpg",
-            period: "Era Mesozoikum (Jura/Kapur)",
+            period: "Mesozoikum (Jura - Kapur)",
             description: {
               short:
                 "Jejak kaki bulat berukuran sangat besar yang ditinggalkan kawanan dinosaurus leher panjang saat bermigrasi melintasi dataran lumpur purba.",
@@ -483,7 +505,7 @@ export const encyclopediaData = {
             modelPath: "/models/fosil/fosil_terawetkan/eduf104_fern_leaves.glb",
             image:
               "https://media.istockphoto.com/id/1449549945/id/foto/fosil-daun-pakis-membatu-dan-disorot-di-permukaan-batu.jpg?s=170667a&w=0&k=20&c=jZ_D3VaG8-J2TNJj9yORAvqj6u3BlCZahtxuh-qaNKQ=",
-            period: "Era Paleozoikum (Karbon)",
+            period: "Paleozoikum (Karbon)",
             description: {
               short:
                 "Cetakan karbon daun tumbuhan paku dari zaman Karbon, sisa hutan rawa purba yang kini menjadi sumber batu bara dunia.",
@@ -506,7 +528,7 @@ export const encyclopediaData = {
               "/models/fosil/fosil_terawetkan/eduf407_petrified_wood.glb",
             image:
               "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTatFnYn9XFV7fWOKtr62uj5FpKpRF3nXvU9A&s",
-            period: "Zaman Prasejarah",
+            period: "Lintas Zaman (Terutama Trias - Miosen)",
             description: {
               short:
                 "Batang pohon purba yang materi organiknya telah tergantikan sepenuhnya oleh mineral batu namun tetap mempertahankan struktur serat kayunya.",
@@ -529,7 +551,7 @@ export const encyclopediaData = {
               "/models/fosil/fosil_terawetkan/lyuba_the_woolly_mammoth_calf.glb",
             image:
               "https://historyofinformation.com/images/Screen_Shot_2020-10-05_at_6.16.10_PM.png",
-            period: "Era Kenozoikum (Pleistosen)",
+            period: "Kenozoikum (Pleistosen Akhir)",
             description: {
               short:
                 "Mumi bayi Mammoth berbulu paling utuh yang pernah ditemukan, terawetkan sempurna di dalam es abadi Siberia selama 40.000 tahun.",
@@ -552,7 +574,7 @@ export const encyclopediaData = {
               "/models/fosil/fosil_terawetkan/real-time_refraction_demo_mosquito_in_amber.glb",
             image:
               "https://img.freepik.com/foto-premium/amber-dengan-serangga-prasejarah-yang-diawetkan-nyamuk-dengan-darah-atau-dna-yang-diawetkan-dalam-amber_72932-3415.jpg?w=360",
-            period: "Era Mesozoikum/Kenozoikum",
+            period: "Mesozoikum - Kenozoikum (Kapur - Paleogen)",
             description: {
               short:
                 "Serangga kecil yang terperangkap dan mati di dalam getah pohon yang mengeras, tubuhnya terawetkan utuh dalam 'peti mati' emas transparan.",
@@ -583,7 +605,7 @@ export const encyclopediaData = {
               "/models/fosil/fosil_tubuh/deinonychus_velociraptor_claw.glb",
             image:
               "https://c02.purpledshub.com/uploads/sites/41/2021/05/GettyImages-589152322-c7ec34e.jpg?webp=1&w=1200",
-            period: "Era Mesozoikum (Kapur)",
+            period: "Mesozoikum (Kapur Akhir)",
             description: {
               short:
                 "Fosil cakar kaki melengkung tajam berbentuk sabit, senjata utama dinosaurus raptor untuk menusuk dan mencengkeram mangsanya.",
@@ -606,7 +628,7 @@ export const encyclopediaData = {
               "/models/fosil/fosil_tubuh/eduf32_belemnite_phragmacone.glb",
             image:
               "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT578NeCt-YGMQs3s-wKKmemcjs75ZXxMLM6g&s",
-            period: "Era Mesozoikum",
+            period: "Mesozoikum (Jura - Kapur)",
             description: {
               short:
                 "Bagian dalam cangkang keras berbentuk peluru dari hewan laut purba mirip cumi-cumi, sering ditemukan melimpah di batuan sedimen.",
@@ -629,7 +651,7 @@ export const encyclopediaData = {
               "/models/fosil/fosil_tubuh/giant_deer_teeth_115000_years_old.glb",
             image:
               "https://static.promediateknologi.id/crop/0x0:0x0/0x0/webp/photo/p2/32/2024/09/25/News-20240919-Czech-Republic-Reindeer-Teeth-565674170.jpg",
-            period: "Era Kenozoikum (Pleistosen)",
+            period: "Kenozoikum (Pleistosen)",
             description: {
               short:
                 "Fosil gigi geraham besar dengan permukaan kasar dari Megaloceros, digunakan untuk mengunyah rumput dan vegetasi keras di padang es.",
@@ -651,7 +673,7 @@ export const encyclopediaData = {
             modelPath: "/models/fosil/fosil_tubuh/megalodon_teeth_fossil.glb",
             image:
               "https://images-cdn.ubuy.co.id/653fefa96b30650eee069979-genuine-megalodon-shark-tooth-66-8.jpg",
-            period: "Era Kenozoikum (Miosen/Pliosen)",
+            period: "Kenozoikum (Miosen - Pliosen)",
             description: {
               short:
                 "Gigi fosil berukuran raksasa, berbentuk segitiga dan bergerigi tajam, satu-satunya sisa yang tertinggal dari hiu terbesar sepanjang masa.",
@@ -674,7 +696,7 @@ export const encyclopediaData = {
               "/models/fosil/fosil_tubuh/saber-toothed_tiger_cat_-_ice_age_smilodon.glb",
             image:
               "https://www.activewild.com/wp-content/uploads/2018/11/Smilodon_populator_skull.jpg",
-            period: "Era Kenozoikum (Pleistosen)",
+            period: "Kenozoikum (Pleistosen)",
             description: {
               short:
                 "Tengkorak macan purba dengan sepasang gigi taring atas yang sangat panjang seperti pedang, rahangnya bisa membuka sangat lebar.",
@@ -696,7 +718,7 @@ export const encyclopediaData = {
             modelPath: "/models/fosil/fosil_tubuh/triceratops_skull.glb",
             image:
               "https://media.istockphoto.com/id/501154807/id/foto/tengkorak-fosil-triceratops-di-atas-latar-belakang-terisolasi-putih.jpg?s=612x612&w=0&k=20&c=QsPjw2eXUU3bWdahhpITi7TY6dSpYgv7c0ZywCCZLaI=",
-            period: "Era Mesozoikum (Kapur)",
+            period: "Mesozoikum (Kapur Akhir)",
             description: {
               short:
                 "Salah satu tengkorak terbesar hewan darat, dilengkapi paruh keras, tiga tanduk tajam, dan tameng leher tulang yang kokoh.",
@@ -719,7 +741,7 @@ export const encyclopediaData = {
               "/models/fosil/fosil_tubuh/vertebrate_tyrannosaurus_rex_skull_mote.glb",
             image:
               "https://pict.sindonews.net/dyn/850/pena/news/2022/12/09/768/964301/tengkorak-kepala-trex-dilelang-harga-diperkirakan-tembus-rp311-miliar-zvi.jpg",
-            period: "Era Mesozoikum (Kapur)",
+            period: "Mesozoikum (Kapur Akhir)",
             description: {
               short:
                 "Tengkorak kokoh dengan rahang yang sangat kuat and gigi berbentuk pisang yang tebal, didesain untuk meremukkan tulang mangsa.",
@@ -760,7 +782,7 @@ export const encyclopediaData = {
               "/models/geologi/era_paleozoikum/anomalocaris_3d_model.glb",
             image:
               "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCKirad74kBrQZ5awp0RCliWJ2WObwA64JpA&s",
-            period: "Era Paleozoikum (Kambrium)",
+            period: "Paleozoikum (Kambrium)",
             description: {
               short:
                 "Predator laut raksasa pertama di bumi dari zaman Kambrium, memiliki mata majemuk besar dan sepasang lengan berduri di dekat mulut untuk menangkap mangsa.",
@@ -782,7 +804,7 @@ export const encyclopediaData = {
             modelPath: "/models/geologi/era_paleozoikum/dimetrodon.glb",
             image:
               "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7Om1KbpIjtaEVrAfucbh-LepeHUcPK6i_Ng&s",
-            period: "Era Paleozoikum (Permian)",
+            period: "Paleozoikum (Permian)",
             description: {
               short:
                 "Reptil purba berkaki empat dengan layar besar di punggungnya, hidup jauh sebelum dinosaurus dan sebenarnya lebih berkerabat dekat dengan mamalia.",
@@ -805,7 +827,7 @@ export const encyclopediaData = {
               "/models/geologi/era_paleozoikum/dinorauls_arthropleura.glb",
             image:
               "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Arthropleura_Reconstruction.jpg/250px-Arthropleura_Reconstruction.jpg",
-            period: "Era Paleozoikum (Karbon)",
+            period: "Paleozoikum (Karbon)",
             description: {
               short:
                 "Kelabang raksasa seukuran mobil yang hidup di hutan rawa zaman Karbon, invertebrata darat terbesar yang pernah merayap di bumi.",
@@ -828,7 +850,7 @@ export const encyclopediaData = {
               "/models/geologi/era_paleozoikum/dinorauls_dunkleosteus_2.glb",
             image:
               "https://it.schleich-s.com/cdn/shop/files/14575_main_v16_TP.jpg?v=1707493289",
-            period: "Era Paleozoikum (Devon)",
+            period: "Paleozoikum (Devon)",
             description: {
               short:
                 "Ikan purba raksasa yang kepala dan dadanya dilindungi pelat tulang keras, memiliki rahang tajam pemotong tulang tanpa gigi sejati.",
@@ -850,7 +872,7 @@ export const encyclopediaData = {
             modelPath: "/models/geologi/era_paleozoikum/meganeura.glb",
             image:
               "https://cdn.rri.co.id/berita/Bengkulu/o/1761752463317-01/4wfu9532zwn2g8u.jpeg",
-            period: "Era Paleozoikum (Karbon)",
+            period: "Paleozoikum (Karbon)",
             description: {
               short:
                 "Serangga terbang mirip capung dengan bentang sayap selebar tangan manusia dewasa, predator udara yang menguasai langit zaman Karbon.",
@@ -873,7 +895,7 @@ export const encyclopediaData = {
               "/models/geologi/era_paleozoikum/model_of_a_trilobite.glb",
             image:
               "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRstc9xAVu7a6fljWVLAqaDeOHWyE2U6R88Gg&s",
-            period: "Era Paleozoikum",
+            period: "Paleozoikum (Kambrium - Permian)",
             description: {
               short:
                 "Hewan laut purba yang sangat sukses dan beragam, memiliki tubuh bersegmen tiga lobus dan mata majemuk kristal, mendominasi lautan selama ratusan juta tahun.",
@@ -896,7 +918,7 @@ export const encyclopediaData = {
               "/models/geologi/era_paleozoikum/primeval_-_gorgonopsid.glb",
             image:
               "https://images.steamusercontent.com/ugc/2057631029505964028/84558350C0569A59A53F5D4189B367D6199A0AC6/?imw=637&imh=358&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true",
-            period: "Era Paleozoikum (Permian Akhir)",
+            period: "Paleozoikum (Permian)",
             description: {
               short:
                 "Predator darat utama pada akhir masa Paleozoikum, reptil mirip mamalia yang gesit dengan gigi taring besar untuk merobek mangsa.",
@@ -926,7 +948,7 @@ export const encyclopediaData = {
             modelPath: "/models/geologi/era_mesozoikum/allosaurus.glb",
             image:
               "https://www.extinctanimals.org/wp-content/uploads/2015/12/Allosaurus-Images.jpg",
-            period: "Era Mesozoikum (Jura)",
+            period: "Mesozoikum (Jura Akhir)",
             description: {
               short:
                 "Predator puncak zaman Jura yang berburu mangsa besar dengan gigi tajam dan cakar tangan kuat, teror bagi dinosaurus herbivora.",
@@ -949,7 +971,7 @@ export const encyclopediaData = {
               "/models/geologi/era_mesozoikum/brachiosaurus_altithorax.glb",
             image:
               "https://awsimages.detik.net.id/community/media/visual/2023/12/22/brachiosaurus_169.jpeg?w=1200",
-            period: "Era Mesozoikum",
+            period: "Mesozoikum (Jura Akhir)",
             description: {
               short:
                 "Dinosaurus leher panjang raksasa dengan kaki depan yang lebih tinggi dari kaki belakang, memungkinkannya memakan daun di puncak pohon.",
@@ -972,7 +994,7 @@ export const encyclopediaData = {
               "/models/geologi/era_mesozoikum/dilophosaurus_wetherilli.glb",
             image:
               "https://images.dinosaurpictures.org/127544_Dilophosaurus_Pose_2_000.jpg0c59dae3-f8e3-48a4-a5d4-da8ff572cef3Original_eb0a.jpg",
-            period: "Era Mesozoikum (Jura Awal)",
+            period: "Mesozoikum (Jura Awal)",
             description: {
               short:
                 "Dinosaurus karnivora lincah dari awal zaman Jura, memiliki ciri khas sepasang jambul tulang berbentuk setengah lingkaran di atas kepalanya.",
@@ -994,7 +1016,7 @@ export const encyclopediaData = {
             modelPath: "/models/geologi/era_mesozoikum/dino_-_ankylosaurus.glb",
             image:
               "https://images.dinosaurpictures.org/Ankylosaurus/Ankylosaurus_775883a1.jpg",
-            period: "Era Mesozoikum (Kapur Akhir)",
+            period: "Mesozoikum (Kapur Akhir)",
             description: {
               short:
                 "Dinosaurus herbivora yang tubuhnya dilindungi baju zirah tulang anti peluru dan memiliki gada berat di ujung ekornya untuk pertahanan.",
@@ -1017,7 +1039,7 @@ export const encyclopediaData = {
               "/models/geologi/era_mesozoikum/dinorauls_herrerasaurus.glb",
             image:
               "https://image-service.zaonce.net/eyJidWNrZXQiOiJmcm9udGllci1jbXMiLCJrZXkiOiIyMDIxLTExL2hlcnJlcmFzYXVydXNfMjI2MDA0LnBuZyIsImVkaXRzIjp7IndlYnAiOnsicXVhbGl0eSI6ODV9LCJ0b0Zvcm1hdCI6IndlYnAiLCJyZXNpemUiOnsiZml0IjoiY29udGFpbiJ9fX0=",
-            period: "Era Mesozoikum (Trias)",
+            period: "Mesozoikum (Trias Akhir)",
             description: {
               short:
                 "Salah satu dinosaurus paling awal yang pernah ditemukan, predator lincah berkaki dua yang hidup pada zaman Trias.",
@@ -1039,7 +1061,7 @@ export const encyclopediaData = {
             modelPath: "/models/geologi/era_mesozoikum/ichthyosaurus.glb",
             image:
               "https://www.harapanrakyat.com/wp-content/uploads/2022/03/Fosil-Reptil-Laut-Ichthyosaurus-Berusia-160-Tahun-Direknostruksi.jpg",
-            period: "Era Mesozoikum (Jura)",
+            period: "Mesozoikum (Jura - Jura)",
             description: {
               short:
                 "Reptil laut yang berevolusi memiliki bentuk tubuh menyerupai lumba-lumba modern, perenang cepat yang melahirkan anak di dalam air.",
@@ -1062,7 +1084,7 @@ export const encyclopediaData = {
               "/models/geologi/era_mesozoikum/jurassic_world_dominion_quetzalcoatlus.glb",
             image:
               "https://t3.ftcdn.net/jpg/16/05/05/46/360_F_1605054644_xdiTwD4wqv0SmPRmmJnenIj8xdYKhqEe.jpg",
-            period: "Era Mesozoikum (Kapur)",
+            period: "Mesozoikum (Kapur Akhir)",
             description: {
               short:
                 "Hewan terbang terbesar sepanjang sejarah bumi, reptil pterosaurus raksasa dengan tinggi setara jerapah saat berdiri di tanah.",
@@ -1084,7 +1106,7 @@ export const encyclopediaData = {
             modelPath: "/models/geologi/era_mesozoikum/jwe2_coelophysis.glb",
             image:
               "https://www.extinctanimals.org/wp-content/uploads/2018/11/Coelophysis-Images.jpg",
-            period: "Era Mesozoikum (Trias Akhir)",
+            period: "Mesozoikum (Trias Akhir)",
             description: {
               short:
                 "Dinosaurus karnivora kecil, ramping, dan lincah dari zaman Trias yang tulang-tulangnya berongga ringan, hidup dan berburu secara berkelompok.",
@@ -1106,7 +1128,7 @@ export const encyclopediaData = {
             modelPath: "/models/geologi/era_mesozoikum/mosasaurus.glb",
             image:
               "https://www.extinctanimals.org/wp-content/uploads/2019/03/Mosasaurus.jpg",
-            period: "Era Mesozoikum (Kapur)",
+            period: "Mesozoikum (Kapur Akhir)",
             description: {
               short:
                 "Kadal laut raksasa penguasa lautan zaman Kapur, predator puncak dengan rahang kuat yang memangsa apa saja di laut.",
@@ -1129,7 +1151,7 @@ export const encyclopediaData = {
               "/models/geologi/era_mesozoikum/parasaurolophus_walkeri.glb",
             image:
               "https://www.extinctanimals.org/wp-content/uploads/2015/09/Parasaurolophus-Photos.jpg",
-            period: "Era Mesozoikum (Kapur)",
+            period: "Mesozoikum (Kapur Akhir)",
             description: {
               short:
                 "Dinosaurus pemakan tumbuhan dengan jambul tabung panjang di belakang kepala yang berfungsi seperti terompet untuk berkomunikasi.",
@@ -1151,7 +1173,7 @@ export const encyclopediaData = {
             modelPath: "/models/geologi/era_mesozoikum/pteranodon.glb",
             image:
               "https://cdn.mos.cms.futurecdn.net/6vA8wWskCkUgffN9dbQhvh-1200-80.jpg",
-            period: "Era Mesozoikum (Kapur)",
+            period: "Mesozoikum (Kapur Akhir)",
             description: {
               short:
                 "Reptil terbang terkenal yang memiliki paruh panjang tanpa gigi dan jambul kepala menonjol, ahli meluncur di atas samudra purba.",
@@ -1173,7 +1195,7 @@ export const encyclopediaData = {
             modelPath: "/models/geologi/era_mesozoikum/spinosaurus.glb",
             image:
               "https://www.superherotoystore.com/cdn/shop/articles/Blog_Banners_11_e325b223-a705-4062-a83a-66a2548fde70_1600x.jpg?v=1746545950",
-            period: "Era Mesozoikum (Kapur)",
+            period: "Mesozoikum (Kapur Awal-Tengah)",
             description: {
               short:
                 "Karnivora terbesar di bumi yang beradaptasi untuk hidup di air dan darat, memiliki layar punggung raksasa dan moncong panjang pemakan ikan.",
@@ -1195,7 +1217,7 @@ export const encyclopediaData = {
             modelPath: "/models/geologi/era_mesozoikum/stegosaurus_armatus.glb",
             image:
               "https://dinosaurlady.com/wp-content/uploads/2024/08/4802592-311672367.jpg?w=1200",
-            period: "Era Mesozoikum (Jura)",
+            period: "Mesozoikum (Jura Akhir)",
             description: {
               short:
                 "Dinosaurus herbivora dengan barisan lempeng tulang di punggung dan empat duri tajam di ekor, namun memiliki otak yang sangat kecil.",
@@ -1217,7 +1239,7 @@ export const encyclopediaData = {
             modelPath: "/models/geologi/era_mesozoikum/t-rex.glb",
             image:
               "https://ichef.bbci.co.uk/ace/standard/976/cpsprodpb/6260/production/_126048152_gettyimages-1363838708.jpg",
-            period: "Era Mesozoikum (Kapur)",
+            period: "Mesozoikum (Kapur Akhir)",
             description: {
               short:
                 "Tyrannosaurus Rex, raja dinosaurus karnivora dengan gigitan terkuat di daratan, lengan kecil, dan indra penciuman yang sangat tajam.",
@@ -1239,7 +1261,7 @@ export const encyclopediaData = {
             modelPath: "/models/geologi/era_mesozoikum/triceratop.glb",
             image:
               "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0zUdVREIP4qVQLBkN257QoEFPhqPYVWk3Gw&s",
-            period: "Era Mesozoikum (Kapur)",
+            period: "Mesozoikum (Kapur Akhir)",
             description: {
               short:
                 "Dinosaurus berbadan badak dengan tiga tanduk wajah dan tameng leher, herbivora tangguh yang berani berhadapan dengan T-Rex.",
@@ -1261,7 +1283,7 @@ export const encyclopediaData = {
             modelPath: "/models/geologi/era_mesozoikum/velociraptor.glb",
             image:
               "https://www.extinctanimals.org/wp-content/uploads/2015/08/Velociraptor.jpg",
-            period: "Era Mesozoikum (Kapur)",
+            period: "Mesozoikum (Kapur Akhir)",
             description: {
               short:
                 "Dinosaurus pemangsa berukuran kecil, lincah, cerdas, dan tertutup bulu, terkenal dengan cakar sabit besar di kakinya.",
@@ -1292,7 +1314,7 @@ export const encyclopediaData = {
               "/models/geologi/era_kenozoikum/dinorauls_paraceratherium.glb",
             image:
               "https://www.fossilguy.com/gallery/vert/mammal/land/paraceratherium/paraceratherium-statue-5820747273.jpg",
-            period: "Era Kenozoikum (Oligosen)",
+            period: "Kenozoikum (Oligosen)",
             description: {
               short:
                 "Mamalia darat terbesar yang pernah berjalan di bumi, kerabat badak raksasa tanpa cula dengan leher panjang pemakan daun tinggi.",
@@ -1314,7 +1336,7 @@ export const encyclopediaData = {
             modelPath: "/models/geologi/era_kenozoikum/mammoth.glb",
             image:
               "https://awsimages.detik.net.id/community/media/visual/2022/03/19/replika-mammoth-berbulu.webp?w=1200",
-            period: "Era Kenozoikum (Pleistosen)",
+            period: "Kenozoikum (Pleistosen)",
             description: {
               short:
                 "Gajah purba ikonik Zaman Es yang tubuhnya tertutup rambut tebal dan memiliki gading melengkung besar, hidup berdampingan dengan manusia purba.",
@@ -1337,7 +1359,7 @@ export const encyclopediaData = {
               "/models/geologi/era_kenozoikum/phorusrhacos_longissimus_terror_bird.glb",
             image:
               "https://imgapps.okezone.com/dynamic/content/2023/04/17/56/2800114/mengenal-terror-bird-burung-predator-purba-yang-sempat-jadi-puncak-rantai-makanan-gzmizQFatb.jpg?w=350",
-            period: "Era Kenozoikum",
+            period: "Kenozoikum (Miosen - Pliosen)",
             description: {
               short:
                 "Burung pemangsa raksasa yang tidak bisa terbang, predator puncak berkaki cepat dengan paruh besar mematikan yang menguasai Amerika Selatan.",
@@ -1359,7 +1381,7 @@ export const encyclopediaData = {
             modelPath: "/models/geologi/era_kenozoikum/smilodon.glb",
             image:
               "https://www.extinctanimals.org/wp-content/uploads/2018/09/Smilodon-Size.jpg",
-            period: "Era Kenozoikum (Pleistosen)",
+            period: "Kenozoikum (Pleistosen)",
             description: {
               short:
                 "Kucing besar prasejarah yang terkenal dengan dua gigi taring atas yang sangat panjang seperti pedang, pemburu hewan besar di Zaman Es.",
