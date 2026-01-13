@@ -58,14 +58,11 @@ const Visual3DHub = () => {
   return (
     <div className="hub-container">
       <div className="hub-grid-bg"></div>
-      <nav className="hub-nav">
-        <Link to="/" className="hub-back-btn">
-          ← KEMBALI KE MENU UTAMA
+      <nav className="era-navbar">
+        <Link to="/" className="back-link">
+          ← KEMBALI KE BERANDA
         </Link>
-        <div className="hub-title">KOLEKSI MODEL 3D</div>
-        <div className="hub-status">
-          <span className="status-dot"></span> SISTEM: ONLINE
-        </div>
+        <div className="system-status">SYSTEM ONLINE</div>
       </nav>
 
       <main className="hub-content">

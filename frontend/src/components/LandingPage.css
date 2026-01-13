@@ -14,6 +14,7 @@ body {
   background-color: var(--bg-dark);
   color: var(--text-main);
   font-family: "Rajdhani", sans-serif;
+  overflow-x: hidden;
 }
 
 /* ==========================================================================
@@ -30,10 +31,23 @@ body {
   justify-content: space-between;
   align-items: center;
   z-index: 100;
-  background: rgba(0, 0, 0, 0.5); /* Agak lebih gelap */
+  background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
+}
+.navbar.animate-fade-down {
+  animation: fadeDown 1s ease-out;
+}
+@keyframes fadeDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .logo-section {
@@ -112,10 +126,8 @@ body {
   height: 100%;
   z-index: 0;
   overflow: hidden;
-  background: #000; /* Fallback hitam jika video loading */
+  background: #000;
 }
-
-/* --- PERBAIKAN: VIDEO LEBIH GELAP & SINEMATIK --- */
 .hero-video {
   width: 105%;
   height: 105%;
@@ -123,15 +135,9 @@ body {
   top: 0;
   left: 0;
   object-fit: cover;
-
-  opacity: 0.6; /* Turunkan opacity agar blend dengan background */
-
-  /* Filter: Brightness diturunkan (0.7) agar teks putih terbaca jelas. 
-     Contrast dinaikkan (1.2) agar video tidak terlihat pudar/abu-abu */
+  opacity: 0.6;
   filter: brightness(0.7) contrast(1.2) saturate(1.1);
 }
-
-/* --- PERBAIKAN: OVERLAY GRADASI GELAP --- */
 .video-overlay {
   position: absolute;
   top: 0;
@@ -139,15 +145,12 @@ body {
   width: 100%;
   height: 100%;
   z-index: 2;
-  /* Gradasi: Kiri Gelap (agar teks jelas), Kanan agak terang (agar video terlihat) */
   background: linear-gradient(
     90deg,
     rgba(0, 0, 0, 0.85) 0%,
-    /* Kiri: Hampir hitam pekat */ rgba(0, 0, 0, 0.5) 40%,
-    /* Tengah: Setengah transparan */ rgba(0, 0, 0, 0.3) 100%
-      /* Kanan: Lebih transparan */
+    rgba(0, 0, 0, 0.5) 40%,
+    rgba(0, 0, 0, 0.3) 100%
   );
-  /* Tambahkan efek bintik halus (opsional) agar terlihat seperti layar monitor jadul */
   background-image: linear-gradient(
       90deg,
       rgba(0, 0, 0, 0.85) 0%,
@@ -167,7 +170,7 @@ body {
   margin-bottom: 1.5rem;
   font-size: 1rem;
   letter-spacing: 2px;
-  text-shadow: 0 0 10px rgba(0, 210, 255, 0.5); /* Glow efek */
+  text-shadow: 0 0 10px rgba(0, 210, 255, 0.5);
 }
 .hero-title {
   font-family: "Rajdhani", sans-serif;
@@ -279,7 +282,6 @@ body {
     );
 }
 
-/* EFEK CAHAYA BERGERAK */
 .moving-lights {
   position: absolute;
   top: 0;
@@ -326,6 +328,7 @@ body {
   opacity: 0.2;
   mix-blend-mode: screen;
 }
+
 @keyframes floatLights {
   0% {
     transform: translate(0, 0) scale(1);
@@ -348,7 +351,6 @@ body {
   margin: 0 auto;
 }
 
-/* ABOUT HEADER LAYOUT 2 KOLOM */
 .about-header {
   display: flex;
   justify-content: space-between;
@@ -366,7 +368,6 @@ body {
   justify-content: flex-end;
 }
 
-/* GAMBAR FUTURISTIK */
 .header-image-wrapper {
   position: relative;
   width: 100%;
@@ -437,7 +438,6 @@ body {
   margin-top: 4rem;
   margin-bottom: 2rem;
 }
-
 .feature-card {
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -501,8 +501,17 @@ body {
 .feature-card:hover .card-decoration {
   width: 100%;
 }
+.read-more-link {
+  display: inline-block;
+  margin-top: 1rem;
+  color: var(--neon-blue);
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
 
-/* --- COLLECTION PREVIEW --- */
+/* COLLECTION PREVIEW */
 .collection-preview-section {
   position: relative;
   width: 100%;
@@ -510,15 +519,12 @@ body {
   padding-top: 3rem;
   margin-top: 4rem;
 }
-
-/* Layout Header & Tombol */
 .preview-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   margin-bottom: 3rem;
-  padding-right: 0;
-  flex-wrap: wrap; /* Agar responsif */
+  flex-wrap: wrap;
   gap: 2rem;
 }
 .preview-header h3 {
@@ -529,8 +535,6 @@ body {
   line-height: 0.9;
   letter-spacing: 2px;
 }
-
-/* Tombol Scroll Bulat */
 .scroll-controls {
   display: flex;
   align-items: center;
@@ -559,7 +563,6 @@ body {
 .scroll-btn:active {
   transform: scale(0.95);
 }
-
 .scroll-indicator {
   font-family: "Rajdhani", monospace;
   font-size: 0.8rem;
@@ -578,12 +581,10 @@ body {
   line-height: 1.5;
 }
 
-/* SCROLL WRAPPER (TANPA CSS ANIMATION) */
 .gallery-track-wrapper {
   width: 100%;
   overflow: hidden;
   position: relative;
-  /* Masking gradasi kiri-kanan agar terlihat seamless */
   mask-image: linear-gradient(
     to right,
     transparent 0%,
@@ -599,7 +600,6 @@ body {
     transparent 100%
   );
 }
-
 .gallery-track {
   display: flex;
   gap: 2.5rem;
@@ -611,7 +611,6 @@ body {
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
-
 .gallery-track::-webkit-scrollbar {
   display: none;
 }
@@ -663,7 +662,6 @@ body {
 .preview-card.elegant-card:hover::before {
   background: linear-gradient(135deg, var(--neon-blue), #5e00ff);
 }
-
 .preview-visual {
   width: 100%;
   height: 200px;
@@ -830,20 +828,308 @@ body {
   transform: translateX(8px);
 }
 
-.gallery-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top center;
-  filter: grayscale(30%);
-  transition: filter 0.3s;
+/* ANIMATE ON SCROLL CLASSES */
+.animate-hidden {
+  opacity: 0;
+  transition: all 1s ease-out;
+}
+.slide-up {
+  transform: translateY(50px);
+}
+.slide-left {
+  transform: translateX(-50px);
+}
+.slide-right {
+  transform: translateX(50px);
+}
+.animate-active {
+  opacity: 1;
+  transform: translate(0, 0);
 }
 
 /* ==========================================================================
-   MEDIA QUERIES (RESPONSIVE)
+   NEW ADDITIONS (FEATURES FOR COMPETITION)
    ========================================================================== */
 
-/* Tablet & Laptop Kecil (Max Width 1024px) */
+/* 1. PRELOADER */
+.preloader-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: #000;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.loader-content {
+  text-align: center;
+  color: var(--neon-blue);
+  font-family: "Rajdhani", monospace;
+}
+.loader-circle {
+  width: 50px;
+  height: 50px;
+  border: 3px solid rgba(0, 210, 255, 0.2);
+  border-top: 3px solid var(--neon-blue);
+  border-radius: 50%;
+  margin: 0 auto 20px auto;
+  animation: spin 1s linear infinite;
+}
+.loader-text {
+  letter-spacing: 4px;
+  animation: blink 1.5s infinite;
+  font-size: 1.2rem;
+}
+.loader-bar {
+  width: 200px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 15px auto;
+  overflow: hidden;
+}
+.loader-progress {
+  width: 0%;
+  height: 100%;
+  background: var(--neon-blue);
+  animation: progress 0.6s ease-in-out forwards;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes progress {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* 2. AUDIO CONTROL (FLOATING) */
+.audio-control {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  z-index: 999;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 10px 15px;
+  border-radius: 30px;
+  cursor: pointer;
+  color: #fff;
+  font-family: "Rajdhani", sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  backdrop-filter: blur(5px);
+  transition: all 0.3s;
+}
+.audio-control:hover {
+  border-color: var(--neon-blue);
+  color: var(--neon-blue);
+}
+.sound-active {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.equalizer {
+  display: flex;
+  gap: 3px;
+  height: 10px;
+  align-items: flex-end;
+}
+.equalizer span {
+  width: 3px;
+  background: var(--neon-green);
+  animation: eq 0.5s infinite ease-in-out alternate;
+}
+.equalizer span:nth-child(1) {
+  height: 60%;
+  animation-delay: 0.1s;
+}
+.equalizer span:nth-child(2) {
+  height: 100%;
+  animation-delay: 0.2s;
+}
+.equalizer span:nth-child(3) {
+  height: 40%;
+  animation-delay: 0.3s;
+}
+@keyframes eq {
+  0% {
+    height: 30%;
+  }
+  100% {
+    height: 100%;
+  }
+}
+
+.blink-text {
+  animation: blinkWarn 2s infinite;
+  color: #fff;
+}
+@keyframes blinkWarn {
+  0%,
+  100% {
+    opacity: 1;
+    text-shadow: 0 0 10px red;
+  }
+  50% {
+    opacity: 0.5;
+    text-shadow: none;
+  }
+}
+
+/* 3. STATS SECTION (PARALLAX STRIP) */
+.stats-section {
+  width: 100%;
+  padding: 4rem 0;
+  background-image: url("https://images.unsplash.com/photo-1535581652167-3d6b98c9b36d?q=80&w=1920&auto=format&fit=crop");
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5rem;
+  color: #fff;
+  z-index: 15;
+}
+.stats-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+}
+.stat-item {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+.stat-item h2 {
+  font-family: "Rajdhani", sans-serif;
+  font-size: 4rem;
+  color: var(--neon-blue);
+  margin: 0;
+  line-height: 1;
+  text-shadow: 0 0 20px rgba(0, 210, 255, 0.4);
+}
+.stat-item p {
+  font-family: "Rajdhani", monospace;
+  letter-spacing: 2px;
+  color: #aaa;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+}
+.stat-separator {
+  color: rgba(255, 255, 255, 0.1);
+  font-size: 3rem;
+  font-weight: 100;
+  position: relative;
+  z-index: 2;
+}
+
+/* 4. FOOTER */
+.landing-footer {
+  background: #020202;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 4rem 2rem 1rem 2rem;
+  position: relative;
+  z-index: 10;
+}
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto 3rem auto;
+  gap: 2rem;
+}
+.footer-brand h2 {
+  font-family: "Rajdhani", sans-serif;
+  font-size: 3rem;
+  color: #fff;
+  margin: 0;
+  letter-spacing: 5px;
+}
+.footer-brand p {
+  color: #666;
+  margin-top: 0.5rem;
+  font-family: "Rajdhani", monospace;
+}
+.footer-links {
+  display: flex;
+  gap: 4rem;
+  flex-wrap: wrap;
+}
+.link-group h4 {
+  color: #00d2ff;
+  font-family: "Rajdhani", sans-serif;
+  letter-spacing: 2px;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+}
+.link-group a,
+.link-group span {
+  display: block;
+  color: #888;
+  text-decoration: none;
+  margin-bottom: 0.8rem;
+  font-size: 0.9rem;
+  transition: color 0.3s;
+  font-family: "Inter", sans-serif;
+  cursor: default;
+}
+.link-group a:hover {
+  color: #fff;
+  cursor: pointer;
+}
+.footer-bottom {
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 2rem;
+}
+.footer-bottom p {
+  color: #444;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+}
+
+/* 5. WATERMARK PATCH (NEW) */
+.watermark-patch {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 250px; /* Lebar area yang menutupi watermark */
+  height: 80px; /* Tinggi area */
+  background: #000; /* Hitam pekat */
+  z-index: 3; /* Penting: Di atas video (0) dan overlay (2), tapi di bawah Teks Koordinat (10) */
+  pointer-events: none;
+  /* Membuat gradasi halus agar tidak terlihat patah (opsional, jika video tidak hitam pekat) */
+  background: linear-gradient(to top left, #000 70%, transparent 100%);
+}
+
+/* ==========================================================================
+   MEDIA QUERIES (RESPONSIVE UPDATES)
+   ========================================================================== */
 @media screen and (max-width: 1024px) {
   .navbar {
     padding: 1rem 2rem;
@@ -876,9 +1162,15 @@ body {
     max-width: 100%;
     height: 250px;
   }
+  .stats-section {
+    gap: 2rem;
+    padding: 3rem 0;
+  }
+  .stat-item h2 {
+    font-size: 3rem;
+  }
 }
 
-/* Mobile Devices (Max Width 768px) */
 @media screen and (max-width: 768px) {
   .navbar {
     flex-direction: column;
@@ -1036,5 +1328,23 @@ body {
   }
   .preview-info h4 {
     font-size: 1.3rem;
+  }
+
+  .stats-section {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem 0;
+    background-attachment: scroll;
+  }
+  .stat-separator {
+    display: none;
+  }
+  .footer-content {
+    flex-direction: column;
+  }
+  .footer-links {
+    gap: 2rem;
+    width: 100%;
+    justify-content: space-between;
   }
 }

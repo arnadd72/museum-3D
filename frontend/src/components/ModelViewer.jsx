@@ -61,7 +61,6 @@ const PlaceholderModel = ({ color }) => {
 // --- 3. MODEL LOADER ---
 const Model3D = ({ path }) => {
   const { scene } = useGLTF(path);
-  // Clone scene agar aman saat navigasi
   const clonedScene = useMemo(() => scene.clone(), [scene]);
   return <primitive object={clonedScene} />;
 };
@@ -83,16 +82,14 @@ const ModelViewer = () => {
 
   const data = location.state?.itemData;
 
-  // --- 5. SMART DATA GENERATOR (CUSTOMIZABLE) ---
+  // --- 5. SMART DATA GENERATOR ---
   const extendedData = useMemo(() => {
     if (!data) return null;
 
     const dbDesc = data.description || {};
-    // Ambil data 'details' jika ada di encyclopediaData.js
     const customInfo = data.details || {};
 
-    let info = {
-      // TAB 1: RINGKASAN
+    return {
       scientificName:
         customInfo.scientificName ||
         data.name.charAt(0) + data.name.slice(1).toLowerCase() + " sp.",
@@ -100,46 +97,50 @@ const ModelViewer = () => {
       taxonomy: customInfo.taxonomy || "Kingdom Animalia",
       location: customInfo.location || "Global / Tersebar Luas",
       status: "PUNAH",
-
-      // TAB 2: DATA FISIK
       diet: customInfo.diet || "Tidak Diketahui",
       size: customInfo.size || "Bervariasi",
       weight: customInfo.weight || "Tidak Diketahui",
       lifespan: customInfo.lifespan || "Tidak Diketahui",
-      sizeCompare: 50,
-
-      // TAB 3: EDUKASI
+      sizeCompare: 50, // Default size compare
       period: customInfo.period || "Zaman Prasejarah",
       funFact:
         dbDesc.key || "Spesies ini memiliki peran unik dalam ekosistem purba.",
       discoveryYear: customInfo.discoveryYear || "Abad ke-19",
-
-      // --- UPDATE PENTING: Ambil stats dari database ---
       stats: customInfo.stats || { completeness: 50, rarity: 50, value: 50 },
     };
+  }, [data]);
 
-    // --- LOGIKA TAMBAHAN UNTUK VISUALISASI STATS ---
-    // (Opsional: Tetap pertahankan ini untuk grafik bar yang dinamis)
+  // --- 6. DYNAMIC CAMERA & SCALE SETTINGS ---
+  const { cameraPosition, maxZoomDistance, modelScale } = useMemo(() => {
+    if (!data)
+      return { cameraPosition: [0, 2, 8], maxZoomDistance: 15, modelScale: 3 };
+
     const name = data.name.toUpperCase();
 
-    if (name.includes("REX")) {
-      info.sizeCompare = 100;
-      info.stats = { completeness: 65, rarity: 95, value: 100 };
-    } else if (name.includes("TRILOBITE")) {
-      info.sizeCompare = 10;
-      info.stats = { completeness: 98, rarity: 20, value: 85 };
-    } else if (name.includes("VELOCIRAPTOR")) {
-      info.sizeCompare = 25;
-      info.stats = { completeness: 45, rarity: 80, value: 90 };
-    } else if (name.includes("AMMONITE")) {
-      info.sizeCompare = 20;
-      info.stats = { completeness: 95, rarity: 30, value: 80 };
-    } else if (name.includes("BRACHIOSAURUS")) {
-      info.sizeCompare = 100;
-      info.stats = { completeness: 70, rarity: 60, value: 95 };
+    // JIKA BRACHIOSAURUS (atau dinosaurus raksasa lain)
+    if (name.includes("BRACHIOSAURUS") || name.includes("SAUROPOD")) {
+      return {
+        cameraPosition: [0, 5, 20], // Kamera mundur jauh & agak naik
+        maxZoomDistance: 40, // Bisa zoom out sangat jauh
+        modelScale: 1.5, // Model diperkecil agar muat di layar
+      };
     }
 
-    return info;
+    // JIKA T-REX (Besar tapi tidak raksasa)
+    if (name.includes("REX") || name.includes("SPINOSAURUS")) {
+      return {
+        cameraPosition: [0, 2, 12],
+        maxZoomDistance: 25,
+        modelScale: 2.2,
+      };
+    }
+
+    // DEFAULT (Untuk hewan kecil/sedang)
+    return {
+      cameraPosition: [0, 1, 8],
+      maxZoomDistance: 15,
+      modelScale: 3,
+    };
   }, [data]);
 
   if (!data) {
@@ -156,50 +157,53 @@ const ModelViewer = () => {
 
   return (
     <div className="viewer-container">
-      {/* BACKGROUND 3D */}
+      {/* BACKGROUND 3D (TETAP HITAM/GELAP) */}
       <div className="canvas-wrapper">
         <div className="hologram-overlay"></div>
-        <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 2, 8], fov: 40 }}>
-          <fog attach="fog" args={["#000000", 5, 30]} />
+        <Canvas
+          shadows
+          dpr={[1, 2]}
+          camera={{ position: cameraPosition, fov: 45 }}
+        >
+          <fog attach="fog" args={["#000000", 5, 40]} /> {/* Fog hitam pekat */}
           <Sparkles
             count={100}
-            scale={5}
+            scale={10} // Area partikel diperluas
             size={2}
             speed={0.5}
             color={hologramCyan}
             position={[0, 0, 0]}
           />
-
-          <ambientLight intensity={2.5} color="#ffffff" />
+          <ambientLight intensity={2.0} color="#ffffff" />
           <directionalLight
             position={[10, 10, 5]}
-            intensity={3.5}
+            intensity={3.0}
             color="#ffffff"
             castShadow
           />
           <directionalLight
             position={[-10, 5, -10]}
-            intensity={2.0}
+            intensity={1.5}
             color="#b0e0ff"
           />
           <pointLight
             position={[0, -2, 0]}
-            intensity={1.5}
+            intensity={1.0}
             color="#ffffff"
             distance={10}
           />
-
           <Suspense fallback={<Loader />}>
             <Float
               speed={1.5}
               rotationIntensity={0.2}
               floatIntensity={0.5}
-              position={[0, -0.5, 0]}
+              position={[0, -0.5, 0]} // Posisi dasar float
             >
               <group scale={1.5}>
                 <ModelErrorBoundary color={themeColor}>
-                  <Center>
-                    <Resize scale={3}>
+                  {/* Center & Resize: Memastikan model selalu di tengah (0,0,0) */}
+                  <Center top>
+                    <Resize scale={modelScale}>
                       <Model3D path={data.modelPath} />
                     </Resize>
                   </Center>
@@ -207,13 +211,13 @@ const ModelViewer = () => {
               </group>
             </Float>
           </Suspense>
-
           <OrbitControls
             autoRotate
             autoRotateSpeed={0.5}
             makeDefault
-            minDistance={3}
-            maxDistance={15}
+            minDistance={2}
+            maxDistance={maxZoomDistance} // Batas zoom out dinamis
+            target={[0, 0, 0]} // Selalu fokus ke tengah
           />
         </Canvas>
       </div>
@@ -286,7 +290,7 @@ const ModelViewer = () => {
         </div>
 
         <div className="panel-content">
-          {/* === TAB 1: RINGKASAN === */}
+          {/* TAB 1: RINGKASAN */}
           {activeTab === "OVERVIEW" && (
             <>
               <h3 className="panel-heading">KLASIFIKASI & ASAL</h3>
@@ -321,7 +325,7 @@ const ModelViewer = () => {
             </>
           )}
 
-          {/* === TAB 2: DATA FISIK === */}
+          {/* TAB 2: DATA FISIK */}
           {activeTab === "ANATOMY" && (
             <>
               <h3 className="panel-heading">KARAKTERISTIK FISIK</h3>
@@ -347,7 +351,7 @@ const ModelViewer = () => {
                 </div>
               </div>
 
-              {/* FITUR: DATA KOLEKSI MUSEUM (PENGGANTI BAR KEKUATAN) */}
+              {/* DATA KOLEKSI */}
               <div
                 style={{
                   marginTop: "25px",
@@ -443,7 +447,7 @@ const ModelViewer = () => {
             </>
           )}
 
-          {/* === TAB 3: EDUKASI === */}
+          {/* TAB 3: EDUKASI */}
           {activeTab === "FUNFACT" && (
             <>
               <h3 className="panel-heading">WAWASAN & SEJARAH</h3>
@@ -455,7 +459,6 @@ const ModelViewer = () => {
                   gap: "20px",
                 }}
               >
-                {/* Periode Waktu */}
                 <div>
                   <div
                     style={{
@@ -482,7 +485,6 @@ const ModelViewer = () => {
                   </div>
                 </div>
 
-                {/* Tahun Penemuan */}
                 <div>
                   <div
                     style={{
@@ -503,7 +505,6 @@ const ModelViewer = () => {
                   </div>
                 </div>
 
-                {/* Fakta Unik */}
                 <div
                   style={{
                     background: "rgba(255,255,255,0.05)",

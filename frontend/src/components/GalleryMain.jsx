@@ -87,7 +87,7 @@ const GalleryMain = () => {
             }`}
           >
             <h1 className="main-heading">
-              KATEGORI <span className="blink">_</span>
+              KATEGORI <span className="blink"></span>
             </h1>
             <div className="cards-wrapper">
               {Object.keys(encyclopediaData).map((key) => {

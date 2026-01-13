@@ -5,13 +5,16 @@ import "./LandingPage.css";
 
 const LandingPage = ({ onStart, onTimeline }) => {
   const observerRef = useRef(null);
-  const scrollRef = useRef(null); // Ref untuk container galeri
-  const [isPaused, setIsPaused] = useState(false); // State untuk pause saat hover
+  const scrollRef = useRef(null);
+  const audioRef = useRef(null);
 
-  // STATE BARU: Untuk mengecek apakah ini mobile device
+  // STATE
+  const [isLoading, setIsLoading] = useState(true); // State Preloader
+  const [isPaused, setIsPaused] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
 
-  // Link Gambar Dinosaurus
+  // DATA
   const dinoImageLink =
     "https://i0.wp.com/genemil.com/wp-content/uploads/2020/07/zaman-paleozoikum.jpg?fit=800%2C600&ssl=1";
 
@@ -66,48 +69,47 @@ const LandingPage = ({ onStart, onTimeline }) => {
         "https://media.sketchfab.com/models/6de8fb7fb8ed4f26844a3556a491cd9c/thumbnails/ef2080f4692342d3aa0f7ef6d7cefd26/14354e2a4cb74e07b312891a5b66375c.jpeg",
       accentColor: "#00ff88",
     },
-    {
-      id: 6,
-      title: "ARCHAEOPTERYX",
-      desc: "Fosil transisi penting penghubung dinosaurus dan burung.",
-      type: "TRANSISI",
-      era: "JURA AKHIR",
-      image:
-        "https://preview.free3d.com/img/2020/07/2408255575549805854/0a4346v6.jpg",
-      accentColor: "#A020F0",
-    },
-    {
-      id: 7,
-      title: "MEGALODON TOOTH",
-      desc: "Gigi hiu raksasa prasejarah. Predator laut terbesar.",
-      type: "MIKRO/BAGIAN",
-      era: "KENOZOIKUM",
-      image:
-        "https://media.sketchfab.com/models/6a36ac89561d44eb80e983bf2c213c50/thumbnails/ccb504b00fe54341ac36c1f361fb0028/ed63e9ebabec48b9a211982847318d49.jpeg",
-      accentColor: "#00CED1",
-    },
   ];
 
-  // LOGIC 1: Cek ukuran layar saat pertama kali load & resize
+  // 1. LOGIC PRELOADER
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 600);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // 2. LOGIC AUDIO
+  const toggleAudio = () => {
+    if (audioRef.current) {
+      if (isMuted) {
+        audioRef.current
+          .play()
+          .catch((e) => console.log("Audio play failed", e));
+        audioRef.current.muted = false;
+        setIsMuted(false);
+      } else {
+        audioRef.current.pause();
+        setIsMuted(true);
+      }
+    }
+  };
+
+  // 3. LOGIC MOBILE CHECK
   useEffect(() => {
     const checkScreenSize = () => {
-      // Jika lebar layar kurang dari 768px, anggap mobile
       setIsMobile(window.innerWidth <= 768);
     };
-
-    checkScreenSize(); // Jalankan sekali di awal
-    window.addEventListener("resize", checkScreenSize); // Update jika layar di-resize
-
+    checkScreenSize();
+    window.addEventListener("resize", checkScreenSize);
     return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
 
-  // LOGIC SCROLL BUTTON
+  // 4. LOGIC SCROLL BUTTON
   const scroll = (direction) => {
     if (scrollRef.current) {
       const { current } = scrollRef;
-      // Di HP kita geser lebih sedikit agar tidak terlalu jauh lompatnya
       const scrollAmount = isMobile ? 280 : 350;
-
       if (direction === "left") {
         current.scrollLeft -= scrollAmount;
       } else {
@@ -116,17 +118,14 @@ const LandingPage = ({ onStart, onTimeline }) => {
     }
   };
 
-  // LOGIC AUTO SCROLL (Diupdate agar MATI di Mobile)
+  // 5. LOGIC AUTO SCROLL
   useEffect(() => {
-    // Jika sedang di Mobile, JANGAN jalankan auto scroll
     if (isMobile) return;
-
-    const autoScrollSpeed = 1; // Kecepatan pixel per tick
+    const autoScrollSpeed = 1;
     let animationId;
 
     const startScroll = () => {
       if (scrollRef.current && !isPaused) {
-        // Jika sudah mentok kanan, kembalikan ke awal (looping sederhana)
         if (
           scrollRef.current.scrollLeft + scrollRef.current.clientWidth >=
           scrollRef.current.scrollWidth - 1
@@ -142,12 +141,13 @@ const LandingPage = ({ onStart, onTimeline }) => {
     if (!isPaused) {
       animationId = requestAnimationFrame(startScroll);
     }
-
     return () => cancelAnimationFrame(animationId);
-  }, [isPaused, isMobile]); // Tambahkan isMobile ke dependency array
+  }, [isPaused, isMobile]);
 
-  // LOGIC ANIMASI MUNCUL (INTERSECTION OBSERVER)
+  // 6. LOGIC ANIMASI MUNCUL
   useEffect(() => {
+    if (isLoading) return;
+
     observerRef.current = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -165,11 +165,48 @@ const LandingPage = ({ onStart, onTimeline }) => {
     return () => {
       if (observerRef.current) observerRef.current.disconnect();
     };
-  }, []);
+  }, [isLoading]);
 
+  // --- RENDER PRELOADER ---
+  if (isLoading) {
+    return (
+      <div className="preloader-container">
+        <div className="loader-content">
+          <div className="loader-circle"></div>
+          <div className="loader-text">INITIALIZING SYSTEM...</div>
+          <div className="loader-bar">
+            <div className="loader-progress"></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // --- RENDER UTAMA ---
   return (
     <>
-      <nav className="navbar">
+      {/* AUDIO ELEMENT */}
+      <audio ref={audioRef} loop>
+        <source src="/ambience.mp3" type="audio/mp3" />
+      </audio>
+
+      {/* FLOATING AUDIO CONTROL */}
+      <div className="audio-control" onClick={toggleAudio}>
+        {isMuted ? (
+          <span className="blink-text">🔇 ACTIVATE SOUND</span>
+        ) : (
+          <span className="sound-active">
+            🔊 AUDIO ON{" "}
+            <div className="equalizer">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </span>
+        )}
+      </div>
+
+      <nav className="navbar animate-fade-down">
         <div className="logo-section">
           <div className="logo-symbol">JP</div>
           <span className="logo-text">JEJAK PURBA</span>
@@ -198,8 +235,8 @@ const LandingPage = ({ onStart, onTimeline }) => {
           <div className="video-overlay"></div>
         </div>
 
-        <div className="hero-content">
-          <div className="floating-tag"></div>
+        <div className="hero-content animate-hidden slide-up">
+          <div className="floating-tag">SYSTEM ONLINE</div>
           <h1 className="hero-title">
             JEJAK <br />
             <span className="outline-text">PRASEJARAH</span>
@@ -214,21 +251,41 @@ const LandingPage = ({ onStart, onTimeline }) => {
             <button className="explore-btn" onClick={onStart}>
               MULAI EKSKAVASI
             </button>
-            <div
-              className="play-btn-wrapper"
-              onClick={onTimeline}
-              style={{ cursor: "pointer" }}
-            >
+            <div className="play-btn-wrapper" onClick={onTimeline}>
               <div className="play-icon">▶</div>
               <span>LIHAT TIMELINE BUMI</span>
             </div>
           </div>
         </div>
         <div className="decorative-line"></div>
+
+        {/* TEXT COORDINATE */}
         <div className="coordinate-text">
           LAT -6.2088 // LONG 106.8456 // ERA: HOLOCENE
         </div>
+
+        {/* --- WATERMARK PATCH (NEW) --- */}
+        {/* Kotak hitam ini akan menutupi watermark di pojok kanan bawah video */}
+        <div className="watermark-patch"></div>
       </main>
+
+      {/* --- STATS BAR --- */}
+      <div className="stats-section">
+        <div className="stat-item">
+          <h2>3</h2>
+          <p>ERA GEOLOGI</p>
+        </div>
+        <div className="stat-separator">/</div>
+        <div className="stat-item">
+          <h2>50+</h2>
+          <p>SPESIMEN DIGITAL</p>
+        </div>
+        <div className="stat-separator">/</div>
+        <div className="stat-item">
+          <h2>100%</h2>
+          <p>INTERAKTIF</p>
+        </div>
+      </div>
 
       <section id="about" className="about-section">
         <div className="moving-lights">
@@ -250,9 +307,8 @@ const LandingPage = ({ onStart, onTimeline }) => {
                 <span className="highlight">
                   Era Geologi, jenis fosil, dan kelompok biologis
                 </span>
-                ,<span className="highlight"></span> sehingga memudahkan
-                pemahaman hubungan antara makhluk hidup, lingkungan, dan
-                perubahan Bumi sepanjang waktu.
+                , sehingga memudahkan pemahaman hubungan antara makhluk hidup,
+                lingkungan, dan perubahan Bumi.
               </p>
             </div>
             <div className="about-image-slot">
@@ -263,7 +319,6 @@ const LandingPage = ({ onStart, onTimeline }) => {
                   className="header-img"
                 />
                 <div className="img-overlay"></div>
-                <div className="img-border"></div>
               </div>
             </div>
           </div>
@@ -326,8 +381,6 @@ const LandingPage = ({ onStart, onTimeline }) => {
                   detail ilmiah.
                 </p>
               </div>
-
-              {/* --- BAGIAN TOMBOL SCROLL BARU --- */}
               <div className="scroll-controls">
                 <button
                   className="scroll-btn"
@@ -337,9 +390,7 @@ const LandingPage = ({ onStart, onTimeline }) => {
                   ←
                 </button>
                 <div className="scroll-indicator">
-                  <span style={{ fontSize: "0.8rem", letterSpacing: "2px" }}>
-                    {isMobile ? "SWIPE TO EXPLORE ///" : "AUTO SCROLLING ///"}
-                  </span>
+                  <span>{isMobile ? "SWIPE ///" : "AUTO SCROLL ///"}</span>
                 </div>
                 <button
                   className="scroll-btn"
@@ -349,46 +400,63 @@ const LandingPage = ({ onStart, onTimeline }) => {
                   →
                 </button>
               </div>
-              {/* ---------------------------------- */}
             </div>
 
             <div className="gallery-track-wrapper">
               <div
                 className="gallery-track"
                 ref={scrollRef}
-                // LOGIC PENTING: Pause juga saat disentuh jari (Touch)
                 onMouseEnter={() => setIsPaused(true)}
                 onMouseLeave={() => setIsPaused(false)}
-                onTouchStart={() => setIsPaused(true)} // HP: Sentuh = Pause
-                onTouchEnd={() => setIsPaused(false)} // HP: Lepas = Jalan (jika tidak mobile)
+                onTouchStart={() => setIsPaused(true)}
+                onTouchEnd={() => setIsPaused(false)}
               >
-                {/* Kita duplikasi data beberapa kali agar cukup panjang untuk discroll */}
-                {featuredFossils.map((item, index) => (
-                  <FossilCard
-                    key={`set1-${index}`}
-                    item={item}
-                    onStart={onStart}
-                  />
-                ))}
-                {featuredFossils.map((item, index) => (
-                  <FossilCard
-                    key={`set2-${index}`}
-                    item={item}
-                    onStart={onStart}
-                  />
-                ))}
-                {featuredFossils.map((item, index) => (
-                  <FossilCard
-                    key={`set3-${index}`}
-                    item={item}
-                    onStart={onStart}
-                  />
+                {/* Looping Data 3 Kali untuk Infinite Scroll Effect */}
+                {[
+                  ...featuredFossils,
+                  ...featuredFossils,
+                  ...featuredFossils,
+                ].map((item, index) => (
+                  <FossilCard key={index} item={item} onStart={onStart} />
                 ))}
               </div>
             </div>
           </div>
         </div>
       </section>
+
+      {/* --- FOOTER --- */}
+      <footer className="landing-footer">
+        <div className="footer-content">
+          <div className="footer-brand">
+            <h2>JP</h2>
+            <p>Digital Museum Project</p>
+          </div>
+          <div className="footer-links">
+            <div className="link-group">
+              <h4>EKSPLORASI</h4>
+              <a href="#home">Beranda</a>
+              <Link to="/era-geologi">Era Geologi</Link>
+              <Link to="/gallery">Galeri Fosil</Link>
+            </div>
+            <div className="link-group">
+              <h4>TEKNOLOGI</h4>
+              <span>React JS</span>
+              <span>Three.js (Visual 3D)</span>
+              <span>CSS Animation</span>
+            </div>
+            <div className="link-group">
+              <h4>TIM PENGEMBANG</h4>
+              <span>Yasvin Syahgana</span>
+              <span>Anwar Hanani</span>
+              <span>Ihsan Nafis</span>
+            </div>
+          </div>
+        </div>
+        <div className="footer-bottom">
+          <p>&copy; 2026 Jejak Purba. Museum Digital & Galeri Interaktif.</p>
+        </div>
+      </footer>
     </>
   );
 };

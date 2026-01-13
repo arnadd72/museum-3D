@@ -23,8 +23,8 @@ export const encyclopediaData = {
                 "Kerabat purba cumi-cumi dan gurita dengan cangkang spiral yang hidup di laut sekitar 400 hingga 66 juta tahun lalu, memiliki tentakel untuk menangkap mangsa dan bergerak dengan menyemprotkan air.",
               full: "Amonit (Ammonite) adalah kelompok moluska laut predator dari kelas Cephalopoda yang telah punah. Mereka memiliki cangkang eksternal berpilin (spiral) yang terbagi menjadi bilik-bilik udara, memungkinkan mereka mengatur daya apung di dalam air. Hewan ini sangat sukses dan beragam selama era Mesozoikum, namun punah bersamaan dengan dinosaurus non-unggas pada peristiwa kepunahan massal Kapur-Paleogen.",
               key: "Cangkang Amonit bekerja persis seperti kapal selam! Mereka memompa udara masuk dan keluar dari bilik-bilik cangkangnya untuk naik atau turun di dalam air.",
-           },
-           details: {
+            },
+            details: {
               diet: "Karnivora (Plankton & Krustasea)",
               lifespan: "1 - 4 Tahun",
               weight: "10g - 100kg (Bervariasi)",
@@ -32,7 +32,7 @@ export const encyclopediaData = {
               discoveryYear: "Zaman Kuno (Pliny the Elder)",
               taxonomy: "Mollusca > Cephalopoda",
               stats: { completeness: 95, rarity: 30, value: 80 },
-           },
+            },
           },
           {
             name: "TURRITELLA",
@@ -66,7 +66,7 @@ export const encyclopediaData = {
               short:
                 "Hewan laut bercangkang tangkup atas-bawah yang menempel di dasar laut menggunakan tangkai, sekilas mirip kerang tetapi memiliki anatomi dalam yang sangat berbeda.",
               full: "Brakiopoda adalah filum hewan laut yang memiliki cangkang keras terdiri dari dua katup (atas dan bawah), berbeda dengan kerang (bivalvia) yang cangkangnya kiri dan kanan. Di dalam cangkangnya, terdapat organ khusus bernama lofofor, yaitu struktur berbentuk tentakel melingkar yang digunakan untuk menyaring makanan dari arus air. Meskipun sangat melimpah pada Era Paleozoikum, jenis mereka menurun drastis setelah kepunahan massal Permian.",
-                key: "Meskipun sekilas mirip kerang, mereka sebenarnya memiliki 'tentakel' khusus bernama lofofor yang tersembunyi di dalam cangkang untuk menangkap makanan.",
+              key: "Meskipun sekilas mirip kerang, mereka sebenarnya memiliki 'tentakel' khusus bernama lofofor yang tersembunyi di dalam cangkang untuk menangkap makanan.",
             },
             details: {
               diet: "Filter Feeder (Plankton)",
@@ -87,7 +87,7 @@ export const encyclopediaData = {
               short:
                 "Hewan multiseluler paling sederhana yang dikenal sebagai spons laut, tubuhnya penuh pori-pori untuk menyaring air guna mendapatkan oksigen dan makanan, serta tidak memiliki organ sejati.",
               full: "Porifera (hewan berpori) adalah filum hewan invertebrata yang hidup menetap (sesil) di dasar perairan. Tubuh mereka terdiri dari jaringan saluran air yang kompleks namun tidak memiliki sistem saraf, pencernaan, atau peredaran darah sejati. Mereka bertahan hidup dengan memompa air melalui tubuh mereka untuk menyaring partikel makanan mikroskopis. Struktur tubuhnya ditopang oleh spikula (duri mikroskopis) yang terbuat dari kapur atau silika.",
-                key: "Jika tubuh Spons Laut dihancurkan menjadi sel-sel terpisah (diblender), sel-sel tersebut bisa menyatu kembali dan membentuk spons baru!",
+              key: "Jika tubuh Spons Laut dihancurkan menjadi sel-sel terpisah (diblender), sel-sel tersebut bisa menyatu kembali dan membentuk spons baru!",
             },
             details: {
               diet: "Filter Feeder (Partikel Organik)",
@@ -576,7 +576,8 @@ export const encyclopediaData = {
           },
           {
             name: "BELEMNITE",
-            modelPath: "/models/fosil/fosil_tubuh/eduf32_belemnite_phragmacone.glb",
+            modelPath:
+              "/models/fosil/fosil_tubuh/eduf32_belemnite_phragmacone.glb",
             image:
               "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT578NeCt-YGMQs3s-wKKmemcjs75ZXxMLM6g&s",
             description: {
