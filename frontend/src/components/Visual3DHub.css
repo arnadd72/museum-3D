@@ -534,49 +534,24 @@
    ANIMATIONS
    ========================================================================== */
 @keyframes pulse {
-  0% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.5;
-    transform: scale(1.2);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
+  0% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.2); }
+  100% { opacity: 1; transform: scale(1); }
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(50px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .slide-up {
@@ -584,20 +559,10 @@
 }
 
 @keyframes scanDown {
-  0% {
-    top: 0%;
-    opacity: 0;
-  }
-  20% {
-    opacity: 1;
-  }
-  80% {
-    opacity: 1;
-  }
-  100% {
-    top: 100%;
-    opacity: 0;
-  }
+  0% { top: 0%; opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
 }
 
 /* ==========================================================================
@@ -641,13 +606,22 @@
     font-size: 1.2rem;
   }
 
+  /* FILTER BAR: Bisa Swipe ke samping */
+  .filter-bar {
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    width: 100%;
+    white-space: nowrap;
+  }
+
   .filter-btn {
     padding: 0.6rem 1rem;
     font-size: 0.8rem;
-    flex: 1 1 40%;
+    flex-shrink: 0;
   }
 
-  /* GRID */
+  /* GRID 1 KOLOM */
   .hub-grid {
     grid-template-columns: 1fr; /* 1 Kolom di HP */
     gap: 1.5rem;
@@ -686,6 +660,10 @@
   .modal-stats {
     flex-direction: column;
     gap: 0.5rem;
+  }
+
+  .modal-actions {
+    flex-direction: column-reverse; /* Tombol batal di bawah */
   }
 
   .modal-actions button {

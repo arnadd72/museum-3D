@@ -13,13 +13,41 @@ const GalleryMain = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  // === PERBAIKAN 1: LOGIC PEMULIHAN STATUS ===
   useEffect(() => {
-    if (location.state && location.state.targetCategory) {
-      const target = location.state.targetCategory;
-      if (encyclopediaData[target]) {
-        setSelectedCategory(encyclopediaData[target]);
+    if (location.state) {
+      const { targetCategory, targetSubCategory, targetItem } = location.state;
+
+      // 1. Pulihkan Kategori Utama
+      if (targetCategory && encyclopediaData[targetCategory]) {
+        const categoryData = encyclopediaData[targetCategory];
+        setSelectedCategory(categoryData);
+
+        // 2. Pulihkan Sub-Kategori (Jika ada)
+        if (targetSubCategory) {
+          const subData = categoryData.subCategories.find(
+            (sub) => sub.title === targetSubCategory
+          );
+          if (subData) {
+            setSelectedSubCategory(subData);
+
+            // 3. Pulihkan Item Aktif (Jika ada)
+            if (targetItem) {
+              const itemData = subData.items.find(
+                (item) => item.name === targetItem
+              );
+              if (itemData) {
+                setActiveItem(itemData);
+              }
+            } else if (subData.items && subData.items.length > 0) {
+              // Fallback ke item pertama jika targetItem tidak spesifik
+              setActiveItem(subData.items[0]);
+            }
+          }
+        }
       }
-      window.history.replaceState({}, document.title);
+      // Opsional: Bersihkan state agar tidak stuck saat refresh (hapus jika ingin persistent)
+      // window.history.replaceState({}, document.title);
     }
   }, [location]);
 
@@ -64,6 +92,26 @@ const GalleryMain = () => {
     setActiveItem(item);
   };
 
+  // === PERBAIKAN 2: FUNGSI NAVIGASI KE 3D ===
+  const handleGoTo3D = () => {
+    // Cari Key Kategori (misal: 'invertebrata') berdasarkan object selectedCategory
+    const categoryKey = Object.keys(encyclopediaData).find(
+      (key) => encyclopediaData[key] === selectedCategory
+    );
+
+    navigate("/model-viewer", {
+      state: {
+        itemData: activeItem,
+        // Kirim "Jejak" agar bisa kembali ke titik ini
+        returnContext: {
+          targetCategory: categoryKey,
+          targetSubCategory: selectedSubCategory.title,
+          targetItem: activeItem.name,
+        },
+      },
+    });
+  };
+
   return (
     <div className="gallery-container">
       <div className="grid-bg"></div>
@@ -79,13 +127,9 @@ const GalleryMain = () => {
       </nav>
 
       <main className="gallery-content">
-        {/* === VIEW 1: PILIH KATEGORI UTAMA === */}
+        {/* VIEW 1: KATEGORI */}
         {!selectedCategory && (
-          <div
-            className={`selection-grid ${
-              isExiting ? "fade-out-down" : "fade-in-up"
-            }`}
-          >
+          <div className={`selection-grid ${isExiting ? "fade-out-down" : "fade-in-up"}`}>
             <h1 className="main-heading">
               KATEGORI <span className="blink"></span>
             </h1>
@@ -115,22 +159,16 @@ const GalleryMain = () => {
           </div>
         )}
 
-        {/* === VIEW 2: PILIH SUB-KATEGORI === */}
+        {/* VIEW 2: SUB-KATEGORI */}
         {selectedCategory && !selectedSubCategory && (
-          <div
-            className={`sub-selection-view ${
-              isExiting ? "fade-out-down" : "fade-in-up"
-            }`}
-          >
+          <div className={`sub-selection-view ${isExiting ? "fade-out-down" : "fade-in-up"}`}>
             <div className="sub-header">
               <button onClick={handleBack} className="back-arrow-btn">
                 ← KEMBALI KE KATEGORI
               </button>
               <h2 style={{ color: selectedCategory.color }}>
                 {selectedCategory.title}{" "}
-                <span style={{ opacity: 0.5, fontSize: "0.6em" }}>
-                  /// ARSIP
-                </span>
+                <span style={{ opacity: 0.5, fontSize: "0.6em" }}>/// ARSIP</span>
               </h2>
             </div>
             <div className="sub-cards-wrapper">
@@ -163,14 +201,9 @@ const GalleryMain = () => {
           </div>
         )}
 
-        {/* === VIEW 3: DETAIL SPLIT SCREEN === */}
+        {/* VIEW 3: DETAIL SPLIT SCREEN */}
         {selectedSubCategory && activeItem && (
-          <div
-            className={`split-view-container ${
-              isExiting ? "fade-out-down" : "fade-in-up"
-            }`}
-          >
-            {/* PANEL KIRI: LIST ITEM */}
+          <div className={`split-view-container ${isExiting ? "fade-out-down" : "fade-in-up"}`}>
             <div className="left-panel-list">
               <button
                 onClick={handleBackToSub}
@@ -180,19 +213,14 @@ const GalleryMain = () => {
                 ← KEMBALI KE {selectedCategory.title}
               </button>
 
-              <h3
-                className="list-heading"
-                style={{ color: selectedCategory.color }}
-              >
+              <h3 className="list-heading" style={{ color: selectedCategory.color }}>
                 {selectedSubCategory.title}
               </h3>
               <div className="list-scroll-area">
                 {selectedSubCategory.items.map((item, idx) => (
                   <button
                     key={idx}
-                    className={`list-item-btn ${
-                      activeItem.name === item.name ? "active" : ""
-                    }`}
+                    className={`list-item-btn ${activeItem.name === item.name ? "active" : ""}`}
                     onClick={() => handleItemClick(item)}
                     style={{ "--accent": selectedCategory.color }}
                   >
@@ -203,19 +231,14 @@ const GalleryMain = () => {
               </div>
             </div>
 
-            {/* PANEL KANAN: DETAIL KONTEN */}
             <div className="right-panel-detail">
               <div className="detail-image-wrapper">
-                {/* --- PERBAIKAN DI SINI --- */}
-                {/* Menambahkan inline style objectFit: "contain" agar gambar utuh */}
                 <img
                   src={activeItem.image}
                   alt={activeItem.name}
                   className="detail-img"
                   style={{ objectFit: "contain", backgroundColor: "#000" }}
                 />
-                {/* ------------------------- */}
-
                 <div className="scan-overlay"></div>
                 <div className="img-caption">
                   {activeItem.name} /// DATA VISUAL
@@ -223,11 +246,7 @@ const GalleryMain = () => {
               </div>
 
               <div className="detail-info-box">
-                <h1 style={{ color: selectedCategory.color }}>
-                  {activeItem.name}
-                </h1>
-
-                {/* Menggunakan Deskripsi Lengkap (Full) */}
+                <h1 style={{ color: selectedCategory.color }}>{activeItem.name}</h1>
                 <p>
                   {activeItem.description
                     ? activeItem.description.full
@@ -244,14 +263,11 @@ const GalleryMain = () => {
                 </div>
 
                 <div className="action-row">
+                  {/* Gunakan fungsi handleGoTo3D yang baru */}
                   <button
                     className="view-3d-btn"
                     style={{ "--btn-color": selectedCategory.color }}
-                    onClick={() =>
-                      navigate("/model-viewer", {
-                        state: { itemData: activeItem },
-                      })
-                    }
+                    onClick={handleGoTo3D}
                   >
                     <span className="icon-3d">❒</span> LIHAT MODEL 3D
                   </button>

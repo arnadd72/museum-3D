@@ -1,3 +1,4 @@
+import { GoogleGenerativeAI } from "@google/generative-ai"; // Import SDK Gemini
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import "../App.css";
@@ -10,7 +11,6 @@ const LandingPage = ({ onStart, onTimeline }) => {
 
   // STATE
   const [isLoading, setIsLoading] = useState(true); // State Preloader
-  const [isPaused, setIsPaused] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
 
@@ -105,46 +105,47 @@ const LandingPage = ({ onStart, onTimeline }) => {
     return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
 
-  // 4. LOGIC SCROLL BUTTON
-  const scroll = (direction) => {
-    if (scrollRef.current) {
-      const { current } = scrollRef;
-      const scrollAmount = isMobile ? 280 : 350;
-      if (direction === "left") {
-        current.scrollLeft -= scrollAmount;
+    // 4. LOGIC SCROLL BUTTON (Manual Navigasi)
+const scroll = (direction) => {
+  if (scrollRef.current) {
+    const scrollAmount = isMobile ? 300 : 400; 
+    // Mengubah scrollLeft secara langsung agar responsif terhadap input user
+    if (direction === "left") {
+      scrollRef.current.scrollLeft -= scrollAmount;
+    } else {
+      scrollRef.current.scrollLeft += scrollAmount;
+    }
+  }
+};
+
+ // 5. LOGIC AUTO SCROLL PERMANEN (JALAN TERUS)
+useEffect(() => {
+  if (isMobile || isLoading) return;
+
+  const speed = 1; 
+  let animationId;
+
+  const runScroll = () => {
+    const el = scrollRef.current;
+    if (el) {
+      const oneSetWidth = el.scrollWidth / 3;
+
+      if (el.scrollLeft >= oneSetWidth * 2) {
+        el.scrollLeft = oneSetWidth; 
+      } else if (el.scrollLeft <= 0) {
+        el.scrollLeft = oneSetWidth; 
       } else {
-        current.scrollLeft += scrollAmount;
+        el.scrollLeft += speed;
       }
     }
+    animationId = requestAnimationFrame(runScroll);
   };
 
-  // 5. LOGIC AUTO SCROLL
-  useEffect(() => {
-    if (isMobile) return;
-    const autoScrollSpeed = 1;
-    let animationId;
+  animationId = requestAnimationFrame(runScroll);
+  return () => cancelAnimationFrame(animationId);
+}, [isMobile, isLoading]); // Hapus isPaused dari sini  
 
-    const startScroll = () => {
-      if (scrollRef.current && !isPaused) {
-        if (
-          scrollRef.current.scrollLeft + scrollRef.current.clientWidth >=
-          scrollRef.current.scrollWidth - 1
-        ) {
-          scrollRef.current.scrollLeft = 0;
-        } else {
-          scrollRef.current.scrollLeft += autoScrollSpeed;
-        }
-        animationId = requestAnimationFrame(startScroll);
-      }
-    };
-
-    if (!isPaused) {
-      animationId = requestAnimationFrame(startScroll);
-    }
-    return () => cancelAnimationFrame(animationId);
-  }, [isPaused, isMobile]);
-
-  // 6. LOGIC ANIMASI MUNCUL
+  // 6. LOGIC ANIMASI ELEMENT MUNCUL
   useEffect(() => {
     if (isLoading) return;
 
@@ -198,35 +199,30 @@ const LandingPage = ({ onStart, onTimeline }) => {
           <span className="sound-active">
             🔊 AUDIO ON{" "}
             <div className="equalizer">
-              <span></span>
-              <span></span>
-              <span></span>
+              <span></span><span></span><span></span>
             </div>
           </span>
         )}
       </div>
 
+      {/* --- GEMINI AI CHATBOT (RAG) --- */}
+      <CyberChatbot dataFosil={featuredFossils} />
+
+      {/* NAVBAR */}
       <nav className="navbar animate-fade-down">
         <div className="logo-section">
           <div className="logo-symbol">JP</div>
           <span className="logo-text">JEJAK PURBA</span>
         </div>
         <div className="nav-links">
-          <a href="#home" className="nav-link active">
-            HOME
-          </a>
-          <Link to="/era-geologi" className="nav-link">
-            ERA GEOLOGI
-          </Link>
-          <Link to="/gallery" className="nav-link">
-            GALLERY
-          </Link>
-          <Link to="/visual-3d" className="nav-link">
-            VISUAL 3D
-          </Link>
+          <a href="#home" className="nav-link active">HOME</a>
+          <Link to="/era-geologi" className="nav-link">ERA GEOLOGI</Link>
+          <Link to="/gallery" className="nav-link">GALLERY</Link>
+          <Link to="/visual-3d" className="nav-link">VISUAL 3D</Link>
         </div>
       </nav>
 
+      {/* HERO SECTION */}
       <main id="home" className="hero-section">
         <div className="video-wrapper">
           <video autoPlay loop muted playsInline className="hero-video">
@@ -258,35 +254,28 @@ const LandingPage = ({ onStart, onTimeline }) => {
           </div>
         </div>
         <div className="decorative-line"></div>
-
-        {/* TEXT COORDINATE */}
         <div className="coordinate-text">
           LAT -6.2088 // LONG 106.8456 // ERA: HOLOCENE
         </div>
-
-        {/* --- WATERMARK PATCH (NEW) --- */}
-        {/* Kotak hitam ini akan menutupi watermark di pojok kanan bawah video */}
         <div className="watermark-patch"></div>
       </main>
 
-      {/* --- STATS BAR --- */}
+      {/* STATS BAR */}
       <div className="stats-section">
         <div className="stat-item">
-          <h2>3</h2>
-          <p>ERA GEOLOGI</p>
+          <h2>3</h2><p>ERA GEOLOGI</p>
         </div>
         <div className="stat-separator">/</div>
         <div className="stat-item">
-          <h2>50+</h2>
-          <p>SPESIMEN DIGITAL</p>
+          <h2>50+</h2><p>SPESIMEN DIGITAL</p>
         </div>
         <div className="stat-separator">/</div>
         <div className="stat-item">
-          <h2>100%</h2>
-          <p>INTERAKTIF</p>
+          <h2>100%</h2><p>INTERAKTIF</p>
         </div>
       </div>
 
+      {/* ABOUT & FEATURES */}
       <section id="about" className="about-section">
         <div className="moving-lights">
           <div className="light-blob blob-1"></div>
@@ -327,15 +316,8 @@ const LandingPage = ({ onStart, onTimeline }) => {
             <div className="feature-card animate-hidden slide-left">
               <div className="card-number">01</div>
               <h3>KELOMPOK HEWAN</h3>
-              <p>
-                Vertebrata (Dinosaurus, Mamalia), Invertebrata (Trilobite), dan
-                Mikrofosil.
-              </p>
-              <Link
-                to="/gallery"
-                state={{ targetCategory: "BIO" }}
-                className="read-more-link"
-              >
+              <p>Vertebrata, Invertebrata, dan Mikrofosil.</p>
+              <Link to="/gallery" state={{ targetCategory: "BIO" }} className="read-more-link">
                 LIHAT SELENGKAPNYA →
               </Link>
               <div className="card-decoration"></div>
@@ -343,15 +325,8 @@ const LandingPage = ({ onStart, onTimeline }) => {
             <div className="feature-card animate-hidden slide-up">
               <div className="card-number">02</div>
               <h3>JENIS FOSIL</h3>
-              <p>
-                Fosil Tubuh (Tulang/Gigi), Fosil Jejak (Tapak Kaki), dan Fosil
-                Terawetkan (Amber/Es).
-              </p>
-              <Link
-                to="/gallery"
-                state={{ targetCategory: "FOSSIL" }}
-                className="read-more-link"
-              >
+              <p>Fosil Tubuh, Jejak, dan Terawetkan.</p>
+              <Link to="/gallery" state={{ targetCategory: "FOSSIL" }} className="read-more-link">
                 LIHAT SELENGKAPNYA →
               </Link>
               <div className="card-decoration"></div>
@@ -359,10 +334,7 @@ const LandingPage = ({ onStart, onTimeline }) => {
             <div className="feature-card animate-hidden slide-right">
               <div className="card-number">03</div>
               <h3>ERA GEOLOGI</h3>
-              <p>
-                Paleozoikum (Awal), Mesozoikum (Dinosaurus), hingga Kenozoikum
-                (Mamalia).
-              </p>
+              <p>Paleozoikum hingga Kenozoikum.</p>
               <Link to="/era-geologi" className="read-more-link">
                 LIHAT SELENGKAPNYA →
               </Link>
@@ -370,6 +342,7 @@ const LandingPage = ({ onStart, onTimeline }) => {
             </div>
           </div>
 
+          {/* COLLECTION SCROLLER */}
           <div className="collection-preview-section animate-hidden slide-up">
             <div className="preview-header">
               <div className="header-text-group">
@@ -382,41 +355,18 @@ const LandingPage = ({ onStart, onTimeline }) => {
                 </p>
               </div>
               <div className="scroll-controls">
-                <button
-                  className="scroll-btn"
-                  onClick={() => scroll("left")}
-                  aria-label="Scroll Left"
-                >
-                  ←
-                </button>
+                {/* <button className="scroll-btn" onClick={() => scroll("left")}>←</button> */}
                 <div className="scroll-indicator">
-                  <span>{isMobile ? "SWIPE ///" : "AUTO SCROLL ///"}</span>
+                  <span>AUTO SCROLL</span>
                 </div>
-                <button
-                  className="scroll-btn"
-                  onClick={() => scroll("right")}
-                  aria-label="Scroll Right"
-                >
-                  →
-                </button>
+                {/* <button className="scroll-btn" onClick={() => scroll("right")}>→</button> */}
               </div>
             </div>
 
             <div className="gallery-track-wrapper">
-              <div
-                className="gallery-track"
-                ref={scrollRef}
-                onMouseEnter={() => setIsPaused(true)}
-                onMouseLeave={() => setIsPaused(false)}
-                onTouchStart={() => setIsPaused(true)}
-                onTouchEnd={() => setIsPaused(false)}
-              >
-                {/* Looping Data 3 Kali untuk Infinite Scroll Effect */}
-                {[
-                  ...featuredFossils,
-                  ...featuredFossils,
-                  ...featuredFossils,
-                ].map((item, index) => (
+              <div className="gallery-track" ref={scrollRef}>
+                {/* Loop 3x untuk Infinite Scroll */}
+                {[...featuredFossils, ...featuredFossils, ...featuredFossils].map((item, index) => (
                   <FossilCard key={index} item={item} onStart={onStart} />
                 ))}
               </div>
@@ -425,12 +375,11 @@ const LandingPage = ({ onStart, onTimeline }) => {
         </div>
       </section>
 
-      {/* --- FOOTER --- */}
+      {/* FOOTER */}
       <footer className="landing-footer">
         <div className="footer-content">
           <div className="footer-brand">
-            <h2>JP</h2>
-            <p>Digital Museum Project</p>
+            <h2>JP</h2><p>Digital Museum Project</p>
           </div>
           <div className="footer-links">
             <div className="link-group">
@@ -441,15 +390,16 @@ const LandingPage = ({ onStart, onTimeline }) => {
             </div>
             <div className="link-group">
               <h4>TEKNOLOGI</h4>
-              <span>React JS</span>
-              <span>Three.js (Visual 3D)</span>
+              <span>React JS / Three.js</span>
+              <span>Chatbot Integration</span>
               <span>CSS Animation</span>
             </div>
             <div className="link-group">
               <h4>TIM PENGEMBANG</h4>
-              <span>Yasvin Syahgana</span>
-              <span>Anwar Hanani</span>
-              <span>Ihsan Nafis</span>
+              <span>Fajrina Nurhaliza</span>
+              <span>Arvan Murbiyanto</span>
+              <span>Arnanda Setya Nosa Putra</span>
+              <span>Ihsan Nafis Hidayat</span>
             </div>
           </div>
         </div>
@@ -460,6 +410,146 @@ const LandingPage = ({ onStart, onTimeline }) => {
     </>
   );
 };
+
+/* ======================================================== */
+/* 2. CHATBOT COMPONENT (CLIENT-SIDE RAG)                   */
+/* ======================================================== */
+
+const CyberChatbot = ({ dataFosil }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [messages, setMessages] = useState([
+    {
+      text: "Saya adalah ARCA (Artificial Reconnaissance & Communication Assistant). Silakan ajukan pertanyaan tentang data fosil atau sejarah bumi.",
+      sender: "bot",
+    },
+  ]);
+  const [input, setInput] = useState("");
+  const [isTyping, setIsTyping] = useState(false);
+  const chatEndRef = useRef(null);
+
+  // KONFIGURASI API GEMINI
+  // Ganti string di bawah dengan API Key Anda yang asli
+  // Atau gunakan: import.meta.env.VITE_GEMINI_API_KEY
+  const API_KEY = "AIzaSyDcb46hb1kqYt5eYGOchMHRD5UwtXlceTM"; 
+  
+  // Inisialisasi Model
+  const genAI = new GoogleGenerativeAI(API_KEY);
+  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, isTyping]);
+
+  const generateGeminiResponse = async (userQuery) => {
+    try {
+      const contextData = JSON.stringify(dataFosil);
+      const prompt = `
+        Kamu adalah ARCA (Artificial Reconnaissance & Communication Assistant), AI penjaga museum digital masa depan bertema Cyberpunk/Sci-Fi.
+        
+        TUGASMU:
+        Jawab pertanyaan pengunjung berdasarkan DATA FOSIL berikut ini. 
+        
+        DATABASE:
+        ${contextData}
+        
+        INFORMASI UMUM:
+        - Pembuat: Arnanda, Arvan, dan Ihsan.
+        - Lokasi: Museum Digital (Virtual).
+        
+        GAYA BICARA:
+        1. Berikan jawaban yang cerdas, informatif, dan akurat berdasarkan DATABASE FOSIL di atas.
+        2. Gaya bahasa: Futuristik, tenang, berwibawa, dan sangat cerdas (seperti AI di film fiksi ilmiah kelas atas).
+        3. JANGAN gunakan suara robot primitif seperti "Beep" atau "Boop".
+        4. Jika pertanyaan tidak relevan dengan sejarah bumi atau fosil, arahkan kembali pengguna dengan sopan untuk fokus pada arsip museum.
+        5. Jika data tidak tersedia di database, katakan bahwa data tersebut berada di luar jangkauan sensor saat ini atau sedang didekripsi.
+        
+      # FORMATTING RULES
+      - JANGAN GUNAKAN MARKDOWN (seperti **, #, atau simbol list).
+      - Gunakan teks polos (plain text) dengan struktur paragraf yang jelas.
+      - Pastikan jawaban mengalir secara natural tanpa poin-poin yang kaku jika tidak diperlukan.
+
+        PERTANYAAN PENGUNJUNG: "${userQuery}"
+      `;
+
+      const result = await model.generateContent(prompt);
+      const response = await result.response;
+      return response.text();
+    } catch (error) {
+      console.error("Gemini Error:", error);
+      return "ERROR: Koneksi Neural Network terputus. Periksa API Key atau kuota Anda.";
+    }
+  };
+
+  const handleSend = async (e) => {
+    e.preventDefault();
+    if (!input.trim()) return;
+
+    // User Message
+    const userMsg = { text: input, sender: "user" };
+    setMessages((prev) => [...prev, userMsg]);
+    setInput("");
+    setIsTyping(true);
+
+    // Call Gemini
+    const botReplyText = await generateGeminiResponse(userMsg.text);
+
+    // Bot Message
+    setMessages((prev) => [...prev, { text: botReplyText, sender: "bot" }]);
+    setIsTyping(false);
+  };
+
+  return (
+    <div className={`chatbot-wrapper ${isOpen ? "open" : ""}`}>
+      <button className="chatbot-toggle" onClick={() => setIsOpen(!isOpen)}>
+        {isOpen ? "✕ TERMINATE" : "CHATBOT"}
+      </button>
+
+      {isOpen && (
+        <div className="chatbot-window animate-fade-up">
+          <div className="chatbot-header">
+            <div className="header-left">
+               <span className="status-dot"></span>
+               <span>ARCBOT</span>
+            </div>
+            <span className="header-code">ONLINE</span>
+          </div>
+
+          <div className="chatbot-messages">
+            {messages.map((msg, idx) => (
+              <div key={idx} className={`message ${msg.sender}`}>
+                <span className="msg-prefix">
+                </span>
+                {msg.text}
+              </div>
+            ))}
+            
+            {isTyping && (
+              <div className="message bot">
+                <span className="msg-prefix">{"> " /* String aman di dalam kurawal */}PROCESSING:</span>
+              </div>
+            )}
+            <div ref={chatEndRef} />
+          </div>
+
+          <form onSubmit={handleSend} className="chatbot-input-area">
+            <input
+              type="text"
+              placeholder="Masukkan Pertanyaan Anda....."
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              disabled={isTyping}
+            />
+            <button type="submit" disabled={isTyping}>SEND</button>
+          </form>
+        </div>
+      )}
+    </div>
+  );
+};
+
+/* ======================================================== */
+/* 3. FOSSIL CARD COMPONENT                                 */
+/* ======================================================== */
 
 const FossilCard = ({ item, onStart }) => (
   <div className="preview-card elegant-card">

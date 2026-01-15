@@ -50,10 +50,19 @@ const Visual3DHub = () => {
     });
   }, [filter, searchQuery, allItems]);
 
+  // === PERBAIKAN UTAMA DI SINI ===
   const handleProceed = () => {
-    if (selectedItem)
-      navigate("/model-viewer", { state: { itemData: selectedItem } });
+    if (selectedItem) {
+      navigate("/model-viewer", { 
+        state: { 
+          itemData: selectedItem,
+          // Kita titip pesan: "Kalau pulang, antar ke /visual-3d"
+          returnPath: "/visual-3d" 
+        } 
+      });
+    }
   };
+  // ===============================
 
   return (
     <div className="hub-container">
@@ -164,7 +173,6 @@ const Visual3DHub = () => {
                 <h4 style={{ color: selectedItem.color }}>
                   OBJEK: {selectedItem.name}
                 </h4>
-                {/* --- GUNAKAN DESKRIPSI PENTING (KEY) --- */}
                 <p>
                   {selectedItem.description
                     ? selectedItem.description.key

@@ -137,11 +137,21 @@
 .tab.active {
   color: #fff;
 }
-/* Garis bawah aktif dihandle lewat inline style di JSX agar warnanya dinamis */
 
 /* --- ISI KONTEN PANEL --- */
 .panel-content {
   animation: fadeIn 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  overflow-y: auto; /* Scroll jika konten panjang */
+  padding-right: 10px; /* Space untuk scrollbar */
+}
+
+/* Scrollbar Custom */
+.panel-content::-webkit-scrollbar {
+  width: 4px;
+}
+.panel-content::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 2px;
 }
 
 .panel-heading {
@@ -277,7 +287,7 @@
   }
 }
 
-/* --- RESPONSIF (HP / TABLET) --- */
+/* --- RESPONSIF (TABLET & LAPTOP KECIL) --- */
 @media (max-width: 1024px) {
   .main-title {
     font-size: 3.5rem;
@@ -290,37 +300,91 @@
   }
 }
 
+/* --- RESPONSIF MOBILE (HP) --- */
 @media (max-width: 768px) {
-  /* Di HP, layout jadi atas-bawah */
+  /* Layout Berubah Jadi Atas-Bawah */
+  .viewer-container {
+    height: 100vh;
+    overflow: hidden; /* Tetap kunci scroll body */
+  }
+
+  /* 1. Canvas di Atas (55% Tinggi Layar) */
   .canvas-wrapper {
     width: 100%;
-    height: 55%; /* Canvas di atas */
+    height: 55%;
     top: 0;
-    background: radial-gradient(circle at center, #151515 0%, #000 80%);
+    left: 0;
+    background: radial-gradient(circle at center, #151515 0%, #000 90%);
   }
 
+  /* 2. Panel Info di Bawah (45% Tinggi Layar) */
   .ui-right-panel {
     width: 100%;
-    height: 45%; /* Panel di bawah */
+    height: 45%;
     top: auto;
     bottom: 0;
-    padding: 25px;
+    right: 0;
+    padding: 1.5rem;
     border-left: none;
     border-top: 1px solid rgba(255, 255, 255, 0.2);
+    background: #050505; /* Background solid agar teks jelas */
+    box-sizing: border-box;
   }
 
+  /* 3. Judul & Info (Pindah ke Tengah, di atas Panel) */
   .ui-bottom-left {
-    bottom: 48%; /* Judul nempel di batas canvas dan panel */
-    left: 20px;
-    max-width: 90%;
+    bottom: 46%; /* Tepat di atas garis batas panel */
+    left: 1.5rem;
+    max-width: 80%;
+    pointer-events: none;
   }
 
   .main-title {
-    font-size: 3rem;
+    font-size: 2.5rem; /* Font Judul Lebih Kecil */
+    margin-bottom: 0.2rem;
   }
 
+  .item-id {
+    font-size: 0.7rem;
+  }
+
+  /* 4. Tombol Kembali (Kiri Atas) */
   .ui-top-left {
-    top: 20px;
-    left: 20px;
+    top: 1rem;
+    left: 1rem;
+  }
+
+  .back-btn {
+    padding: 8px 15px;
+    font-size: 0.8rem;
+    background: rgba(0, 0, 0, 0.5); /* Background gelap agar terlihat di atas model */
+    backdrop-filter: blur(5px);
+  }
+
+  /* 5. Tab & Konten Panel */
+  .panel-tabs {
+    margin-bottom: 1.5rem;
+    gap: 1rem;
+    justify-content: space-between;
+  }
+
+  .tab {
+    font-size: 0.8rem;
+    padding-bottom: 10px;
+    flex: 1; /* Tab dibagi rata */
+    text-align: center;
+  }
+
+  .panel-desc {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .info-grid {
+    gap: 15px;
+  }
+
+  .info-item span {
+    font-size: 0.95rem;
   }
 }

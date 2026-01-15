@@ -302,7 +302,7 @@ export const encyclopediaData = {
             name: "LATIMERIA",
             modelPath: "/models/hewan/vertebrata/dinorauls_latimeria_2.glb",
             image:
-              "https://upload.wikimedia.org/wikipedia/commons/4/42/Latimeria_chalumnae01.jpg",
+              "https://upload.wikimedia.org/wikipedia/commons/9/96/Latimeria_Paris.jpg",
             period: "Kenozoikum - Sekarang (Holosen)",
             description: {
               short:

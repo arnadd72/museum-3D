@@ -1,265 +1,6 @@
-/* CONTAINER UTAMA */
-.artifact-container {
-  width: 100vw;
-  height: 100vh;
-  background-color: #000;
-  color: #00ff88;
-  font-family: "Rajdhani", monospace;
-  overflow: hidden;
-  position: relative;
-}
-
-/* Background Grid Bergerak */
-.grid-bg-anim {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(rgba(0, 255, 136, 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 255, 136, 0.1) 1px, transparent 1px);
-  background-size: 50px 50px;
-  transform: perspective(500px) rotateX(60deg);
-  animation: gridScroll 10s linear infinite;
-  opacity: 0.2;
-  z-index: 0;
-}
-@keyframes gridScroll {
-  from {
-    background-position: 0 0;
-  }
-  to {
-    background-position: 0 100px;
-  }
-}
-
-/* UI LAYER (HUD) */
-.hud-layer {
-  position: relative;
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  padding: 1rem;
-  background: radial-gradient(circle, transparent 60%, rgba(0, 0, 0, 0.8) 100%);
-}
-
-/* HEADER */
-.hud-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 2px solid #00ff88;
-  padding-bottom: 1rem;
-  margin-bottom: 1rem;
-}
-.back-btn-hud {
-  background: transparent;
-  border: 1px solid #00ff88;
-  color: #00ff88;
-  padding: 0.5rem 1.5rem;
-  font-family: "Rajdhani";
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.3s;
-}
-.back-btn-hud:hover {
-  background: #00ff88;
-  color: #000;
-}
-.header-info {
-  text-align: center;
-}
-.header-info h1 {
-  margin: 0;
-  font-size: 2rem;
-  letter-spacing: 5px;
-  text-transform: uppercase;
-}
-.blink-text {
-  color: red;
-  font-weight: bold;
-  animation: blink 1s infinite;
-  margin-right: 10px;
-}
-
-/* MAIN LAYOUT */
-.hud-main {
-  flex: 1;
-  display: flex;
-  gap: 2rem;
-  overflow: hidden;
-}
-
-/* PANEL KIRI & KANAN */
-.hud-left-panel,
-.hud-right-panel {
-  width: 250px;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-.panel-box {
-  background: rgba(0, 50, 20, 0.3);
-  border: 1px solid rgba(0, 255, 136, 0.3);
-  padding: 1rem;
-  position: relative;
-}
-.panel-box::before {
-  /* Dekorasi Sudut */
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 10px;
-  height: 10px;
-  border-top: 2px solid #00ff88;
-  border-left: 2px solid #00ff88;
-}
-.panel-box h3 {
-  margin-top: 0;
-  border-bottom: 1px solid rgba(0, 255, 136, 0.3);
-  padding-bottom: 0.5rem;
-  color: #fff;
-}
-
-.data-row {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 0.5rem;
-  font-size: 0.9rem;
-}
-.data-row span {
-  color: #888;
-}
-.description-box p {
-  font-size: 0.9rem;
-  color: #ccc;
-  line-height: 1.4;
-  text-align: justify;
-}
-
-/* CENTER VIEW (MODEL) */
-.hud-center-view {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-.model-frame {
-  width: 100%;
-  height: 100%;
-  border: 1px solid rgba(0, 255, 136, 0.5);
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  background: rgba(0, 0, 0, 0.5);
-}
-
-/* Simulasi 3D menggunakan Gambar */
-.model-proxy-img {
-  max-width: 80%;
-  max-height: 80%;
-  object-fit: contain;
-  filter: drop-shadow(0 0 20px rgba(0, 255, 136, 0.2));
-  animation: floatAnim 6s ease-in-out infinite;
-}
-@keyframes floatAnim {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
-}
-
-.scanner-line {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: #00ff88;
-  box-shadow: 0 0 10px #00ff88;
-  animation: scanDown 3s linear infinite;
-  opacity: 0.5;
-}
-
-.model-controls {
-  display: flex;
-  gap: 1rem;
-  margin-top: 1rem;
-}
-.model-controls button {
-  background: transparent;
-  border: 1px solid #00ff88;
-  color: #fff;
-  padding: 0.5rem 1rem;
-  font-family: "Rajdhani";
-  cursor: pointer;
-}
-.model-controls button:hover {
-  background: rgba(0, 255, 136, 0.2);
-}
-
-/* STAT BARS */
-.stat-bar {
-  margin-bottom: 1rem;
-}
-.stat-bar label {
-  display: block;
-  font-size: 0.8rem;
-  margin-bottom: 0.2rem;
-}
-.progress {
-  width: 100%;
-  height: 5px;
-  background: #333;
-}
-.progress div {
-  height: 100%;
-  background: #00ff88;
-  box-shadow: 0 0 10px #00ff88;
-}
-
-.system-log p {
-  font-size: 0.8rem;
-  margin: 0.2rem 0;
-  color: #666;
-  font-family: monospace;
-}
-.system-log .success {
-  color: #00ff88;
-}
-
-/* FOOTER */
-.hud-footer {
-  margin-top: 1rem;
-  border-top: 1px solid #333;
-  padding-top: 0.5rem;
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.8rem;
-  color: #666;
-}
-
-/* RESPONSIVE */
-@media (max-width: 768px) {
-  .hud-main {
-    flex-direction: column;
-    overflow-y: auto;
-  }
-  .hud-left-panel,
-  .hud-right-panel {
-    width: 100%;
-  }
-  .model-frame {
-    min-height: 300px;
-  }
-}
-/* CONTAINER UTAMA */
+/* ==========================================================================
+   CONTAINER UTAMA & BACKGROUND
+   ========================================================================== */
 .artifact-container {
   width: 100vw;
   height: 100vh;
@@ -282,6 +23,7 @@
   opacity: 0.3;
   z-index: 0;
 }
+
 @keyframes gridScroll {
   from {
     background-position: 0 0;
@@ -291,7 +33,9 @@
   }
 }
 
-/* UI LAYER (HUD) */
+/* ==========================================================================
+   UI LAYER (HUD)
+   ========================================================================== */
 .hud-layer {
   position: relative;
   z-index: 10;
@@ -311,6 +55,7 @@
   padding-bottom: 1rem;
   margin-bottom: 1rem;
 }
+
 .back-btn-hud {
   background: transparent;
   border: 1px solid #fff;
@@ -321,13 +66,16 @@
   cursor: pointer;
   transition: 0.3s;
 }
+
 .back-btn-hud:hover {
   background: #fff;
   color: #000;
 }
+
 .header-info {
   text-align: center;
 }
+
 .header-info h1 {
   margin: 0;
   font-size: 2.5rem;
@@ -335,6 +83,7 @@
   text-transform: uppercase;
   text-shadow: 0 0 10px currentColor;
 }
+
 .blink-text {
   color: #ff3333;
   font-weight: bold;
@@ -343,7 +92,14 @@
   font-size: 0.8rem;
 }
 
-/* MAIN LAYOUT */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* ==========================================================================
+   MAIN LAYOUT (DESKTOP)
+   ========================================================================== */
 .hud-main {
   flex: 1;
   display: flex;
@@ -359,6 +115,7 @@
   flex-direction: column;
   gap: 1rem;
 }
+
 .panel-box {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -366,6 +123,7 @@
   position: relative;
   backdrop-filter: blur(5px);
 }
+
 .panel-box::before {
   /* Dekorasi Sudut */
   content: "";
@@ -377,6 +135,7 @@
   border-top: 2px solid #fff;
   border-left: 2px solid #fff;
 }
+
 .panel-box h3 {
   margin-top: 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -392,10 +151,12 @@
   margin-bottom: 0.8rem;
   font-size: 1rem;
 }
+
 .data-row span {
   color: #666;
   font-weight: bold;
 }
+
 .description-box p {
   font-size: 0.95rem;
   color: #ddd;
@@ -412,6 +173,7 @@
   justify-content: center;
   position: relative;
 }
+
 .model-frame {
   width: 100%;
   height: 100%;
@@ -432,9 +194,9 @@
   filter: drop-shadow(0 0 30px rgba(0, 0, 0, 0.5));
   animation: floatAnim 6s ease-in-out infinite;
 }
+
 @keyframes floatAnim {
-  0%,
-  100% {
+  0%, 100% {
     transform: translateY(0) scale(1);
   }
   50% {
@@ -455,6 +217,11 @@
   z-index: 5;
 }
 
+@keyframes scanDown {
+  0% { top: -10%; }
+  100% { top: 110%; }
+}
+
 /* DEKORASI POJOK MODEL */
 .target-corner {
   position: absolute;
@@ -462,36 +229,18 @@
   height: 30px;
   border: 2px solid #fff;
 }
-.tl {
-  top: 20px;
-  left: 20px;
-  border-bottom: none;
-  border-right: none;
-}
-.tr {
-  top: 20px;
-  right: 20px;
-  border-bottom: none;
-  border-left: none;
-}
-.bl {
-  bottom: 20px;
-  left: 20px;
-  border-top: none;
-  border-right: none;
-}
-.br {
-  bottom: 20px;
-  right: 20px;
-  border-top: none;
-  border-left: none;
-}
+
+.tl { top: 20px; left: 20px; border-bottom: none; border-right: none; }
+.tr { top: 20px; right: 20px; border-bottom: none; border-left: none; }
+.bl { bottom: 20px; left: 20px; border-top: none; border-right: none; }
+.br { bottom: 20px; right: 20px; border-top: none; border-left: none; }
 
 .model-controls {
   display: flex;
   gap: 1rem;
   margin-top: 1rem;
 }
+
 .model-controls button {
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.3);
@@ -501,6 +250,7 @@
   cursor: pointer;
   transition: 0.3s;
 }
+
 .model-controls button:hover {
   background: #fff;
   color: #000;
@@ -510,17 +260,20 @@
 .stat-bar {
   margin-bottom: 1rem;
 }
+
 .stat-bar label {
   display: block;
   font-size: 0.8rem;
   margin-bottom: 0.2rem;
   color: #888;
 }
+
 .progress {
   width: 100%;
   height: 6px;
   background: #222;
 }
+
 .progress div {
   height: 100%;
   box-shadow: 0 0 10px currentColor;
@@ -533,6 +286,7 @@
   color: #666;
   font-family: monospace;
 }
+
 .system-log .success {
   font-weight: bold;
   text-shadow: 0 0 5px currentColor;
@@ -549,17 +303,99 @@
   color: #666;
 }
 
-/* RESPONSIVE */
-@media (max-width: 768px) {
-  .hud-main {
-    flex-direction: column;
+/* =========================================
+   MOBILE RESPONSIVE FIX (FINAL)
+   ========================================= */
+@media screen and (max-width: 768px) {
+  /* 1. Container Utama: Izinkan Scroll */
+  .artifact-container {
+    height: auto;
+    min-height: 100vh;
     overflow-y: auto;
+    overflow-x: hidden;
   }
-  .hud-left-panel,
-  .hud-right-panel {
+
+  /* 2. HUD Layer & Layout */
+  .hud-layer {
+    padding: 1rem;
+    height: auto;
+    background: rgba(0, 0, 0, 0.9);
+  }
+
+  .hud-main {
+    flex-direction: column; /* Susun vertikal */
+    gap: 2rem;
+    overflow: visible;
+  }
+
+  /* 3. Header */
+  .hud-header {
+    flex-direction: column-reverse; /* Tombol back di atas */
+    gap: 1rem;
+    align-items: center;
+    text-align: center;
+  }
+
+  .header-info h1 {
+    font-size: 1.8rem;
+    line-height: 1.2;
+  }
+
+  .back-btn-hud {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* 4. REORDERING: Model (Tengah) jadi Paling Atas */
+  .hud-center-view {
+    order: 1;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .hud-left-panel {
+    order: 2;
     width: 100%;
   }
+
+  .hud-right-panel {
+    order: 3;
+    width: 100%;
+  }
+
+  /* 5. Styling Model Frame Mobile */
   .model-frame {
-    min-height: 350px;
+    height: 350px; /* Tinggi fix agar model terlihat */
+    width: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .model-proxy-img {
+    max-height: 70%;
+    max-width: 90%;
+  }
+
+  /* 6. Panel & Footer */
+  .panel-box {
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .model-controls {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .model-controls button {
+    flex: 1;
+    padding: 12px;
+  }
+
+  .hud-footer {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-bottom: 2rem;
   }
 }

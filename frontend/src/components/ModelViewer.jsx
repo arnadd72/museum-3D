@@ -13,7 +13,7 @@ import {
 import "../App.css";
 import "./ModelViewer.css";
 
-// --- 1. ERROR BOUNDARY ---
+// ERROR BOUNDARY
 class ModelErrorBoundary extends Component {
   constructor(props) {
     super(props);
@@ -33,14 +33,13 @@ class ModelErrorBoundary extends Component {
   }
 }
 
-// --- 2. PLACEHOLDER (WIREFRAME) ---
+// PLACEHOLDER
 const PlaceholderModel = ({ color }) => {
   const meshRef = useRef();
   useFrame((state, delta) => {
     meshRef.current.rotation.x += delta * 0.2;
     meshRef.current.rotation.y += delta * 0.5;
   });
-
   return (
     <Float speed={2} rotationIntensity={1} floatIntensity={1}>
       <mesh ref={meshRef} scale={1.8}>
@@ -58,14 +57,14 @@ const PlaceholderModel = ({ color }) => {
   );
 };
 
-// --- 3. MODEL LOADER ---
+// MODEL LOADER
 const Model3D = ({ path }) => {
   const { scene } = useGLTF(path);
   const clonedScene = useMemo(() => scene.clone(), [scene]);
   return <primitive object={clonedScene} />;
 };
 
-// --- 4. LOADING ---
+// LOADING
 const Loader = () => {
   return (
     <Html center>
@@ -80,12 +79,37 @@ const ModelViewer = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("OVERVIEW");
 
-  const data = location.state?.itemData;
+  // === 1. AMBIL DATA & NAVIGASI ===
+  const { itemData, returnContext, returnPath } = location.state || {};
+  const data = itemData;
 
-  // --- 5. SMART DATA GENERATOR ---
+  // === 2. LOGIC TOMBOL KEMBALI CERDAS ===
+  const handleBack = () => {
+    // Skenario 1: Jika ada returnPath (dari Visual3DHub)
+    if (returnPath) {
+      navigate(returnPath);
+      return;
+    }
+
+    // Skenario 2: Jika ada returnContext (dari GalleryMain)
+    if (returnContext) {
+      navigate("/gallery", {
+        state: {
+          targetCategory: returnContext.targetCategory,
+          targetSubCategory: returnContext.targetSubCategory,
+          targetItem: returnContext.targetItem,
+        },
+      });
+      return;
+    }
+
+    // Skenario 3: Default (Langsung akses URL / Refresh)
+    navigate("/gallery");
+  };
+
+  // --- 3. EXTENDED DATA & CAMERA LOGIC ---
   const extendedData = useMemo(() => {
     if (!data) return null;
-
     const dbDesc = data.description || {};
     const customInfo = data.details || {};
 
@@ -101,9 +125,6 @@ const ModelViewer = () => {
       size: customInfo.size || "Bervariasi",
       weight: customInfo.weight || "Tidak Diketahui",
       lifespan: customInfo.lifespan || "Tidak Diketahui",
-      sizeCompare: 50,
-      // PERUBAHAN DISINI: Membaca data.period (sejajar name/modelPath)
-      // atau customInfo.period jika ada di dalam details
       period: data.period || customInfo.period || "Zaman Prasejarah",
       funFact:
         dbDesc.key || "Spesies ini memiliki peran unik dalam ekosistem purba.",
@@ -112,37 +133,17 @@ const ModelViewer = () => {
     };
   }, [data]);
 
-  // --- 6. DYNAMIC CAMERA & SCALE SETTINGS ---
   const { cameraPosition, maxZoomDistance, modelScale } = useMemo(() => {
     if (!data)
       return { cameraPosition: [0, 2, 8], maxZoomDistance: 15, modelScale: 3 };
-
     const name = data.name.toUpperCase();
-
-    // JIKA BRACHIOSAURUS (atau dinosaurus raksasa lain)
     if (name.includes("BRACHIOSAURUS") || name.includes("SAUROPOD")) {
-      return {
-        cameraPosition: [0, 5, 20], // Kamera mundur jauh & agak naik
-        maxZoomDistance: 40, // Bisa zoom out sangat jauh
-        modelScale: 1.5, // Model diperkecil agar muat di layar
-      };
+      return { cameraPosition: [0, 5, 20], maxZoomDistance: 40, modelScale: 1.5 };
     }
-
-    // JIKA T-REX (Besar tapi tidak raksasa)
     if (name.includes("REX") || name.includes("SPINOSAURUS")) {
-      return {
-        cameraPosition: [0, 2, 12],
-        maxZoomDistance: 25,
-        modelScale: 2.2,
-      };
+      return { cameraPosition: [0, 2, 12], maxZoomDistance: 25, modelScale: 2.2 };
     }
-
-    // DEFAULT (Untuk hewan kecil/sedang)
-    return {
-      cameraPosition: [0, 1, 8],
-      maxZoomDistance: 15,
-      modelScale: 3,
-    };
+    return { cameraPosition: [0, 1, 8], maxZoomDistance: 15, modelScale: 3 };
   }, [data]);
 
   if (!data) {
@@ -159,51 +160,19 @@ const ModelViewer = () => {
 
   return (
     <div className="viewer-container">
-      {/* BACKGROUND 3D (TETAP HITAM/GELAP) */}
       <div className="canvas-wrapper">
         <div className="hologram-overlay"></div>
-        <Canvas
-          shadows
-          dpr={[1, 2]}
-          camera={{ position: cameraPosition, fov: 45 }}
-        >
-          <fog attach="fog" args={["#000000", 5, 40]} /> {/* Fog hitam pekat */}
-          <Sparkles
-            count={100}
-            scale={10} // Area partikel diperluas
-            size={2}
-            speed={0.5}
-            color={hologramCyan}
-            position={[0, 0, 0]}
-          />
+        <Canvas shadows dpr={[1, 2]} camera={{ position: cameraPosition, fov: 45 }}>
+          <fog attach="fog" args={["#000000", 5, 40]} />
+          <Sparkles count={100} scale={10} size={2} speed={0.5} color={hologramCyan} position={[0, 0, 0]} />
           <ambientLight intensity={2.0} color="#ffffff" />
-          <directionalLight
-            position={[10, 10, 5]}
-            intensity={3.0}
-            color="#ffffff"
-            castShadow
-          />
-          <directionalLight
-            position={[-10, 5, -10]}
-            intensity={1.5}
-            color="#b0e0ff"
-          />
-          <pointLight
-            position={[0, -2, 0]}
-            intensity={1.0}
-            color="#ffffff"
-            distance={10}
-          />
+          <directionalLight position={[10, 10, 5]} intensity={3.0} color="#ffffff" castShadow />
+          <directionalLight position={[-10, 5, -10]} intensity={1.5} color="#b0e0ff" />
+          <pointLight position={[0, -2, 0]} intensity={1.0} color="#ffffff" distance={10} />
           <Suspense fallback={<Loader />}>
-            <Float
-              speed={1.5}
-              rotationIntensity={0.2}
-              floatIntensity={0.5}
-              position={[0, -0.5, 0]} // Posisi dasar float
-            >
+            <Float speed={1.5} rotationIntensity={0.2} floatIntensity={0.5} position={[0, -0.5, 0]}>
               <group scale={1.5}>
                 <ModelErrorBoundary color={themeColor}>
-                  {/* Center & Resize: Memastikan model selalu di tengah (0,0,0) */}
                   <Center top>
                     <Resize scale={modelScale}>
                       <Model3D path={data.modelPath} />
@@ -213,339 +182,80 @@ const ModelViewer = () => {
               </group>
             </Float>
           </Suspense>
-          <OrbitControls
-            autoRotate
-            autoRotateSpeed={0.5}
-            makeDefault
-            minDistance={2}
-            maxDistance={maxZoomDistance} // Batas zoom out dinamis
-            target={[0, 0, 0]} // Selalu fokus ke tengah
-          />
+          <OrbitControls autoRotate autoRotateSpeed={0.5} makeDefault minDistance={2} maxDistance={maxZoomDistance} target={[0, 0, 0]} />
         </Canvas>
       </div>
 
-      {/* UI LAYER */}
+      {/* BUTTON KEMBALI */}
       <div className="ui-top-left">
-        <button onClick={() => navigate(-1)} className="back-btn">
-          ← KEMBALI
-        </button>
+        <button onClick={handleBack} className="back-btn">← KEMBALI</button>
       </div>
 
       <div className="ui-bottom-left">
         <div className="item-id" style={{ color: themeColor }}>
           ID: {data.name.substring(0, 3)}-{Math.floor(Math.random() * 9999)}
         </div>
-        <h1
-          className="main-title"
-          style={{ WebkitTextStroke: `1px ${themeColor}` }}
-        >
-          {data.name}
-        </h1>
-        <div
-          style={{
-            color: "#aaa",
-            letterSpacing: "2px",
-            marginTop: "10px",
-            fontStyle: "italic",
-            fontSize: "1.1rem",
-          }}
-        >
+        <h1 className="main-title" style={{ WebkitTextStroke: `1px ${themeColor}` }}>{data.name}</h1>
+        <div style={{ color: "#aaa", letterSpacing: "2px", marginTop: "10px", fontStyle: "italic", fontSize: "1.1rem" }}>
           {extendedData.scientificName}
         </div>
       </div>
 
       <div className="ui-right-panel">
         <div className="panel-tabs">
-          <button
-            className={activeTab === "OVERVIEW" ? "tab active" : "tab"}
-            onClick={() => setActiveTab("OVERVIEW")}
-            style={
-              activeTab === "OVERVIEW"
-                ? { borderBottom: `2px solid ${themeColor}`, color: themeColor }
-                : {}
-            }
-          >
-            RINGKASAN
-          </button>
-          <button
-            className={activeTab === "ANATOMY" ? "tab active" : "tab"}
-            onClick={() => setActiveTab("ANATOMY")}
-            style={
-              activeTab === "ANATOMY"
-                ? { borderBottom: `2px solid ${themeColor}`, color: themeColor }
-                : {}
-            }
-          >
-            DATA FISIK
-          </button>
-          <button
-            className={activeTab === "FUNFACT" ? "tab active" : "tab"}
-            onClick={() => setActiveTab("FUNFACT")}
-            style={
-              activeTab === "FUNFACT"
-                ? { borderBottom: `2px solid ${themeColor}`, color: themeColor }
-                : {}
-            }
-          >
-            EDUKASI
-          </button>
+          <button className={activeTab === "OVERVIEW" ? "tab active" : "tab"} onClick={() => setActiveTab("OVERVIEW")} style={activeTab === "OVERVIEW" ? { borderBottom: `2px solid ${themeColor}`, color: themeColor } : {}}>RINGKASAN</button>
+          <button className={activeTab === "ANATOMY" ? "tab active" : "tab"} onClick={() => setActiveTab("ANATOMY")} style={activeTab === "ANATOMY" ? { borderBottom: `2px solid ${themeColor}`, color: themeColor } : {}}>DATA FISIK</button>
+          <button className={activeTab === "FUNFACT" ? "tab active" : "tab"} onClick={() => setActiveTab("FUNFACT")} style={activeTab === "FUNFACT" ? { borderBottom: `2px solid ${themeColor}`, color: themeColor } : {}}>EDUKASI</button>
         </div>
 
         <div className="panel-content">
-          {/* TAB 1: RINGKASAN */}
           {activeTab === "OVERVIEW" && (
             <>
               <h3 className="panel-heading">KLASIFIKASI & ASAL</h3>
-              <p className="panel-desc">
-                {data.description ? data.description.short : data.desc}
-              </p>
-
+              <p className="panel-desc">{data.description ? data.description.short : data.desc}</p>
               <div className="info-grid">
-                <div className="info-item">
-                  <label style={{ color: themeColor }}>KELOMPOK</label>
-                  <span>{extendedData.category}</span>
-                </div>
-                <div className="info-item">
-                  <label style={{ color: themeColor }}>TAKSONOMI</label>
-                  <span style={{ fontSize: "0.8rem" }}>
-                    {extendedData.taxonomy}
-                  </span>
-                </div>
-                <div className="info-item">
-                  <label style={{ color: themeColor }}>LOKASI TEMUAN</label>
-                  <span style={{ fontSize: "0.9rem" }}>
-                    {extendedData.location}
-                  </span>
-                </div>
-                <div className="info-item">
-                  <label style={{ color: themeColor }}>STATUS</label>
-                  <span style={{ color: "#ff3333", fontWeight: "bold" }}>
-                    {extendedData.status}
-                  </span>
-                </div>
+                <div className="info-item"><label style={{ color: themeColor }}>KELOMPOK</label><span>{extendedData.category}</span></div>
+                <div className="info-item"><label style={{ color: themeColor }}>TAKSONOMI</label><span style={{ fontSize: "0.8rem" }}>{extendedData.taxonomy}</span></div>
+                <div className="info-item"><label style={{ color: themeColor }}>LOKASI TEMUAN</label><span style={{ fontSize: "0.9rem" }}>{extendedData.location}</span></div>
+                <div className="info-item"><label style={{ color: themeColor }}>STATUS</label><span style={{ color: "#ff3333", fontWeight: "bold" }}>{extendedData.status}</span></div>
               </div>
             </>
           )}
 
-          {/* TAB 2: DATA FISIK */}
           {activeTab === "ANATOMY" && (
             <>
               <h3 className="panel-heading">KARAKTERISTIK FISIK</h3>
-
               <div className="info-grid">
-                <div className="info-item">
-                  <label style={{ color: themeColor }}>DIET (MAKANAN)</label>
-                  <span>{extendedData.diet}</span>
-                </div>
-                <div className="info-item">
-                  <label style={{ color: themeColor }}>ESTIMASI UMUR</label>
-                  <span>{extendedData.lifespan}</span>
-                </div>
-                <div className="info-item">
-                  <label style={{ color: themeColor }}>UKURAN TUBUH</label>
-                  <span style={{ fontSize: "0.9rem" }}>
-                    {extendedData.size}
-                  </span>
-                </div>
-                <div className="info-item">
-                  <label style={{ color: themeColor }}>BERAT (PERKIRAAN)</label>
-                  <span>{extendedData.weight}</span>
-                </div>
+                <div className="info-item"><label style={{ color: themeColor }}>DIET (MAKANAN)</label><span>{extendedData.diet}</span></div>
+                <div className="info-item"><label style={{ color: themeColor }}>ESTIMASI UMUR</label><span>{extendedData.lifespan}</span></div>
+                <div className="info-item"><label style={{ color: themeColor }}>UKURAN TUBUH</label><span style={{ fontSize: "0.9rem" }}>{extendedData.size}</span></div>
+                <div className="info-item"><label style={{ color: themeColor }}>BERAT (PERKIRAAN)</label><span>{extendedData.weight}</span></div>
               </div>
-
-              {/* DATA KOLEKSI */}
-              <div
-                style={{
-                  marginTop: "25px",
-                  borderTop: "1px solid rgba(255,255,255,0.1)",
-                  paddingTop: "20px",
-                }}
-              >
-                <div
-                  style={{
-                    fontSize: "0.8rem",
-                    color: themeColor,
-                    fontWeight: "bold",
-                    marginBottom: "15px",
-                    letterSpacing: "1px",
-                  }}
-                >
-                  DATA KOLEKSI (SPECIMEN STATS)
-                </div>
-
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "12px",
-                  }}
-                >
-                  {[
-                    { label: "KEUTUHAN", val: extendedData.stats.completeness },
-                    { label: "KELANGKAAN", val: extendedData.stats.rarity },
-                    { label: "NILAI SAINS", val: extendedData.stats.value },
-                  ].map((stat, idx) => (
-                    <div
-                      key={idx}
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "10px",
-                      }}
-                    >
-                      <div
-                        style={{
-                          width: "80px",
-                          fontSize: "0.7rem",
-                          color: "#888",
-                          fontWeight: "bold",
-                        }}
-                      >
-                        {stat.label}
+              <div style={{ marginTop: "25px", borderTop: "1px solid rgba(255,255,255,0.1)", paddingTop: "20px" }}>
+                <div style={{ fontSize: "0.8rem", color: themeColor, fontWeight: "bold", marginBottom: "15px", letterSpacing: "1px" }}>DATA KOLEKSI (SPECIMEN STATS)</div>
+                <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+                  {[{ label: "KEUTUHAN", val: extendedData.stats.completeness }, { label: "KELANGKAAN", val: extendedData.stats.rarity }, { label: "NILAI SAINS", val: extendedData.stats.value }].map((stat, idx) => (
+                    <div key={idx} style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                      <div style={{ width: "80px", fontSize: "0.7rem", color: "#888", fontWeight: "bold" }}>{stat.label}</div>
+                      <div style={{ flex: 1, height: "6px", background: "#333", borderRadius: "3px", overflow: "hidden" }}>
+                        <div style={{ width: `${stat.val}%`, height: "100%", background: themeColor, boxShadow: `0 0 10px ${themeColor}`, transition: "width 1s ease-out" }}></div>
                       </div>
-                      <div
-                        style={{
-                          flex: 1,
-                          height: "6px",
-                          background: "#333",
-                          borderRadius: "3px",
-                          overflow: "hidden",
-                        }}
-                      >
-                        <div
-                          style={{
-                            width: `${stat.val}%`,
-                            height: "100%",
-                            background: themeColor,
-                            boxShadow: `0 0 10px ${themeColor}`,
-                            transition: "width 1s ease-out",
-                          }}
-                        ></div>
-                      </div>
-                      <div
-                        style={{
-                          width: "35px",
-                          fontSize: "0.8rem",
-                          color: "#fff",
-                          textAlign: "right",
-                        }}
-                      >
-                        {stat.val}%
-                      </div>
+                      <div style={{ width: "35px", fontSize: "0.8rem", color: "#fff", textAlign: "right" }}>{stat.val}%</div>
                     </div>
                   ))}
-                </div>
-                <div
-                  style={{
-                    fontSize: "0.7rem",
-                    color: "#666",
-                    marginTop: "10px",
-                    fontStyle: "italic",
-                  }}
-                >
-                  *Berdasarkan analisis data geologis global.
                 </div>
               </div>
             </>
           )}
 
-          {/* TAB 3: EDUKASI */}
           {activeTab === "FUNFACT" && (
             <>
               <h3 className="panel-heading">WAWASAN & SEJARAH</h3>
-
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "20px",
-                }}
-              >
-                <div>
-                  <div
-                    style={{
-                      fontSize: "0.8rem",
-                      color: themeColor,
-                      fontWeight: "bold",
-                      marginBottom: "5px",
-                    }}
-                  >
-                    PERIODE HIDUP
-                  </div>
-                  <div
-                    style={{
-                      background: "rgba(255,255,255,0.1)",
-                      padding: "10px",
-                      borderRadius: "4px",
-                      textAlign: "center",
-                      color: "#fff",
-                      fontWeight: "bold",
-                      border: `1px solid ${themeColor}`,
-                    }}
-                  >
-                    {extendedData.period}
-                  </div>
-                </div>
-
-                <div>
-                  <div
-                    style={{
-                      fontSize: "0.8rem",
-                      color: themeColor,
-                      fontWeight: "bold",
-                      marginBottom: "5px",
-                    }}
-                  >
-                    SEJARAH PENEMUAN
-                  </div>
-                  <div style={{ color: "#ccc", fontSize: "0.9rem" }}>
-                    Pertama kali diidentifikasi atau dipelajari secara luas
-                    pada:{" "}
-                    <strong style={{ color: "#fff" }}>
-                      {extendedData.discoveryYear}
-                    </strong>
-                  </div>
-                </div>
-
-                <div
-                  style={{
-                    background: "rgba(255,255,255,0.05)",
-                    padding: "15px",
-                    borderLeft: `3px solid ${themeColor}`,
-                    marginTop: "5px",
-                  }}
-                >
-                  <div
-                    style={{
-                      fontSize: "0.9rem",
-                      color: "#fff",
-                      fontWeight: "bold",
-                      marginBottom: "5px",
-                    }}
-                  >
-                    TAHUKAH KAMU?
-                  </div>
-                  <div
-                    style={{
-                      fontSize: "0.95rem",
-                      color: "#ccc",
-                      fontStyle: "italic",
-                      lineHeight: "1.6",
-                    }}
-                  >
-                    "{extendedData.funFact}"
-                  </div>
-                </div>
-
-                <div
-                  style={{
-                    marginTop: "10px",
-                    fontSize: "0.7rem",
-                    color: "#555",
-                  }}
-                >
-                  Database v3.0 // Asset Path: {data.modelPath}
-                </div>
+              <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+                <div><div style={{ fontSize: "0.8rem", color: themeColor, fontWeight: "bold", marginBottom: "5px" }}>PERIODE HIDUP</div><div style={{ background: "rgba(255,255,255,0.1)", padding: "10px", borderRadius: "4px", textAlign: "center", color: "#fff", fontWeight: "bold", border: `1px solid ${themeColor}` }}>{extendedData.period}</div></div>
+                <div><div style={{ fontSize: "0.8rem", color: themeColor, fontWeight: "bold", marginBottom: "5px" }}>SEJARAH PENEMUAN</div><div style={{ color: "#ccc", fontSize: "0.9rem" }}>Pertama kali diidentifikasi atau dipelajari secara luas pada: <strong style={{ color: "#fff" }}>{extendedData.discoveryYear}</strong></div></div>
+                <div style={{ background: "rgba(255,255,255,0.05)", padding: "15px", borderLeft: `3px solid ${themeColor}`, marginTop: "5px" }}><div style={{ fontSize: "0.9rem", color: "#fff", fontWeight: "bold", marginBottom: "5px" }}>TAHUKAH KAMU?</div><div style={{ fontSize: "0.95rem", color: "#ccc", fontStyle: "italic", lineHeight: "1.6" }}>"{extendedData.funFact}"</div></div>
+                <div style={{ marginTop: "10px", fontSize: "0.7rem", color: "#555" }}>Database v3.0 // Asset Path: {data.modelPath}</div>
               </div>
             </>
           )}
