@@ -151,11 +151,8 @@ body {
     rgba(0, 0, 0, 0.5) 40%,
     rgba(0, 0, 0, 0.3) 100%
   );
-  background-image: linear-gradient(
-      90deg,
-      rgba(0, 0, 0, 0.85) 0%,
-      rgba(0, 0, 0, 0.3) 100%
-    ),
+  background-image:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.3) 100%),
     url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
 }
 
@@ -270,7 +267,8 @@ body {
   padding: 8rem 4rem;
   overflow: hidden;
   z-index: 20;
-  background-image: radial-gradient(
+  background-image:
+    radial-gradient(
       circle at 10% 20%,
       rgba(0, 210, 255, 0.05) 0%,
       transparent 20%
@@ -452,7 +450,9 @@ body {
   background: rgba(0, 210, 255, 0.08);
   transform: translateY(-15px) scale(1.02);
   border-color: var(--neon-blue);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 210, 255, 0.2);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(0, 210, 255, 0.2);
 }
 .card-number {
   font-family: "Rajdhani", sans-serif;
@@ -693,10 +693,8 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: linear-gradient(
-      rgba(255, 255, 255, 0.03) 1px,
-      transparent 1px
-    ),
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
   background-size: 20px 20px;
   z-index: 1;
@@ -1134,8 +1132,6 @@ body {
   z-index: 9999;
   font-family: "Rajdhani", sans-serif;
 }
-
-/* Tombol Floating (Neural Link) */
 .chatbot-toggle {
   background: rgba(0, 0, 0, 0.8);
   color: #00d2ff;
@@ -1148,14 +1144,11 @@ body {
   transition: all 0.3s ease;
   box-shadow: 0 0 15px rgba(0, 210, 255, 0.3);
 }
-
 .chatbot-toggle:hover {
   background: #00d2ff;
   color: #000;
   box-shadow: 0 0 25px #00d2ff;
 }
-
-/* Jendela Chat Terminal */
 .chatbot-window {
   position: absolute;
   bottom: 70px;
@@ -1170,7 +1163,6 @@ body {
   box-shadow: 0 10px 50px rgba(0, 0, 0, 0.8);
   overflow: hidden;
 }
-
 .chatbot-header {
   background: rgba(0, 210, 255, 0.1);
   padding: 10px 15px;
@@ -1182,7 +1174,6 @@ body {
   font-size: 0.8rem;
   font-weight: bold;
 }
-
 .chatbot-messages {
   flex: 1;
   padding: 15px;
@@ -1192,35 +1183,30 @@ body {
   gap: 12px;
   background: rgba(0, 0, 0, 0.3);
 }
-
 .message {
   font-size: 0.9rem;
   line-height: 1.4;
   padding: 8px 12px;
   border-left: 2px solid;
 }
-
 .message.bot {
   border-color: #00d2ff;
   color: #fff;
   background: rgba(0, 210, 255, 0.05);
   align-self: flex-start;
 }
-
 .message.user {
   border-color: #00ff88;
   color: #fff;
   background: rgba(0, 255, 136, 0.05);
   align-self: flex-end;
 }
-
 .chatbot-input-area {
   display: flex;
   padding: 10px;
   background: rgba(0, 0, 0, 0.5);
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
-
 .chatbot-input-area input {
   flex: 1;
   background: transparent;
@@ -1229,7 +1215,6 @@ body {
   padding: 8px;
   outline: none;
 }
-
 .chatbot-input-area button {
   background: #00d2ff;
   color: #000;
@@ -1283,26 +1268,19 @@ body {
   }
 }
 
-/* =========================================
-   MOBILE RESPONSIVE FIX (UPDATE FINAL)
-   Paste ini di bagian PALING BAWAH file css
-   ========================================= */
-
 @media screen and (max-width: 768px) {
   /* 1. Navbar: Dibuat lebih ringkas & Solid agar tidak transparan menumpuk */
   .navbar {
     flex-direction: column;
     padding: 1rem;
     gap: 0.8rem;
-    background: #050505; /* Warna solid agar tulisan Hero tidak tertabrak */
+    background: #050505;
     height: auto;
     position: fixed;
   }
-
   .logo-section {
     margin-bottom: 0.2rem;
   }
-
   .nav-links {
     gap: 10px;
     width: 100%;
@@ -1310,7 +1288,6 @@ body {
     flex-wrap: wrap;
     margin-right: 0;
   }
-
   .nav-link {
     font-size: 0.75rem;
     padding: 6px 10px;
@@ -1330,44 +1307,39 @@ body {
     justify-content: flex-start; /* Mulai dari atas sedikit */
     text-align: center;
   }
-
   .hero-content {
     width: 100%;
     margin-top: 2rem;
   }
-
   .hero-title {
-    font-size: 3.5rem; /* Ukuran font judul pas untuk HP */
+    font-size: 3.5rem;
     line-height: 1;
     margin-bottom: 1rem;
   }
-
   .hero-desc {
     font-size: 0.95rem;
-    border: none; /* Hapus garis pinggir di HP */
+    border: none;
     padding: 0;
     margin: 1.5rem auto;
     width: 100%;
     max-width: 100%;
   }
-
   .cta-container {
     flex-direction: column;
     width: 100%;
     gap: 1rem;
   }
-
   .explore-btn {
     width: 100%;
     padding: 12px;
   }
 
   /* Sembunyikan elemen dekorasi berat di HP */
-  .coordinate-text, 
+  .coordinate-text,
   .watermark-patch,
   .moving-lights,
-  .decorative-line { 
-    display: none; 
+  .decorative-line {
+    display: none;
   }
 
   /* 3. Posisi Tombol Audio & Chatbot (Agar tidak tabrakan) */
@@ -1376,24 +1348,20 @@ body {
     left: 1rem;
     padding: 8px 12px;
     font-size: 0.7rem;
-    max-width: 140px; /* Batasi lebar agar tidak nabrak chatbot */
+    max-width: 140px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
-
   .chatbot-wrapper {
     right: 1rem;
     bottom: 1.5rem;
     z-index: 10000;
   }
-
   .chatbot-toggle {
     padding: 10px 15px;
     font-size: 0.75rem;
   }
-
-  /* Jendela Chatbot Full Width di HP */
   .chatbot-window {
     width: 90vw;
     height: 60vh;
@@ -1410,9 +1378,8 @@ body {
     height: auto;
     background-attachment: scroll;
   }
-
   .stat-separator {
-    display: none; /* Hapus garis miring */
+    display: none;
   }
 
   /* 5. About & Gallery */
@@ -1420,42 +1387,87 @@ body {
     flex-direction: column-reverse;
     gap: 2rem;
   }
-
   .header-image-wrapper {
     width: 100%;
     height: 220px;
   }
-
   .features-grid {
-    grid-template-columns: 1fr; /* 1 Kolom ke bawah */
+    grid-template-columns: 1fr;
     gap: 2rem;
   }
-
   .collection-preview-section {
     padding-top: 2rem;
   }
-
-  /* Gallery Card agar bisa di-swipe */
   .gallery-track {
     padding: 0 1rem 2rem 1rem;
     gap: 1rem;
   }
-
   .preview-card.elegant-card {
-    min-width: 85vw; /* Lebar kartu 85% layar */
+    min-width: 85vw;
     max-width: 85vw;
   }
 
-  /* 6. Footer */
+  /* 6. Footer Mobile: Grid 2x2 Simetris */
+  .landing-footer {
+    padding: 2rem 1.5rem;
+    text-align: left;
+  }
   .footer-content {
+    display: flex;
     flex-direction: column;
     gap: 2.5rem;
+  }
+  .footer-brand {
     text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 1.5rem;
+    width: 100%;
+  }
+  .footer-links {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2rem 1rem;
+    width: 100%;
   }
 
-  .footer-links {
-    flex-direction: column;
-    gap: 2rem;
-    align-items: center;
+  .link-group {
+    flex: 0 0 45%; /* Lebar fix 45% agar muat 2 kolom per baris */
+    min-width: 130px;
+    border-top: none;
+    padding-top: 0;
+    margin-top: 0;
+  }
+
+  .link-group:last-child {
+    flex: 0 0 45%; /* Samakan dengan yang lain */
+    text-align: left;
+    border-top: none;
+    padding-top: 0;
+  }
+
+  .link-group h4 {
+    color: var(--neon-blue);
+    font-size: 0.8rem;
+    margin-bottom: 0.8rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 800;
+  }
+  .link-group a,
+  .link-group span {
+    display: block;
+    color: #888;
+    font-size: 0.75rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+    cursor: pointer;
+  }
+  .footer-bottom {
+    text-align: center;
+    padding-top: 1.5rem;
+    margin-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
   }
 }

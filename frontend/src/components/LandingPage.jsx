@@ -105,45 +105,45 @@ const LandingPage = ({ onStart, onTimeline }) => {
     return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
 
-    // 4. LOGIC SCROLL BUTTON (Manual Navigasi)
-const scroll = (direction) => {
-  if (scrollRef.current) {
-    const scrollAmount = isMobile ? 300 : 400; 
-    // Mengubah scrollLeft secara langsung agar responsif terhadap input user
-    if (direction === "left") {
-      scrollRef.current.scrollLeft -= scrollAmount;
-    } else {
-      scrollRef.current.scrollLeft += scrollAmount;
-    }
-  }
-};
-
- // 5. LOGIC AUTO SCROLL PERMANEN (JALAN TERUS)
-useEffect(() => {
-  if (isMobile || isLoading) return;
-
-  const speed = 1; 
-  let animationId;
-
-  const runScroll = () => {
-    const el = scrollRef.current;
-    if (el) {
-      const oneSetWidth = el.scrollWidth / 3;
-
-      if (el.scrollLeft >= oneSetWidth * 2) {
-        el.scrollLeft = oneSetWidth; 
-      } else if (el.scrollLeft <= 0) {
-        el.scrollLeft = oneSetWidth; 
+  // 4. LOGIC SCROLL BUTTON (Manual Navigasi)
+  const scroll = (direction) => {
+    if (scrollRef.current) {
+      const scrollAmount = isMobile ? 300 : 400;
+      // Mengubah scrollLeft secara langsung agar responsif terhadap input user
+      if (direction === "left") {
+        scrollRef.current.scrollLeft -= scrollAmount;
       } else {
-        el.scrollLeft += speed;
+        scrollRef.current.scrollLeft += scrollAmount;
       }
     }
-    animationId = requestAnimationFrame(runScroll);
   };
 
-  animationId = requestAnimationFrame(runScroll);
-  return () => cancelAnimationFrame(animationId);
-}, [isMobile, isLoading]); // Hapus isPaused dari sini  
+  // 5. LOGIC AUTO SCROLL PERMANEN (JALAN TERUS)
+  useEffect(() => {
+    if (isMobile || isLoading) return;
+
+    const speed = 1;
+    let animationId;
+
+    const runScroll = () => {
+      const el = scrollRef.current;
+      if (el) {
+        const oneSetWidth = el.scrollWidth / 3;
+
+        if (el.scrollLeft >= oneSetWidth * 2) {
+          el.scrollLeft = oneSetWidth;
+        } else if (el.scrollLeft <= 0) {
+          el.scrollLeft = oneSetWidth;
+        } else {
+          el.scrollLeft += speed;
+        }
+      }
+      animationId = requestAnimationFrame(runScroll);
+    };
+
+    animationId = requestAnimationFrame(runScroll);
+    return () => cancelAnimationFrame(animationId);
+  }, [isMobile, isLoading]); // Hapus isPaused dari sini
 
   // 6. LOGIC ANIMASI ELEMENT MUNCUL
   useEffect(() => {
@@ -157,7 +157,7 @@ useEffect(() => {
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     const hiddenElements = document.querySelectorAll(".animate-hidden");
@@ -199,7 +199,9 @@ useEffect(() => {
           <span className="sound-active">
             🔊 AUDIO ON{" "}
             <div className="equalizer">
-              <span></span><span></span><span></span>
+              <span></span>
+              <span></span>
+              <span></span>
             </div>
           </span>
         )}
@@ -215,10 +217,18 @@ useEffect(() => {
           <span className="logo-text">JEJAK PURBA</span>
         </div>
         <div className="nav-links">
-          <a href="#home" className="nav-link active">HOME</a>
-          <Link to="/era-geologi" className="nav-link">ERA GEOLOGI</Link>
-          <Link to="/gallery" className="nav-link">GALLERY</Link>
-          <Link to="/visual-3d" className="nav-link">VISUAL 3D</Link>
+          <a href="#home" className="nav-link active">
+            HOME
+          </a>
+          <Link to="/era-geologi" className="nav-link">
+            ERA GEOLOGI
+          </Link>
+          <Link to="/gallery" className="nav-link">
+            GALLERY
+          </Link>
+          <Link to="/visual-3d" className="nav-link">
+            VISUAL 3D
+          </Link>
         </div>
       </nav>
 
@@ -263,15 +273,18 @@ useEffect(() => {
       {/* STATS BAR */}
       <div className="stats-section">
         <div className="stat-item">
-          <h2>3</h2><p>ERA GEOLOGI</p>
+          <h2>3</h2>
+          <p>ERA GEOLOGI</p>
         </div>
         <div className="stat-separator">/</div>
         <div className="stat-item">
-          <h2>50+</h2><p>SPESIMEN DIGITAL</p>
+          <h2>50+</h2>
+          <p>SPESIMEN DIGITAL</p>
         </div>
         <div className="stat-separator">/</div>
         <div className="stat-item">
-          <h2>100%</h2><p>INTERAKTIF</p>
+          <h2>100%</h2>
+          <p>INTERAKTIF</p>
         </div>
       </div>
 
@@ -317,7 +330,11 @@ useEffect(() => {
               <div className="card-number">01</div>
               <h3>KELOMPOK HEWAN</h3>
               <p>Vertebrata, Invertebrata, dan Mikrofosil.</p>
-              <Link to="/gallery" state={{ targetCategory: "BIO" }} className="read-more-link">
+              <Link
+                to="/gallery"
+                state={{ targetCategory: "BIO" }}
+                className="read-more-link"
+              >
                 LIHAT SELENGKAPNYA →
               </Link>
               <div className="card-decoration"></div>
@@ -326,7 +343,11 @@ useEffect(() => {
               <div className="card-number">02</div>
               <h3>JENIS FOSIL</h3>
               <p>Fosil Tubuh, Jejak, dan Terawetkan.</p>
-              <Link to="/gallery" state={{ targetCategory: "FOSSIL" }} className="read-more-link">
+              <Link
+                to="/gallery"
+                state={{ targetCategory: "FOSSIL" }}
+                className="read-more-link"
+              >
                 LIHAT SELENGKAPNYA →
               </Link>
               <div className="card-decoration"></div>
@@ -354,19 +375,16 @@ useEffect(() => {
                   detail ilmiah.
                 </p>
               </div>
-              <div className="scroll-controls">
-                {/* <button className="scroll-btn" onClick={() => scroll("left")}>←</button> */}
-                <div className="scroll-indicator">
-                  <span>AUTO SCROLL</span>
-                </div>
-                {/* <button className="scroll-btn" onClick={() => scroll("right")}>→</button> */}
-              </div>
             </div>
 
             <div className="gallery-track-wrapper">
               <div className="gallery-track" ref={scrollRef}>
                 {/* Loop 3x untuk Infinite Scroll */}
-                {[...featuredFossils, ...featuredFossils, ...featuredFossils].map((item, index) => (
+                {[
+                  ...featuredFossils,
+                  ...featuredFossils,
+                  ...featuredFossils,
+                ].map((item, index) => (
                   <FossilCard key={index} item={item} onStart={onStart} />
                 ))}
               </div>
@@ -379,30 +397,46 @@ useEffect(() => {
       <footer className="landing-footer">
         <div className="footer-content">
           <div className="footer-brand">
-            <h2>JP</h2><p>Digital Museum Project</p>
+            <h2>JP</h2>
+            <p>Digital Museum Project</p>
           </div>
+
           <div className="footer-links">
+            {/* 1. EKSPLORASI */}
             <div className="link-group">
               <h4>EKSPLORASI</h4>
               <a href="#home">Beranda</a>
               <Link to="/era-geologi">Era Geologi</Link>
               <Link to="/gallery">Galeri Fosil</Link>
             </div>
+
+            {/* 2. TEKNOLOGI */}
             <div className="link-group">
               <h4>TEKNOLOGI</h4>
               <span>React JS / Three.js</span>
               <span>Chatbot Integration</span>
               <span>CSS Animation</span>
             </div>
+
+            {/* 3. TIM PENGEMBANG */}
             <div className="link-group">
               <h4>TIM PENGEMBANG</h4>
               <span>Fajrina Nurhaliza</span>
               <span>Arvan Murbiyanto</span>
-              <span>Arnanda Setya Nosa Putra</span>
+              <span>Arnanda Setya Nosa</span>
               <span>Ihsan Nafis Hidayat</span>
+            </div>
+
+            {/* 4. INFO MUSEUM (BARU */}
+            <div className="link-group">
+              <h4>INFO MUSEUM</h4>
+              <span style={{ cursor: "default" }}>Edukasi Dan Informasi</span>
+              <span style={{ cursor: "default" }}>Berbasis Digital</span>
+              <span style={{ cursor: "default" }}>Ruang 3D</span>
             </div>
           </div>
         </div>
+
         <div className="footer-bottom">
           <p>&copy; 2026 Jejak Purba. Museum Digital & Galeri Interaktif.</p>
         </div>
@@ -430,8 +464,8 @@ const CyberChatbot = ({ dataFosil }) => {
   // KONFIGURASI API GEMINI
   // Ganti string di bawah dengan API Key Anda yang asli
   // Atau gunakan: import.meta.env.VITE_GEMINI_API_KEY
-  const API_KEY = "AIzaSyDcb46hb1kqYt5eYGOchMHRD5UwtXlceTM"; 
-  
+  const API_KEY = "AIzaSyAmnfyjZhIsJFzhQfo2V7uumeflsw94L0M";
+
   // Inisialisasi Model
   const genAI = new GoogleGenerativeAI(API_KEY);
   const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
@@ -508,8 +542,8 @@ const CyberChatbot = ({ dataFosil }) => {
         <div className="chatbot-window animate-fade-up">
           <div className="chatbot-header">
             <div className="header-left">
-               <span className="status-dot"></span>
-               <span>ARCBOT</span>
+              <span className="status-dot"></span>
+              <span>ARCBOT</span>
             </div>
             <span className="header-code">ONLINE</span>
           </div>
@@ -517,15 +551,16 @@ const CyberChatbot = ({ dataFosil }) => {
           <div className="chatbot-messages">
             {messages.map((msg, idx) => (
               <div key={idx} className={`message ${msg.sender}`}>
-                <span className="msg-prefix">
-                </span>
+                <span className="msg-prefix"></span>
                 {msg.text}
               </div>
             ))}
-            
+
             {isTyping && (
               <div className="message bot">
-                <span className="msg-prefix">{"> " /* String aman di dalam kurawal */}PROCESSING:</span>
+                <span className="msg-prefix">
+                  {"> " /* String aman di dalam kurawal */}PROCESSING:
+                </span>
               </div>
             )}
             <div ref={chatEndRef} />
@@ -539,7 +574,9 @@ const CyberChatbot = ({ dataFosil }) => {
               onChange={(e) => setInput(e.target.value)}
               disabled={isTyping}
             />
-            <button type="submit" disabled={isTyping}>SEND</button>
+            <button type="submit" disabled={isTyping}>
+              SEND
+            </button>
           </form>
         </div>
       )}
