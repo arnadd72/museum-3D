@@ -26,7 +26,7 @@ const GalleryMain = () => {
         // 2. Pulihkan Sub-Kategori (Jika ada)
         if (targetSubCategory) {
           const subData = categoryData.subCategories.find(
-            (sub) => sub.title === targetSubCategory
+            (sub) => sub.title === targetSubCategory,
           );
           if (subData) {
             setSelectedSubCategory(subData);
@@ -34,7 +34,7 @@ const GalleryMain = () => {
             // 3. Pulihkan Item Aktif (Jika ada)
             if (targetItem) {
               const itemData = subData.items.find(
-                (item) => item.name === targetItem
+                (item) => item.name === targetItem,
               );
               if (itemData) {
                 setActiveItem(itemData);
@@ -96,7 +96,7 @@ const GalleryMain = () => {
   const handleGoTo3D = () => {
     // Cari Key Kategori (misal: 'invertebrata') berdasarkan object selectedCategory
     const categoryKey = Object.keys(encyclopediaData).find(
-      (key) => encyclopediaData[key] === selectedCategory
+      (key) => encyclopediaData[key] === selectedCategory,
     );
 
     navigate("/model-viewer", {
@@ -129,7 +129,9 @@ const GalleryMain = () => {
       <main className="gallery-content">
         {/* VIEW 1: KATEGORI */}
         {!selectedCategory && (
-          <div className={`selection-grid ${isExiting ? "fade-out-down" : "fade-in-up"}`}>
+          <div
+            className={`selection-grid ${isExiting ? "fade-out-down" : "fade-in-up"}`}
+          >
             <h1 className="main-heading">
               KATEGORI <span className="blink"></span>
             </h1>
@@ -161,14 +163,18 @@ const GalleryMain = () => {
 
         {/* VIEW 2: SUB-KATEGORI */}
         {selectedCategory && !selectedSubCategory && (
-          <div className={`sub-selection-view ${isExiting ? "fade-out-down" : "fade-in-up"}`}>
+          <div
+            className={`sub-selection-view ${isExiting ? "fade-out-down" : "fade-in-up"}`}
+          >
             <div className="sub-header">
               <button onClick={handleBack} className="back-arrow-btn">
                 ← KEMBALI KE KATEGORI
               </button>
               <h2 style={{ color: selectedCategory.color }}>
                 {selectedCategory.title}{" "}
-                <span style={{ opacity: 0.5, fontSize: "0.6em" }}>/// ARSIP</span>
+                <span style={{ opacity: 0.5, fontSize: "0.6em" }}>
+                  /// ARSIP
+                </span>
               </h2>
             </div>
             <div className="sub-cards-wrapper">
@@ -203,7 +209,9 @@ const GalleryMain = () => {
 
         {/* VIEW 3: DETAIL SPLIT SCREEN */}
         {selectedSubCategory && activeItem && (
-          <div className={`split-view-container ${isExiting ? "fade-out-down" : "fade-in-up"}`}>
+          <div
+            className={`split-view-container ${isExiting ? "fade-out-down" : "fade-in-up"}`}
+          >
             <div className="left-panel-list">
               <button
                 onClick={handleBackToSub}
@@ -213,7 +221,10 @@ const GalleryMain = () => {
                 ← KEMBALI KE {selectedCategory.title}
               </button>
 
-              <h3 className="list-heading" style={{ color: selectedCategory.color }}>
+              <h3
+                className="list-heading"
+                style={{ color: selectedCategory.color }}
+              >
                 {selectedSubCategory.title}
               </h3>
               <div className="list-scroll-area">
@@ -246,7 +257,9 @@ const GalleryMain = () => {
               </div>
 
               <div className="detail-info-box">
-                <h1 style={{ color: selectedCategory.color }}>{activeItem.name}</h1>
+                <h1 style={{ color: selectedCategory.color }}>
+                  {activeItem.name}
+                </h1>
                 <p>
                   {activeItem.description
                     ? activeItem.description.full
@@ -257,8 +270,25 @@ const GalleryMain = () => {
                   <div className="metric">
                     <span>TIPE:</span> {selectedSubCategory.title}
                   </div>
+
+                  {/* PERBAIKAN DI SINI: STATUS DINAMIS & BERWARNA */}
                   <div className="metric">
-                    <span>STATUS:</span> PUNAH
+                    <span>STATUS:</span>
+                    <strong
+                      style={{
+                        color:
+                          activeItem.status === "MASIH HIDUP"
+                            ? "#00ff88"
+                            : "#ff3333",
+                        marginLeft: "8px",
+                        textShadow:
+                          activeItem.status === "MASIH HIDUP"
+                            ? "0 0 10px rgba(0,255,136,0.3)"
+                            : "none",
+                      }}
+                    >
+                      {activeItem.status || "PUNAH"}
+                    </strong>
                   </div>
                 </div>
 
