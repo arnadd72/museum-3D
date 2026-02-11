@@ -10,8 +10,8 @@
 ---
 
 ## 🚀 Live Demo
-🌐 **Jelajahi Museum:** [Link Live Vercel Jejak Purba Disini]
-🎥 **Video Interaksi 3D:** [Link Video YouTube/Google Drive] *(Sangat disarankan untuk memamerkan cara model 3D diputar/di-zoom di sini)*
+🌐 **Jelajahi Museum:** https://jejakpurba.vercel.app/
+🎥 **Video Interaksi 3D:** https://youtu.be/MayP-8IURhU
 
 ---
 
@@ -32,17 +32,29 @@ Berikut adalah cuplikan pengalaman menjelajah di dalam Jejak Purba:
 
 > **🏛️ Halaman Utama Museum**
 > *Gerbang masuk digital dengan desain imersif untuk menyambut pengunjung.*
-> ![Halaman Beranda](link-gambar-beranda-disini)
+> <img width="1889" height="898" alt="image" src="https://github.com/user-attachments/assets/8402a61a-c90d-4aed-a650-7bba3ff00c77" />
+  <img width="1886" height="894" alt="image" src="https://github.com/user-attachments/assets/b5c17533-eb18-4a76-95c5-3782c7a6ebb1" />
+
+
+
+
+
+
 
 > **🦴 Halaman Interaksi Model 3D**
 > *Tampilan saat pengguna berinteraksi dengan model fosil secara 360 derajat.*
-> ![Halaman 3D Viewer](link-gambar-3d-disini)
+> <img width="1874" height="877" alt="image" src="https://github.com/user-attachments/assets/d0f4d8ca-590c-45da-bb3b-cc74b49bb648" />
+  <img width="1900" height="881" alt="image" src="https://github.com/user-attachments/assets/94fc2c27-bec3-4303-8a46-2f17eb19bbea" />
+
+
+
+
 
 > **📜 Halaman Detail Spesies & Edukasi**
 > *Menyajikan data historis, habitat, dan informasi taksonomi.*
-> ![Halaman Detail Edukasi](link-gambar-detail-disini)
+> <img width="1086" height="799" alt="image" src="https://github.com/user-attachments/assets/d7d3572c-7d6a-4b60-a578-1e86db594686" />
 
-*(Catatan: Drag and drop gambar dari komputer Anda ke editor GitHub untuk menghasilkan link gambar secara otomatis)*
+
 
 ---
 
